@@ -1693,3 +1693,5 @@ h1, h2, h3 { text-transform: capitalize; }
 @media (max-width: 1024px) { .print-spots { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .print-spots { grid-template-columns: minmax(0, 1fr); } .print-spot { text-align: center; } }
 @media (prefers-reduced-motion: reduce) { .print-spot .zone { animation: none; } }
+.pdp-help__icon, .pdp-help__icon svg { color: var(--white) !important; stroke: var(--white); }
+.footer-grid { padding-bottom: 48px; }
