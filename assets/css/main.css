@@ -379,12 +379,20 @@ li.is-open > .submenu-toggle svg { transform: rotate(180deg); }
   isolation: isolate;
 }
 .hero__bg {
-  position: absolute; inset: 0; z-index: -2;
+  position: absolute; inset: 0; z-index: -2; overflow: hidden;
   background:
-    radial-gradient(60% 70% at 85% 10%, rgba(227, 255, 59, .14), transparent 60%),
-    radial-gradient(50% 60% at 0% 100%, rgba(255, 107, 26, .16), transparent 60%),
-    var(--ink);
+    radial-gradient(55% 65% at 92% 8%, rgba(227, 255, 59, .30), transparent 62%),
+    radial-gradient(50% 60% at 2% 100%, rgba(255, 107, 26, .42), transparent 62%),
+    radial-gradient(40% 50% at 50% 50%, rgba(46, 84, 160, .35), transparent 70%),
+    linear-gradient(135deg, #07080a 0%, #111a2e 48%, #1a1408 100%);
 }
+.hero__bg::before, .hero__bg::after {
+  content: ""; position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55;
+  animation: glowDrift 16s ease-in-out infinite alternate;
+}
+.hero__bg::before { width: 520px; height: 520px; right: -120px; top: -160px; background: #c8e600; opacity: .28; }
+.hero__bg::after { width: 460px; height: 460px; left: -140px; bottom: -180px; background: var(--orange); opacity: .35; animation-delay: -8s; }
+@keyframes glowDrift { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 40px) scale(1.15); } }
 .hero__grid-lines {
   position: absolute; inset: 0; z-index: -1; opacity: .35;
   background-image:
@@ -1197,3 +1205,11 @@ ul.products::before, ul.products::after { display: none !important; }
 .cta-band p { max-width: none; }
 .cta-band .btn-row, .cta-band .btn-row { justify-content: center; }
 @media (max-width: 900px) { .cta-band .btn-row { justify-content: center; } }
+
+/* Banner typography */
+.hero h1, .page-hero h1 { text-transform: uppercase; font-weight: 900; font-stretch: 118%; letter-spacing: -.02em; }
+.hero h1.h-display { font-size: clamp(40px, 5.8vw, 96px); line-height: .98; }
+.hero .lead, .page-hero__desc, .page-hero__desc p { color: var(--white); }
+.hero__ticks { color: var(--white); }
+.page-hero .eyebrow { color: var(--accent); }
+.page-hero .eyebrow::before { background: var(--accent); box-shadow: 0 0 0 4px rgba(227,255,59,.16); }
