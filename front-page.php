@@ -10,7 +10,6 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 
 $c44_orders     = (int) c44_opt( 'orders' );
-$c44_rating     = c44_opt( 'rating' );
 $c44_shop_url   = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
 $c44_cat_url    = function ( $slug ) {
 	if ( taxonomy_exists( 'product_cat' ) ) {
@@ -21,7 +20,14 @@ $c44_cat_url    = function ( $slug ) {
 	}
 	return home_url( '/product-category/' . $slug . '/' );
 };
-$c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
+$c44_gallery = array(
+	array( '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'Custom 44 branded workwear on display', 'custom44' ) ),
+	array( '/wp-content/uploads/2026/04/banner-home-page.jpg', __( 'Custom printed tees and polos', 'custom44' ) ),
+	array( '/wp-content/uploads/2026/08/hero-banner-img.webp', __( 'Branded polos, hoodies and hi-vis', 'custom44' ) ),
+	array( '/wp-content/uploads/2026/10/6HSP-6HVPH-ON-ON.png', __( 'Hi-vis polo and hoodie set', 'custom44' ) ),
+	array( '/wp-content/uploads/2026/08/middle-banner-img.webp', __( 'Uniform range with logo placement', 'custom44' ) ),
+	array( '/wp-content/uploads/2026/10/7BEL-BLACK-ORANGE-.png', __( 'Polo and hoodie team set', 'custom44' ) ),
+);
 ?>
 
 <!-- Banner: content displays immediately (no reveal animation) -->
@@ -31,9 +37,8 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 	<div class="container hero__inner">
 		<div class="hero__content">
 			<a class="hero__rating" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener">
-				<span class="hero__rating-badge"><?php c44_the_icon( 'google' ); ?><?php echo esc_html( $c44_rating ); ?></span>
-				<?php echo c44_stars(); // phpcs:ignore ?>
-				<span><?php esc_html_e( 'Rated by Aussie businesses on Google', 'custom44' ); ?></span>
+				<span class="hero__rating-badge"><?php c44_the_icon( 'google' ); ?><?php esc_html_e( 'Reviews', 'custom44' ); ?></span>
+				<span><?php esc_html_e( 'See what Aussie businesses say about us on Google', 'custom44' ); ?></span>
 			</a>
 			<h1 class="h-display" id="hero-title"><?php echo wp_kses_post( c44_opt( 'hero_title' ) ); ?></h1>
 			<p class="lead"><?php echo esc_html( c44_opt( 'hero_text' ) ); ?></p>
@@ -91,7 +96,6 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 				<span class="eyebrow"><?php esc_html_e( 'Shop by category', 'custom44' ); ?></span>
 				<h2 class="h-1" id="cats-title"><?php echo wp_kses_post( __( 'Gear for every crew, <span class="hl-ink">branded your way.</span>', 'custom44' ) ); ?></h2>
 			</div>
-			<a class="btn btn--dark reveal" href="<?php echo esc_url( $c44_shop_url ); ?>"><?php esc_html_e( 'View all products', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 		</div>
 
 		<div class="cat-grid">
@@ -111,18 +115,25 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 				</a>
 			<?php endforeach; ?>
 		</div>
+		<div class="section-cta reveal">
+			<a class="btn btn--dark btn--lg" href="<?php echo esc_url( $c44_shop_url ); ?>"><?php esc_html_e( 'View all products', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+		</div>
 	</div>
 </section>
 
 <!-- Bulk savings -->
 <section class="section section--dark bulk" id="bulk-pricing" aria-labelledby="bulk-title">
-	<div class="container">
-		<div class="section-head section-head--center reveal">
+	<div class="container bulk__inner">
+		<div class="reveal reveal--left">
 			<span class="eyebrow"><?php esc_html_e( 'Bulk pricing', 'custom44' ); ?></span>
 			<h2 class="h-1" id="bulk-title"><?php echo wp_kses_post( __( 'The more you order, <span class="hl">the more you save.</span>', 'custom44' ) ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'Discounts are applied automatically in your quote cart from just five items. Mix sizes across the same style and still unlock the tier.', 'custom44' ); ?></p>
+			<div class="btn-row" style="margin-top:34px">
+				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
+			</div>
 		</div>
-		<div class="bulk__chart reveal" style="--d:.1s">
+		<div class="reveal" style="--d:.1s">
 			<div class="tiers" data-observe>
 				<?php
 				$c44_tiers = c44_tiers();
@@ -138,12 +149,6 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 				<?php endforeach; ?>
 			</div>
 			<p class="bulk__note"><?php esc_html_e( 'Per item discount on the garment price. Print locations are priced separately on each product.', 'custom44' ); ?></p>
-		</div>
-		<div class="bulk__cta reveal">
-			<div class="btn-row">
-				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
-			</div>
 		</div>
 	</div>
 </section>
@@ -177,12 +182,10 @@ if ( class_exists( 'WooCommerce' ) ) :
 						<span class="eyebrow"><?php esc_html_e( 'Best sellers', 'custom44' ); ?></span>
 						<h2 class="h-1" id="best-title"><?php esc_html_e( 'Proven on site. Loved by crews.', 'custom44' ); ?></h2>
 					</div>
-					<div class="carousel__nav reveal">
-						<button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="<?php esc_attr_e( 'Previous products', 'custom44' ); ?>"><?php c44_the_icon( 'arrow' ); ?></button>
-						<button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="<?php esc_attr_e( 'Next products', 'custom44' ); ?>"><?php c44_the_icon( 'arrow' ); ?></button>
-					</div>
 				</div>
 				<div class="carousel reveal" data-carousel>
+					<button class="carousel__btn carousel__btn--prev carousel__side" type="button" data-carousel-prev aria-label="<?php esc_attr_e( 'Previous products', 'custom44' ); ?>"><?php c44_the_icon( 'arrow' ); ?></button>
+					<button class="carousel__btn carousel__btn--next carousel__side" type="button" data-carousel-next aria-label="<?php esc_attr_e( 'Next products', 'custom44' ); ?>"><?php c44_the_icon( 'arrow' ); ?></button>
 					<ul class="carousel__track c44-products-track">
 						<?php
 						while ( $c44_q->have_posts() ) :
@@ -196,6 +199,9 @@ if ( class_exists( 'WooCommerce' ) ) :
 					</ul>
 					<div class="carousel__progress"><span data-carousel-bar></span></div>
 				</div>
+				<div class="section-cta reveal">
+					<a class="btn btn--dark btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Shop all best sellers', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+				</div>
 			</div>
 		</section>
 		<?php
@@ -204,7 +210,7 @@ endif;
 ?>
 
 <!-- How it works -->
-<section class="section" aria-labelledby="steps-title">
+<section class="section section--dark steps-section" aria-labelledby="steps-title">
 	<div class="container">
 		<div class="section-head section-head--center reveal">
 			<span class="eyebrow"><?php esc_html_e( 'How it works', 'custom44' ); ?></span>
@@ -222,10 +228,14 @@ endif;
 			foreach ( $c44_steps as $c44_k => $c44_step ) :
 				?>
 				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.1 ); ?>s">
-					<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
-					<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
+					<div class="step__top">
+						<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
+						<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
+					</div>
+					<span class="step__label"><?php echo esc_html( sprintf( __( 'Step %d', 'custom44' ), $c44_k + 1 ) ); ?></span>
 					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
 					<p><?php echo esc_html( $c44_step[2] ); ?></p>
+					<span class="step__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 				</div>
 			<?php endforeach; ?>
 		</div>
@@ -242,10 +252,10 @@ endif;
 		</div>
 		<div class="why">
 		<div class="why__media reveal reveal--clip" data-parallax-wrap>
-			<img src="<?php echo esc_url( c44_img( '/wp-content/uploads/2025/09/4.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Custom 44 printed apparel', 'custom44' ); ?>" loading="lazy" data-parallax="0.12">
+			<img src="<?php echo esc_url( c44_img( '/wp-content/uploads/2026/09/m-m-for-website-.png' ) ); ?>" alt="<?php esc_attr_e( 'Marko and Maria from Custom 44', 'custom44' ); ?>" loading="lazy" data-parallax="0.12">
 			<div class="why__badge">
-				<strong><?php echo esc_html( $c44_rating ); ?></strong>
-				<div><?php echo c44_stars(); // phpcs:ignore ?><span><?php esc_html_e( 'Average Google rating from local businesses', 'custom44' ); ?></span></div>
+				<span class="why__badge-icon"><?php c44_the_icon( 'heart' ); ?></span>
+				<div><b><?php esc_html_e( 'Marko & Maria', 'custom44' ); ?></b><span><?php esc_html_e( 'The family behind Custom 44', 'custom44' ); ?></span></div>
 			</div>
 		</div>
 		<div>
@@ -264,11 +274,13 @@ endif;
 					</li>
 				<?php endforeach; ?>
 			</ul>
-			<div class="btn-row reveal">
+		</div>
+		</div>
+		<div class="section-cta reveal">
+			<div class="btn-row">
 				<a class="btn btn--dark btn--lg" href="#contact"><?php esc_html_e( 'Get a free quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 				<a class="link-arrow" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Read our reviews', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 			</div>
-		</div>
 		</div>
 	</div>
 </section>
@@ -278,7 +290,7 @@ endif;
 	<div class="container">
 		<div class="stats">
 			<div class="stat reveal"><strong><span data-count="<?php echo esc_attr( $c44_orders ); ?>">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Orders shipped across Australia', 'custom44' ); ?></span></div>
-			<div class="stat reveal" style="--d:.08s"><strong><span data-count="<?php echo esc_attr( $c44_rating ); ?>" data-decimals="1">0</span><span class="hl">&#9733;</span></strong><span><?php esc_html_e( 'Google rating', 'custom44' ); ?></span></div>
+			<div class="stat reveal" style="--d:.08s"><strong><span data-count="7">0</span></strong><span><?php esc_html_e( 'Print locations to choose from', 'custom44' ); ?></span></div>
 			<div class="stat reveal" style="--d:.16s"><strong><span data-count="35">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
 			<div class="stat reveal" style="--d:.24s"><strong><span data-count="5">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Items to unlock discounts', 'custom44' ); ?></span></div>
 		</div>
@@ -325,9 +337,9 @@ endif;
 			<p class="lead"><?php esc_html_e( 'A look at recent uniforms and merch we have produced for local tradies, teams and businesses.', 'custom44' ); ?></p>
 		</div>
 		<div class="gallery">
-			<?php foreach ( $c44_gallery as $c44_k => $c44_img ) : ?>
-				<figure class="gallery__item reveal reveal--scale" style="--d:<?php echo esc_attr( $c44_k * 0.06 ); ?>s; margin:0">
-					<img src="<?php echo esc_url( c44_img( '/wp-content/uploads/2025/09/' . $c44_img ) ); ?>" alt="<?php echo esc_attr( sprintf( __( 'Custom 44 printed apparel example %d', 'custom44' ), $c44_k + 1 ) ); ?>" loading="lazy">
+			<?php foreach ( $c44_gallery as $c44_k => $c44_g ) : ?>
+				<figure class="gallery__item reveal reveal--scale" style="--d:<?php echo esc_attr( $c44_k * 0.06 ); ?>s">
+					<img src="<?php echo esc_url( c44_img( $c44_g[0] ) ); ?>" alt="<?php echo esc_attr( $c44_g[1] ); ?>" loading="lazy">
 				</figure>
 			<?php endforeach; ?>
 		</div>
@@ -341,37 +353,40 @@ endif;
 			<span class="eyebrow"><?php esc_html_e( 'What customers value', 'custom44' ); ?></span>
 			<h2 class="h-1" id="reviews-title"><?php esc_html_e( 'Trusted by tradies, teams and local businesses', 'custom44' ); ?></h2>
 		</div>
-		<div class="reviews">
-			<div class="rating-card reveal reveal--left">
-				<span class="eyebrow" style="color:var(--accent)"><?php esc_html_e( 'Google reviews', 'custom44' ); ?></span>
-				<div class="rating-card__score"><?php echo esc_html( $c44_rating ); ?></div>
-				<?php echo c44_stars(); // phpcs:ignore ?>
-				<p><?php esc_html_e( 'Customers consistently mention print quality, fast turnaround and great communication.', 'custom44' ); ?></p>
-				<a class="btn btn--accent" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'google' ); ?><?php esc_html_e( 'Read reviews on Google', 'custom44' ); ?></a>
-			</div>
-			<div>
-				<div class="review-points">
-					<?php
-					$c44_points = array(
-						array( 'shield', __( 'Quality that lasts', 'custom44' ), __( 'Crisp, durable prints on garments chosen for real work.', 'custom44' ) ),
-						array( 'zap', __( 'Fast turnaround', 'custom44' ), __( 'Quick production without cutting corners on finish.', 'custom44' ) ),
-						array( 'mail', __( 'Clear communication', 'custom44' ), __( 'Updates from quote to delivery, so you are never guessing.', 'custom44' ) ),
-						array( 'percent', __( 'Competitive pricing', 'custom44' ), __( 'Automatic bulk tiers and no surprise extras.', 'custom44' ) ),
-					);
-					foreach ( $c44_points as $c44_k => $c44_p ) :
-						?>
-						<div class="review-point reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s">
-							<?php c44_the_icon( $c44_p[0] ); ?>
-							<h3><?php echo esc_html( $c44_p[1] ); ?></h3>
-							<p><?php echo esc_html( $c44_p[2] ); ?></p>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
+		<?php
+		$c44_reviews = apply_filters(
+			'c44_reviews',
+			array(
+				array( 'Joey taylor', 'I&rsquo;ve had an outstanding experience with this company. The shirt quality is absolutely top-notch really impressive. Service is always friendly and professional, and they consistently give me great prices. They really take care of their customers, and I wouldn&rsquo;t hesitate to recommend them.' ),
+				array( 'Cameron Dixon', 'Marko and Maria are so easy to deal with, with quick communication. The product arrived quickly to my door and is fantastic quality. Highly recommend to anyone looking for custom work wear.' ),
+				array( 'Nick Keating', 'Custom 44 is so easy to deal with. Marko and Maria were very helpful when I placed my order. Answered any question I had very quickly. Once the mock up was approved I received my order the same week even though I&rsquo;m in a different state. I would highly recommend this company.' ),
+				array( 'Cinzia Cailotto', 'Amazing to work with and hoodies and polos are PERFECT. Great quality product and printing. Thank you so much Marko and Maria, you guys are the best every time I order. Balloons and More look so professional in their tops x' ),
+				array( 'Brijeshkumar Patel', 'I&rsquo;m very happy with Custom 44. Very fast turnaround, the quality is excellent and very easy to deal with Marko &amp; Maria. Highly recommend.' ),
+				array( 'Simon Albore', 'After seeing an advertisement on Facebook I ended up using custom44 to supply and print 50 work shirts for my business. They were easy to deal with, the printing looks great and the T-shirt quality is very good. They even threw in a pack of Allen&rsquo;s Snakes chewie lollies which my family was happy to receive. Would definitely use their services in the future.' ),
+			)
+		);
+		?>
+		<div class="review-grid">
+			<?php foreach ( $c44_reviews as $c44_k => $c44_r ) : ?>
+				<figure class="review-card reveal" style="--d:<?php echo esc_attr( ( $c44_k % 3 ) * 0.08 ); ?>s">
+					<div class="review-card__head">
+						<?php echo c44_stars(); // phpcs:ignore ?>
+						<span class="review-card__g" title="Google review"><?php c44_the_icon( 'google' ); ?></span>
+					</div>
+					<blockquote><?php echo wp_kses_post( $c44_r[1] ); ?></blockquote>
+					<figcaption>
+						<span class="review-card__avatar" aria-hidden="true"><?php echo esc_html( mb_substr( $c44_r[0], 0, 1 ) ); ?></span>
+						<span><b><?php echo esc_html( $c44_r[0] ); ?></b><small><?php esc_html_e( 'Google review', 'custom44' ); ?></small></span>
+					</figcaption>
+				</figure>
+			<?php endforeach; ?>
 		</div>
 		<?php if ( c44_opt( 'reviews_code' ) ) : ?>
 			<div class="reviews-embed reveal"><?php echo do_shortcode( wp_kses_post( c44_opt( 'reviews_code' ) ) ); ?></div>
 		<?php endif; ?>
+		<div class="section-cta reveal">
+			<a class="btn btn--dark btn--lg" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'google' ); ?><?php esc_html_e( 'Read all reviews on Google', 'custom44' ); ?></a>
+		</div>
 	</div>
 </section>
 
@@ -382,7 +397,6 @@ endif;
 			<span class="eyebrow"><?php esc_html_e( 'FAQs', 'custom44' ); ?></span>
 			<h2 class="h-1" id="faq-title"><?php esc_html_e( 'Good questions, quick answers', 'custom44' ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'Still unsure? Our team is a phone call away.', 'custom44' ); ?></p>
-			<a class="btn btn--dark" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php echo esc_html( c44_opt( 'phone' ) ); ?></a>
 		</div>
 		<div class="faq reveal" style="--d:.1s">
 			<?php
@@ -401,6 +415,9 @@ endif;
 					<div class="faq__body"><p><?php echo esc_html( $c44_f[1] ); ?></p></div>
 				</details>
 			<?php endforeach; ?>
+		</div>
+		<div class="section-cta reveal">
+			<a class="btn btn--dark btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php echo esc_html( sprintf( __( 'Call %s', 'custom44' ), c44_opt( 'phone' ) ) ); ?></a>
 		</div>
 	</div>
 </section>
