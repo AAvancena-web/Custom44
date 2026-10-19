@@ -23,7 +23,6 @@ $c44_spots = apply_filters(
 			<span class="eyebrow"><?php esc_html_e( 'Print locations', 'custom44' ); ?></span>
 			<h2 class="h-2" id="print-guide-title"><?php esc_html_e( 'Put your logo where it counts', 'custom44' ); ?></h2>
 		</div>
-		<a class="btn btn--accent reveal" href="#contact"><?php esc_html_e( 'Ask about artwork', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 	</div>
 	<div class="print-spots">
 		<?php foreach ( $c44_spots as $c44_k => $c44_spot ) : ?>
@@ -35,5 +34,8 @@ $c44_spots = apply_filters(
 				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
+	</div>
+	<div class="section-cta reveal">
+		<a class="btn btn--accent btn--lg" href="#contact"><?php esc_html_e( 'Ask about artwork', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 	</div>
 </section>
