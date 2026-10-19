@@ -1599,3 +1599,5 @@ h1, h2, h3 { text-transform: capitalize; }
 .faq-wrap .section-head { margin-bottom: 28px; }
 .faq-wrap .section-cta { margin-top: 32px; }
 .contact-map iframe, .contact-map:hover iframe { filter: none; }
+.to-top__ring circle.to-top__track { stroke: rgba(11,12,14,.18); stroke-dasharray: none; stroke-dashoffset: 0; }
+.to-top__ring circle.to-top__bar { stroke: var(--ink); }
