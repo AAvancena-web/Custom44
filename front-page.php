@@ -237,7 +237,6 @@ endif;
 					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
 					<p><?php echo esc_html( $c44_step[2] ); ?></p>
 					<span class="step__link" aria-hidden="true"></span>
-					<span class="step__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 				</div>
 			<?php endforeach; ?>
 		</div>
@@ -258,7 +257,7 @@ endif;
 			<div class="why-stat reveal" style="--d:.16s"><strong><span data-count="35">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
 			<div class="why-stat reveal" style="--d:.24s"><strong><span data-count="5">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Items to unlock discounts', 'custom44' ); ?></span></div>
 		</div>
-		<div class="why-features">
+		<div class="why-band reveal">
 			<?php
 			$c44_why = array(
 				array( 'layers', __( 'Prints built for the trade', 'custom44' ), __( 'Commercial-grade DTF inks on rugged base garments that hold up wash after wash.', 'custom44' ) ),
@@ -267,10 +266,12 @@ endif;
 			);
 			foreach ( $c44_why as $c44_k => $c44_item ) :
 				?>
-				<div class="why-feature reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s">
-					<span class="why__list-icon"><?php c44_the_icon( $c44_item[0] ); ?></span>
-					<h3><?php echo esc_html( $c44_item[1] ); ?></h3>
-					<p><?php echo esc_html( $c44_item[2] ); ?></p>
+				<div class="why-band__item">
+					<span class="why-band__icon"><?php c44_the_icon( $c44_item[0] ); ?></span>
+					<div>
+						<h3><?php echo esc_html( $c44_item[1] ); ?></h3>
+						<p><?php echo esc_html( $c44_item[2] ); ?></p>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		</div>
