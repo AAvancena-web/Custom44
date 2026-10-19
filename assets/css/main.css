@@ -1487,3 +1487,30 @@ h1, h2, h3 { text-transform: capitalize; }
 .step__link { height: 3px; top: 71px; background: var(--ink-4); }
 .why-stat strong { font-size: clamp(48px, 4.8vw, 84px); }
 @media (max-width: 560px) { .why-stat strong { font-size: 38px; } .why-stat > span { font-size: 14px; } }
+
+/* Category cards: sharp product shots on a light stage */
+.cat-card { background: #efede8; }
+.cat-card img { object-fit: contain; padding: 7% 10% 24%; mix-blend-mode: multiply; }
+.cat-card::before { background: linear-gradient(180deg, rgba(11,12,14,0) 45%, rgba(11,12,14,.88) 100%); }
+
+/* Step card images */
+.step__top { margin-bottom: 0; }
+.step__media {
+  margin: 22px 0 auto; border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 11; background: #f4f2ed;
+  box-shadow: 0 16px 34px -18px rgba(0,0,0,.7);
+}
+.step__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.step:nth-child(1) .step__media img { object-fit: contain; object-position: center 85%; padding: 4% 6% 0; transform: scale(1.12); transform-origin: center 70%; }
+.step:nth-child(2) .step__media img { object-fit: contain; padding: 8%; background: #fff; }
+.step:hover .step__media img { transform: scale(1.06); }
+.step:nth-child(1):hover .step__media img { transform: scale(1.18); }
+.step { aspect-ratio: auto; min-height: 520px; }
+@media (max-width: 1200px) { .step { min-height: 0; } }
+
+/* Why numbers: yellow symbols */
+.why-stat strong .hl { color: var(--accent); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; }
+
+/* Scroll to top: black progress ring only */
+.to-top { box-shadow: 0 14px 34px -10px rgba(11,12,14,.45); }
+.to-top__ring { inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); }
+.to-top__ring circle { stroke: var(--ink); stroke-width: 4; }
