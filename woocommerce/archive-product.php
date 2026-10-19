@@ -51,7 +51,7 @@ if ( is_wp_error( $c44_chips ) ) {
 			<div class="page-hero__stats">
 				<div class="page-hero__stat"><strong><?php echo esc_html( $c44_total ); ?></strong><span><?php esc_html_e( 'Styles to brand', 'custom44' ); ?></span></div>
 				<div class="page-hero__stat"><strong>35%</strong><span><?php esc_html_e( 'Max bulk saving', 'custom44' ); ?></span></div>
-				<div class="page-hero__stat"><strong><?php echo esc_html( c44_opt( 'rating' ) ); ?>&#9733;</strong><span><?php esc_html_e( 'Google rating', 'custom44' ); ?></span></div>
+				<div class="page-hero__stat"><strong>7</strong><span><?php esc_html_e( 'Print locations', 'custom44' ); ?></span></div>
 				<div class="page-hero__stat"><strong>DTF</strong><span><?php esc_html_e( 'Commercial-grade print', 'custom44' ); ?></span></div>
 			</div>
 		</div>
