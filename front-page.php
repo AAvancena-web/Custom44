@@ -221,10 +221,10 @@ endif;
 		<div class="steps" data-observe>
 			<?php
 			$c44_steps = array(
-				array( 'shirt', __( 'Choose your garments', 'custom44' ), __( 'Pick from trusted brands like AS Colour and JB\'s Wear in the colours and sizes your team needs.', 'custom44' ) ),
-				array( 'target', __( 'Select print locations', 'custom44' ), __( 'Left chest, centre back, sleeves and more. Every location is priced upfront on the product page.', 'custom44' ) ),
-				array( 'upload', __( 'Upload your artwork', 'custom44' ), __( 'Send EPS, SVG, AI, PDF, PNG or JPG files. No logo yet? Ask us to design one for you.', 'custom44' ) ),
-				array( 'truck', __( 'We print and dispatch', 'custom44' ), __( 'Your order is DTF printed in Melbourne, checked by hand and shipped anywhere in Australia.', 'custom44' ) ),
+				array( 'shirt', '/wp-content/uploads/2026/10/6HSP-6HVPH-LIME-BLACK.png', __( 'Choose your garments', 'custom44' ), __( 'Pick from trusted brands like AS Colour and JB\'s Wear in the colours and sizes your team needs.', 'custom44' ) ),
+				array( 'target', '/wp-content/uploads/2026/08/HOODIE-LONG-SLEEVE-RIGHT-1-scaled.jpg', __( 'Select print locations', 'custom44' ), __( 'Left chest, centre back, sleeves and more. Every location is priced upfront on the product page.', 'custom44' ) ),
+				array( 'upload', '/wp-content/uploads/2026/03/customlogo-1.png', __( 'Upload your artwork', 'custom44' ), __( 'Send EPS, SVG, AI, PDF, PNG or JPG files. No logo yet? Ask us to design one for you.', 'custom44' ) ),
+				array( 'truck', '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'We print and dispatch', 'custom44' ), __( 'Your order is DTF printed in Melbourne, checked by hand and shipped anywhere in Australia.', 'custom44' ) ),
 			);
 			foreach ( $c44_steps as $c44_k => $c44_step ) :
 				?>
@@ -233,9 +233,10 @@ endif;
 						<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
 						<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
 					</div>
+					<div class="step__media"><img src="<?php echo esc_url( c44_img( $c44_step[1] ) ); ?>" alt="" loading="lazy"></div>
 					<span class="step__label"><?php echo esc_html( sprintf( __( 'Step %d', 'custom44' ), $c44_k + 1 ) ); ?></span>
-					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
-					<p><?php echo esc_html( $c44_step[2] ); ?></p>
+					<h3><?php echo esc_html( $c44_step[2] ); ?></h3>
+					<p><?php echo esc_html( $c44_step[3] ); ?></p>
 					<span class="step__link" aria-hidden="true"></span>
 				</div>
 			<?php endforeach; ?>
