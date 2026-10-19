@@ -33,7 +33,6 @@ function c44_customize_register( $wp_customize ) {
 		array( 'hero_image', 'c44_home', __( 'Banner main image URL', 'custom44' ), 'url' ),
 		array( 'hero_image_2', 'c44_home', __( 'Banner secondary image URL', 'custom44' ), 'url' ),
 		array( 'orders', 'c44_home', __( 'Orders shipped (number)', 'custom44' ), 'text' ),
-		array( 'rating', 'c44_home', __( 'Google rating', 'custom44' ), 'text' ),
 		array( 'phone', 'c44_contact', __( 'Phone', 'custom44' ), 'text' ),
 		array( 'email', 'c44_contact', __( 'Email', 'custom44' ), 'email' ),
 		array( 'location', 'c44_contact', __( 'Location', 'custom44' ), 'text' ),
