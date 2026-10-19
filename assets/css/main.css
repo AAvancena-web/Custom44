@@ -89,7 +89,7 @@ button { cursor: pointer; }
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
-@media (min-width: 1920px) {
+@media (min-width: 1600px) {
   .container { max-width: 1880px; }
 }
 .section { padding-block: var(--section); position: relative; }
@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5 {
 
 /* 4. Header ------------------------------------------------------------- */
 .topbar {
-  background: var(--ink); color: var(--text-on-dark-soft);
+  background: #050607; border-bottom: 1px solid var(--line-dark); color: var(--text-on-dark-soft);
   font-size: 13.5px; position: relative; z-index: 60;
 }
 .topbar__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 42px; }
@@ -204,11 +204,11 @@ h1, h2, h3, h4, h5 {
 
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: var(--white);
-  border-bottom: 1px solid var(--line);
+  background: var(--ink); color: var(--text-on-dark);
+  border-bottom: 1px solid var(--line-dark);
   transition: box-shadow .35s var(--ease), background-color .35s var(--ease);
 }
-.site-header.is-scrolled { box-shadow: 0 10px 40px -20px rgba(11,12,14,.35); }
+.site-header.is-scrolled { box-shadow: 0 14px 40px -18px rgba(0,0,0,.6); background: #0e1013; }
 .site-header__inner { display: flex; align-items: center; gap: 28px; height: var(--header-h); transition: height .35s var(--ease); }
 .site-header.is-scrolled .site-header__inner { height: 70px; }
 .site-logo { flex: none; display: flex; align-items: center; }
@@ -224,12 +224,13 @@ h1, h2, h3, h4, h5 {
   white-space: nowrap;
   display: inline-flex; align-items: center; gap: 6px;
   padding: 10px 14px; border-radius: 999px;
-  font-weight: 600; font-size: 15px; color: var(--text);
+  font-weight: 600; font-size: 15px; color: var(--text-on-dark);
   transition: background-color .25s var(--ease), color .25s var(--ease);
 }
-.primary-nav > ul > li > a:hover,
+.primary-nav > ul > li > a:hover { background: var(--ink-3); color: var(--accent); }
+.primary-nav > ul > li > a:focus-visible,
 .primary-nav > ul > li.current-menu-item > a,
-.primary-nav > ul > li.current-menu-ancestor > a { background: var(--paper); }
+.primary-nav > ul > li.current-menu-ancestor > a { background: var(--ink-3); color: var(--accent); }
 .primary-nav .menu-item-has-children > a::after {
   content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
   transform: rotate(45deg) translateY(-2px); opacity: .55; transition: transform .3s var(--ease);
@@ -257,10 +258,10 @@ h1, h2, h3, h4, h5 {
 .icon-btn {
   position: relative; width: 46px; height: 46px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid var(--line); background: var(--white); color: var(--ink);
+  border: 1px solid var(--line-dark); background: var(--ink-3); color: var(--white);
   transition: background-color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
 }
-.icon-btn:hover { background: var(--paper); transform: translateY(-1px); }
+.icon-btn:hover { background: var(--ink-4); border-color: var(--ink-4); transform: translateY(-1px); }
 .icon-btn svg { width: 20px; height: 20px; }
 .icon-btn__count {
   position: absolute; top: -3px; right: -3px; min-width: 20px; height: 20px; padding: 0 5px;
@@ -280,19 +281,19 @@ h1, h2, h3, h4, h5 {
 .header-phone svg { width: 19px; height: 19px; }
 .header-phone::after {
   content: ""; position: absolute; inset: -9px; border-radius: 50%;
-  border: 1.5px solid var(--ink); opacity: 0; animation: ring 2.6s infinite;
+  border: 1.5px solid var(--accent); opacity: 0; animation: ring 2.6s infinite;
 }
 .header-phone:hover { transform: rotate(-10deg) scale(1.05); background: var(--ink-3); }
 .header-phone-wrap { display: flex; align-items: center; gap: 12px; }
 .header-phone-text { display: flex; flex-direction: column; line-height: 1.15; }
-.header-phone-text small { font-size: 11.5px; color: var(--text-soft); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-.header-phone-text strong { font-size: 15px; font-weight: 800; font-family: var(--font-display); font-stretch: 108%; }
+.header-phone-text small { font-size: 11.5px; color: var(--text-on-dark-soft); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.header-phone-text strong { color: var(--white); font-size: 15px; font-weight: 800; font-family: var(--font-display); font-stretch: 108%; }
 
 .hamburger {
-  width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--white);
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-dark); background: var(--ink-3);
   display: none; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 0;
 }
-.hamburger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease), opacity .3s var(--ease); }
+.hamburger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--white); transition: transform .3s var(--ease), opacity .3s var(--ease); }
 .hamburger span:nth-child(2) { width: 12px; margin-left: 6px; }
 .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -316,7 +317,7 @@ h1, h2, h3, h4, h5 {
 /* Search panel */
 .search-panel {
   position: absolute; left: 0; right: 0; top: 100%;
-  background: var(--white); border-bottom: 1px solid var(--line);
+  background: var(--ink-2); border-bottom: 1px solid var(--line-dark);
   padding: 22px 0; box-shadow: var(--shadow);
   opacity: 0; visibility: hidden; transform: translateY(-8px);
   transition: all .3s var(--ease);
@@ -324,10 +325,11 @@ h1, h2, h3, h4, h5 {
 .search-panel.is-open { opacity: 1; visibility: visible; transform: none; }
 .search-form { display: flex; gap: 10px; }
 .search-form input[type="search"] {
-  flex: 1; height: 56px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper);
+  flex: 1; height: 56px; border-radius: 999px; border: 1px solid var(--line-dark); background: var(--ink-3); color: var(--white);
   padding: 0 24px; font-size: 16px;
 }
-.search-form input[type="search"]:focus { outline: none; border-color: var(--ink); background: var(--white); }
+.search-form input[type="search"]:focus { outline: none; border-color: var(--accent); }
+.search-form .btn--dark { --btn-bg: var(--accent); --btn-fg: var(--ink); --btn-bg-hover: var(--white); --btn-fg-hover: var(--ink); }
 
 /* Mobile drawer */
 .drawer-overlay {
