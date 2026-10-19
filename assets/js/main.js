@@ -11,13 +11,19 @@
   /* Header state + scroll progress ------------------------------------- */
   var header = document.getElementById('site-header');
   var progress = document.querySelector('.scroll-progress');
+  var toTop = document.querySelector('.to-top');
+  var toTopRing = toTop ? toTop.querySelector('circle') : null;
+  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   var ticking = false;
   function onScroll() {
     var y = window.scrollY || window.pageYOffset;
     if (header) header.classList.toggle('is-scrolled', y > 10);
-    if (progress) {
-      var max = document.body.scrollHeight - window.innerHeight;
-      progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var ratio = max > 0 ? Math.min(y / max, 1) : 0;
+    if (progress) progress.style.transform = 'scaleX(' + ratio + ')';
+    if (toTop) {
+      toTop.classList.toggle('is-visible', y > 600);
+      if (toTopRing) toTopRing.style.strokeDashoffset = (182 * (1 - ratio)).toFixed(1);
     }
     parallax();
     ticking = false;
