@@ -23,7 +23,7 @@
     if (progress) progress.style.transform = 'scaleX(' + ratio + ')';
     if (toTop) {
       toTop.classList.toggle('is-visible', y > 600);
-      if (toTopRing) toTopRing.style.strokeDashoffset = (182 * (1 - ratio)).toFixed(1);
+      if (toTopRing) toTopRing.style.strokeDashoffset = (188.5 * (1 - ratio)).toFixed(1);
     }
     parallax();
     ticking = false;
