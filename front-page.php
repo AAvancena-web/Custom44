@@ -38,6 +38,7 @@ $c44_gallery = array(
 		<div class="hero__content">
 			<a class="hero__rating" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener">
 				<span class="hero__rating-badge"><?php c44_the_icon( 'google' ); ?><?php esc_html_e( 'Reviews', 'custom44' ); ?></span>
+				<?php echo c44_stars(); // phpcs:ignore ?>
 				<span><?php esc_html_e( 'See what Aussie businesses say about us on Google', 'custom44' ); ?></span>
 			</a>
 			<h1 class="h-display" id="hero-title"><?php echo wp_kses_post( c44_opt( 'hero_title' ) ); ?></h1>
@@ -217,7 +218,7 @@ endif;
 			<h2 class="h-1" id="steps-title"><?php esc_html_e( 'From idea to uniform in four simple steps', 'custom44' ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'Order online in minutes or let our team handle everything for you. Either way, you approve before we print.', 'custom44' ); ?></p>
 		</div>
-		<div class="steps">
+		<div class="steps" data-observe>
 			<?php
 			$c44_steps = array(
 				array( 'shirt', __( 'Choose your garments', 'custom44' ), __( 'Pick from trusted brands like AS Colour and JB\'s Wear in the colours and sizes your team needs.', 'custom44' ) ),
@@ -227,7 +228,7 @@ endif;
 			);
 			foreach ( $c44_steps as $c44_k => $c44_step ) :
 				?>
-				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.1 ); ?>s">
+				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.1 ); ?>s; --i:<?php echo esc_attr( $c44_k ); ?>">
 					<div class="step__top">
 						<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
 						<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
@@ -235,6 +236,7 @@ endif;
 					<span class="step__label"><?php echo esc_html( sprintf( __( 'Step %d', 'custom44' ), $c44_k + 1 ) ); ?></span>
 					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
 					<p><?php echo esc_html( $c44_step[2] ); ?></p>
+					<span class="step__link" aria-hidden="true"></span>
 					<span class="step__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 				</div>
 			<?php endforeach; ?>
@@ -250,31 +252,27 @@ endif;
 			<h2 class="h-1" id="why-title"><?php esc_html_e( 'Commercial scale. Family-run care.', 'custom44' ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'We are a family owned business that treats every order like it carries our own name. You get the capacity of a commercial printer with the attention of a local team.', 'custom44' ); ?></p>
 		</div>
-		<div class="why">
-		<div class="why__media reveal reveal--clip" data-parallax-wrap>
-			<img src="<?php echo esc_url( c44_img( '/wp-content/uploads/2026/09/m-m-for-website-.png' ) ); ?>" alt="<?php esc_attr_e( 'Marko and Maria from Custom 44', 'custom44' ); ?>" loading="lazy" data-parallax="0.12">
-			<div class="why__badge">
-				<span class="why__badge-icon"><?php c44_the_icon( 'heart' ); ?></span>
-				<div><b><?php esc_html_e( 'Marko & Maria', 'custom44' ); ?></b><span><?php esc_html_e( 'The family behind Custom 44', 'custom44' ); ?></span></div>
-			</div>
+		<div class="why-stats">
+			<div class="why-stat reveal"><strong><span data-count="<?php echo esc_attr( $c44_orders ); ?>">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Orders shipped across Australia', 'custom44' ); ?></span></div>
+			<div class="why-stat reveal" style="--d:.08s"><strong><span data-count="7">0</span></strong><span><?php esc_html_e( 'Print locations to choose from', 'custom44' ); ?></span></div>
+			<div class="why-stat reveal" style="--d:.16s"><strong><span data-count="35">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
+			<div class="why-stat reveal" style="--d:.24s"><strong><span data-count="5">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Items to unlock discounts', 'custom44' ); ?></span></div>
 		</div>
-		<div>
-			<ul class="why__list" style="margin-top:0">
-				<?php
-				$c44_why = array(
-					array( 'layers', __( 'Prints built for the trade', 'custom44' ), __( 'Commercial-grade DTF inks on rugged base garments that hold up wash after wash.', 'custom44' ) ),
-					array( 'zap', __( 'Ready for big runs', 'custom44' ), __( 'Large uniform runs, corporate fit-outs and nationwide dispatch handled with ease.', 'custom44' ) ),
-					array( 'heart', __( 'Personal service', 'custom44' ), __( 'Real people who answer the phone, check your artwork and keep you updated.', 'custom44' ) ),
-				);
-				foreach ( $c44_why as $c44_k => $c44_item ) :
-					?>
-					<li class="reveal" style="--d:<?php echo esc_attr( 0.1 + $c44_k * 0.08 ); ?>s">
-						<span class="why__list-icon"><?php c44_the_icon( $c44_item[0] ); ?></span>
-						<div><h3><?php echo esc_html( $c44_item[1] ); ?></h3><p><?php echo esc_html( $c44_item[2] ); ?></p></div>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
+		<div class="why-features">
+			<?php
+			$c44_why = array(
+				array( 'layers', __( 'Prints built for the trade', 'custom44' ), __( 'Commercial-grade DTF inks on rugged base garments that hold up wash after wash.', 'custom44' ) ),
+				array( 'zap', __( 'Ready for big runs', 'custom44' ), __( 'Large uniform runs, corporate fit-outs and nationwide dispatch handled with ease.', 'custom44' ) ),
+				array( 'heart', __( 'Personal service', 'custom44' ), __( 'Real people who answer the phone, check your artwork and keep you updated.', 'custom44' ) ),
+			);
+			foreach ( $c44_why as $c44_k => $c44_item ) :
+				?>
+				<div class="why-feature reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s">
+					<span class="why__list-icon"><?php c44_the_icon( $c44_item[0] ); ?></span>
+					<h3><?php echo esc_html( $c44_item[1] ); ?></h3>
+					<p><?php echo esc_html( $c44_item[2] ); ?></p>
+				</div>
+			<?php endforeach; ?>
 		</div>
 		<div class="section-cta reveal">
 			<div class="btn-row">
@@ -285,20 +283,8 @@ endif;
 	</div>
 </section>
 
-<!-- Stats -->
-<section class="section section--dark section--tight" aria-label="<?php esc_attr_e( 'Custom 44 in numbers', 'custom44' ); ?>">
-	<div class="container">
-		<div class="stats">
-			<div class="stat reveal"><strong><span data-count="<?php echo esc_attr( $c44_orders ); ?>">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Orders shipped across Australia', 'custom44' ); ?></span></div>
-			<div class="stat reveal" style="--d:.08s"><strong><span data-count="7">0</span></strong><span><?php esc_html_e( 'Print locations to choose from', 'custom44' ); ?></span></div>
-			<div class="stat reveal" style="--d:.16s"><strong><span data-count="35">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
-			<div class="stat reveal" style="--d:.24s"><strong><span data-count="5">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Items to unlock discounts', 'custom44' ); ?></span></div>
-		</div>
-	</div>
-</section>
-
 <!-- Services (entire card clickable) -->
-<section class="section section--dark" aria-labelledby="services-title" style="padding-top:0">
+<section class="section section--dark" aria-labelledby="services-title">
 	<div class="container">
 		<div class="section-head section-head--center">
 			<div class="section-head__text reveal">

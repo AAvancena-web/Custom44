@@ -94,6 +94,11 @@ $c44_cat = function ( $slug ) {
 	<?php esc_html_e( 'Call Now', 'custom44' ); ?>
 </a>
 
+<button class="to-top" type="button" aria-label="<?php esc_attr_e( 'Scroll to top', 'custom44' ); ?>">
+	<svg class="to-top__ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"></circle></svg>
+	<?php c44_the_icon( 'arrow', 'to-top__arrow' ); ?>
+</button>
+
 <?php wp_footer(); ?>
 </body>
 </html>

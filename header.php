@@ -21,7 +21,6 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div class="scroll-progress" aria-hidden="true"></div>
 <a class="skip-link" href="#main"><?php esc_html_e( 'Skip to content', 'custom44' ); ?></a>
 
 <div class="topbar">
@@ -41,6 +40,7 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 </div>
 
 <header class="site-header" id="site-header">
+	<div class="scroll-progress" aria-hidden="true"></div>
 	<div class="container site-header__inner">
 		<?php c44_logo(); ?>
 
