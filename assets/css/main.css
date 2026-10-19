@@ -1333,3 +1333,5 @@ h1, h2, h3 { text-transform: capitalize; }
 .step:last-child .step__arrow { display: none; }
 .step:last-child { background: linear-gradient(160deg, #2a2f12 0%, var(--ink-2) 100%); border-color: rgba(227,255,59,.35); }
 @media (max-width: 1024px) { .step__arrow { display: none; } }
+.gallery__item:nth-child(4) img, .gallery__item:nth-child(6) img { object-position: center 78%; transform: scale(1.12); transform-origin: center 70%; }
+.gallery__item:nth-child(4):hover img, .gallery__item:nth-child(6):hover img { transform: scale(1.18); }
