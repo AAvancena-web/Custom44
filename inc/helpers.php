@@ -115,12 +115,12 @@ function c44_logo( $class = '' ) {
  */
 function c44_home_categories() {
 	$items = array(
-		array( 'slug' => 'workwear', 'title' => 'Workwear', 'label' => 'Built for site', 'img' => '/wp-content/uploads/2025/09/workwear.jpg', 'tag' => 'Most ordered' ),
-		array( 'slug' => 'best-sellers', 'title' => 'Best Sellers', 'label' => 'Crowd favourites', 'img' => '/wp-content/uploads/2025/09/3.jpg', 'tag' => '' ),
-		array( 'slug' => 'mens', 'title' => 'Mens', 'label' => 'Tees to jackets', 'img' => '/wp-content/uploads/2025/09/mens.jpg', 'tag' => '' ),
-		array( 'slug' => 'womens', 'title' => 'Womens', 'label' => 'Tailored fits', 'img' => '/wp-content/uploads/2025/09/women.jpg', 'tag' => '' ),
-		array( 'slug' => 'kids', 'title' => 'Kids', 'label' => 'Schools & clubs', 'img' => '/wp-content/uploads/2025/10/3032_KIDS_SUPPLY_HOOD_ECRU__94694.1748551445.1280.1280.jpg', 'tag' => '' ),
-		array( 'slug' => 'headwear', 'title' => 'Headwear', 'label' => 'Caps & beanies', 'img' => '/wp-content/uploads/2025/09/HEADWEAR-removebg-preview.png', 'tag' => '' ),
+		array( 'slug' => 'workwear', 'title' => 'Workwear', 'label' => 'Built for site', 'img' => '/wp-content/uploads/2026/10/SW71_OrangeNavy_l.jpg', 'tag' => 'Most ordered' ),
+		array( 'slug' => 'best-sellers', 'title' => 'Best Sellers', 'label' => 'Crowd favourites', 'img' => '/wp-content/uploads/2025/12/5001_STAPLE_TEE_ARCTIC_BLUE__41532.1750652269.1280.1280.jpg', 'tag' => '' ),
+		array( 'slug' => 'mens', 'title' => 'Mens', 'label' => 'Tees to jackets', 'img' => '/wp-content/uploads/2026/10/FL19_BlkAqua_l.jpg', 'tag' => '' ),
+		array( 'slug' => 'womens', 'title' => 'Womens', 'label' => 'Tailored fits', 'img' => '/wp-content/uploads/2025/10/4101_WOS_SUPPLY_HOOD_BLACK__92570.1727138536.1280.1280.jpg', 'tag' => '' ),
+		array( 'slug' => 'kids', 'title' => 'Kids', 'label' => 'Schools & clubs', 'img' => '/wp-content/uploads/2026/05/3032_KIDS_SUPPLY_HOOD_ECRU__94694.jpg', 'tag' => '' ),
+		array( 'slug' => 'headwear', 'title' => 'Headwear', 'label' => 'Caps & beanies', 'img' => '/wp-content/uploads/2025/10/1103_FINN_FIVE_PANEL_CAP_ARMY__40965.1749690349.1280.1280.jpg', 'tag' => '' ),
 	);
 
 	foreach ( $items as &$item ) {
@@ -132,7 +132,7 @@ function c44_home_categories() {
 				$item['url'] = get_term_link( $term );
 				/* translators: %d: number of styles */
 				$item['count'] = sprintf( _n( '%d style', '%d styles', $term->count, 'custom44' ), $term->count );
-				$thumb_id      = get_term_meta( $term->term_id, 'thumbnail_id', true );
+				$thumb_id      = apply_filters( 'c44_use_category_thumbnails', false ) ? get_term_meta( $term->term_id, 'thumbnail_id', true ) : 0;
 				if ( $thumb_id ) {
 					$src = wp_get_attachment_image_url( $thumb_id, 'large' );
 					if ( $src ) {
