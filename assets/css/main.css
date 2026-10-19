@@ -1653,3 +1653,43 @@ h1, h2, h3 { text-transform: capitalize; }
 .footer-big svg { display: block; width: 100%; height: auto; max-width: 100%; overflow: visible; }
 .footer-big text { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: 150px; letter-spacing: -.02em; fill: var(--white); }
 .footer-big .footer-big__num { fill: var(--accent); }
+
+/* ==== Product page: print location cards ==== */
+.print-guide { border-radius: var(--radius-lg); margin-top: clamp(40px, 5vw, 80px); padding: clamp(36px, 5vw, 72px) clamp(20px, 4vw, 56px); overflow: hidden; }
+.print-guide::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(45% 70% at 10% 0%, rgba(227,255,59,.10), transparent 60%), radial-gradient(45% 70% at 90% 100%, rgba(255,107,26,.14), transparent 60%);
+}
+.print-guide .section-head { margin-bottom: 40px; position: relative; }
+.print-spots { position: relative; gap: 18px; }
+.print-spot {
+  padding: 0; overflow: hidden; display: flex; flex-direction: column; text-align: left;
+  background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--radius-lg);
+  transition: transform .5s var(--ease), border-color .3s, box-shadow .5s var(--ease);
+}
+.print-spot:hover { transform: translateY(-8px); border-color: rgba(227,255,59,.55); box-shadow: 0 30px 60px -30px rgba(227,255,59,.4); }
+.print-spot__visual {
+  position: relative; aspect-ratio: 5 / 4; display: grid; place-items: center;
+  background: radial-gradient(70% 70% at 50% 45%, #2a2f36 0%, var(--ink-3) 70%);
+  border-bottom: 1px solid var(--line-dark);
+}
+.print-spot__visual svg { width: 72%; height: auto; overflow: visible; transition: transform .6s var(--ease); }
+.print-spot:hover .print-spot__visual svg { transform: scale(1.05) rotate(-2deg); }
+.print-spot .tee { fill: #3a3f47; stroke: rgba(255,255,255,.55); stroke-width: 1.6; stroke-linejoin: round; }
+.print-spot .seam { fill: none; stroke: rgba(255,255,255,.45); stroke-width: 1.6; stroke-linecap: round; }
+.print-spot .zone { fill: var(--accent); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; animation: zonePulse 2.4s ease-in-out infinite; }
+.print-spot .zone--alt { fill: rgba(227,255,59,.55); animation-delay: .6s; }
+@keyframes zonePulse { 0%, 100% { filter: drop-shadow(0 0 0 rgba(227,255,59,0)); opacity: 1; } 50% { filter: drop-shadow(0 0 8px rgba(227,255,59,.85)); opacity: .82; } }
+.print-spot__badge {
+  position: absolute; top: 14px; left: 14px; padding: 5px 12px; border-radius: 999px;
+  background: var(--accent); color: var(--ink); font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+}
+.print-spot__view { position: absolute; top: 14px; right: 14px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-on-dark-soft); }
+.print-spot__body { position: relative; padding: 22px 24px 26px; }
+.print-spot__num { display: block; font-family: var(--font-display); font-stretch: 120%; font-weight: 900; font-size: 13px; letter-spacing: .14em; color: var(--accent); margin-bottom: 8px; }
+.print-spot h3 { font-size: 20px; color: var(--white); margin-bottom: 8px; }
+.print-spot p { margin: 0; font-size: 14.5px; color: var(--text-on-dark-soft); }
+.print-spot b, .print-spot em { display: none; }
+@media (max-width: 1024px) { .print-spots { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .print-spots { grid-template-columns: minmax(0, 1fr); } .print-spot { text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .print-spot .zone { animation: none; } }
