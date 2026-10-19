@@ -486,21 +486,16 @@ li.is-open > .submenu-toggle svg { transform: rotate(180deg); }
 }
 .marquee__item svg { width: 22px; height: 22px; color: var(--orange); }
 
-/* Category bento */
+/* Category grid: uniform cards */
 .cat-grid {
   display: grid; gap: 18px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: clamp(220px, 21vw, 340px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .cat-card {
   position: relative; display: block; overflow: hidden; border-radius: var(--radius-lg);
   background: var(--ink-3); color: var(--white); isolation: isolate;
-  grid-column: span 4;
+  aspect-ratio: 4 / 3.4;
 }
-.cat-card:nth-child(1) { grid-column: span 6; grid-row: span 2; }
-.cat-card:nth-child(2) { grid-column: span 6; }
-.cat-card:nth-child(3), .cat-card:nth-child(4) { grid-column: span 3; }
-.cat-card:nth-child(5), .cat-card:nth-child(6) { grid-column: span 6; }
 .cat-card img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
   transition: transform 1.1s var(--ease);
@@ -520,15 +515,8 @@ li.is-open > .submenu-toggle svg { transform: rotate(180deg); }
 .cat-card:hover .cat-card__arrow svg { transform: rotate(0); }
 .cat-card--feature { background: var(--orange); }
 .cat-card__tag { position: absolute; top: 20px; left: 20px; padding: 7px 14px; border-radius: 999px; background: var(--accent); color: var(--ink); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-@media (max-width: 1024px) {
-  .cat-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 280px; }
-  .cat-card, .cat-card:nth-child(n) { grid-column: span 1; grid-row: span 1; }
-  .cat-card:nth-child(1) { grid-column: span 2; }
-}
-@media (max-width: 560px) {
-  .cat-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
-  .cat-card:nth-child(n) { grid-column: span 1; }
-}
+@media (max-width: 1024px) { .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .cat-grid { grid-template-columns: minmax(0, 1fr); } .cat-card { aspect-ratio: 4 / 3; } }
 
 /* Bulk savings */
 .bulk { overflow: hidden; }
