@@ -116,7 +116,7 @@ function c44_logo( $class = '' ) {
  */
 function c44_home_categories() {
 	$items = array(
-		array( 'slug' => 'workwear', 'title' => 'Workwear & Hi-Vis', 'label' => 'Built for site', 'img' => '/wp-content/uploads/2025/09/workwear.jpg', 'tag' => 'Most ordered' ),
+		array( 'slug' => 'workwear', 'title' => 'Workwear', 'label' => 'Built for site', 'img' => '/wp-content/uploads/2025/09/workwear.jpg', 'tag' => 'Most ordered' ),
 		array( 'slug' => 'best-sellers', 'title' => 'Best Sellers', 'label' => 'Crowd favourites', 'img' => '/wp-content/uploads/2025/09/3.jpg', 'tag' => '' ),
 		array( 'slug' => 'mens', 'title' => 'Mens', 'label' => 'Tees to jackets', 'img' => '/wp-content/uploads/2025/09/mens.jpg', 'tag' => '' ),
 		array( 'slug' => 'womens', 'title' => 'Womens', 'label' => 'Tailored fits', 'img' => '/wp-content/uploads/2025/09/women.jpg', 'tag' => '' ),
