@@ -31,6 +31,7 @@ function c44_defaults() {
 		'hero_image'     => '/wp-content/uploads/2026/08/about-custom-44-new-bg-img.jpg',
 		'hero_image_2'   => '/wp-content/uploads/2025/09/2.jpg',
 		'orders'         => '10000',
+		'rating'         => '5.0',
 		'logo_fallback'  => '/wp-content/uploads/2025/09/logo-footer.png',
 	);
 }
