@@ -1601,3 +1601,42 @@ h1, h2, h3 { text-transform: capitalize; }
 .contact-map iframe, .contact-map:hover iframe { filter: none; }
 .to-top__ring circle.to-top__track { stroke: rgba(11,12,14,.18); stroke-dasharray: none; stroke-dashoffset: 0; }
 .to-top__ring circle.to-top__bar { stroke: var(--ink); }
+.form-field input::placeholder, .form-field textarea::placeholder { color: #9a9ea5; }
+
+/* ==== Mobile: center-aligned content where it reads well ==== */
+@media (max-width: 767px) {
+  /* Banner */
+  .hero__content { text-align: center; }
+  .hero .lead { margin-inline: auto; }
+  .hero__rating { justify-content: center; }
+  .hero .btn-row { justify-content: center; }
+  .hero__ticks { justify-content: center; }
+  /* Section heads, CTAs */
+  .section-head, .section-head--split { text-align: center; }
+  .section-head .btn-row, .section-cta, .btn-row { justify-content: center; }
+  /* Bulk pricing */
+  .bulk__inner > div:first-child { text-align: center; }
+  .bulk__inner .lead { margin-inline: auto; }
+  .bulk__note { text-align: center; }
+  /* Category cards: keep their own layout. Why band items stack centered */
+  .why-band__item { flex-direction: column; align-items: center; text-align: center; }
+  /* Services */
+  .service-card { align-items: center; text-align: center; }
+  .service-card__go { align-self: center; }
+  /* Print guide */
+  .print-spot { text-align: center; }
+  /* Contact section intro stays centered, contact list stays left for scanning */
+  .contact-form h3, .contact-form > p { text-align: center; }
+  .form-foot { justify-content: center; text-align: center; }
+  /* Footer */
+  .site-footer .footer-grid { text-align: center; }
+  .footer-brand .site-logo { justify-content: center; }
+  .footer-brand p { margin-inline: auto; }
+  .footer-social { justify-content: center; }
+  .footer-contact li { justify-content: center; text-align: left; }
+  .footer-bottom__inner { justify-content: center; text-align: center; }
+  /* Category page */
+  .tier-strip__inner { justify-content: flex-start; }
+  .side-card { text-align: left; }
+  /* Product card text stays left; product page summary stays left for forms */
+}
