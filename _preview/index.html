@@ -144,7 +144,7 @@
 <!-- Shop by category -->
 <section class="section" aria-labelledby="cats-title">
 	<div class="container">
-		<div class="section-head section-head--split">
+		<div class="section-head section-head--center">
 			<div class="section-head__text reveal">
 				<span class="eyebrow">Shop by category</span>
 				<h2 class="h-1" id="cats-title">Gear for every crew, <span class="hl-ink">branded your way.</span></h2>
@@ -220,17 +220,13 @@
 
 <!-- Bulk savings -->
 <section class="section section--dark bulk" id="bulk-pricing" aria-labelledby="bulk-title">
-	<div class="container bulk__inner">
-		<div class="reveal reveal--left">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
 			<span class="eyebrow">Bulk pricing</span>
 			<h2 class="h-1" id="bulk-title">The more you order, <span class="hl">the more you save.</span></h2>
 			<p class="lead">Discounts are applied automatically in your quote cart from just five items. Mix sizes across the same style and still unlock the tier.</p>
-			<div class="btn-row" style="margin-top:34px">
-				<a class="btn btn--accent btn--lg" href="category.html">Start your order<svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-				<a class="btn btn--white btn--lg" href="tel:0481316944"><svg class="icon icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Talk to us</a>
-			</div>
 		</div>
-		<div class="reveal" style="--d:.1s">
+		<div class="bulk__chart reveal" style="--d:.1s">
 			<div class="tiers" data-observe>
 									<div class="tier">
 						<div class="tier__bar" style="--h:28%">
@@ -265,13 +261,19 @@
 							</div>
 			<p class="bulk__note">Per item discount on the garment price. Print locations are priced separately on each product.</p>
 		</div>
+		<div class="bulk__cta reveal">
+			<div class="btn-row">
+				<a class="btn btn--accent btn--lg" href="category.html">Start your order<svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+				<a class="btn btn--white btn--lg" href="tel:0481316944"><svg class="icon icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Talk to us</a>
+			</div>
+		</div>
 	</div>
 </section>
 
 <!-- Best sellers carousel -->
 		<section class="section section--white" aria-labelledby="best-title">
 			<div class="container">
-				<div class="section-head section-head--split">
+				<div class="section-head section-head--center">
 					<div class="section-head__text reveal">
 						<span class="eyebrow">Best sellers</span>
 						<h2 class="h-1" id="best-title">Proven on site. Loved by crews.</h2>
@@ -488,7 +490,13 @@
 
 <!-- Why Custom 44 -->
 <section class="section section--paper2" aria-labelledby="why-title">
-	<div class="container why">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow">Why Custom 44</span>
+			<h2 class="h-1" id="why-title">Commercial scale. Family-run care.</h2>
+			<p class="lead">We are a family owned business that treats every order like it carries our own name. You get the capacity of a commercial printer with the attention of a local team.</p>
+		</div>
+		<div class="why">
 		<div class="why__media reveal reveal--clip" data-parallax-wrap>
 			<img src="https://custom44.com.au/wp-content/uploads/2025/09/4.jpg" alt="Custom 44 printed apparel" loading="lazy" data-parallax="0.12">
 			<div class="why__badge">
@@ -497,12 +505,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="reveal">
-				<span class="eyebrow">Why Custom 44</span>
-				<h2 class="h-1" id="why-title">Commercial scale. Family-run care.</h2>
-				<p class="lead">We are a family owned business that treats every order like it carries our own name. You get the capacity of a commercial printer with the attention of a local team.</p>
-			</div>
-			<ul class="why__list">
+			<ul class="why__list" style="margin-top:0">
 									<li class="reveal" style="--d:0.1s">
 						<span class="why__list-icon"><svg class="icon icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span>
 						<div><h3>Prints built for the trade</h3><p>Commercial-grade DTF inks on rugged base garments that hold up wash after wash.</p></div>
@@ -520,6 +523,7 @@
 				<a class="btn btn--dark btn--lg" href="#contact">Get a free quote<svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 				<a class="link-arrow" href="https://maps.app.goo.gl/tsXCsHEUCCwidphX9" target="_blank" rel="noopener">Read our reviews<svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 			</div>
+		</div>
 		</div>
 	</div>
 </section>
@@ -539,7 +543,7 @@
 <!-- Services (entire card clickable) -->
 <section class="section section--dark" aria-labelledby="services-title" style="padding-top:0">
 	<div class="container">
-		<div class="section-head section-head--split">
+		<div class="section-head section-head--center">
 			<div class="section-head__text reveal">
 				<span class="eyebrow">What we do</span>
 				<h2 class="h-1" id="services-title">Branded apparel for every part of your business</h2>
@@ -612,6 +616,10 @@
 <!-- Reviews -->
 <section class="section section--white" aria-labelledby="reviews-title">
 	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow">What customers value</span>
+			<h2 class="h-1" id="reviews-title">Trusted by tradies, teams and local businesses</h2>
+		</div>
 		<div class="reviews">
 			<div class="rating-card reveal reveal--left">
 				<span class="eyebrow" style="color:var(--accent)">Google reviews</span>
@@ -620,11 +628,7 @@
 				<a class="btn btn--accent" href="https://maps.app.goo.gl/tsXCsHEUCCwidphX9" target="_blank" rel="noopener"><svg class="icon icon-google" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path fill="currentColor" stroke="none" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3zM12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22zM6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9zM12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6z"/></svg>Read reviews on Google</a>
 			</div>
 			<div>
-				<div class="reveal">
-					<span class="eyebrow">What customers value</span>
-					<h2 class="h-2" id="reviews-title">Trusted by tradies, teams and local businesses</h2>
-				</div>
-				<div class="review-points" style="margin-top:30px">
+				<div class="review-points">
 											<div class="review-point reveal" style="--d:0s">
 							<svg class="icon icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>							<h3>Quality that lasts</h3>
 							<p>Crisp, durable prints on garments chosen for real work.</p>
@@ -650,7 +654,7 @@
 <!-- FAQ -->
 <section class="section" aria-labelledby="faq-title">
 	<div class="container faq-wrap">
-		<div class="section-head reveal">
+		<div class="section-head section-head--center reveal">
 			<span class="eyebrow">FAQs</span>
 			<h2 class="h-1" id="faq-title">Good questions, quick answers</h2>
 			<p class="lead">Still unsure? Our team is a phone call away.</p>
@@ -704,13 +708,14 @@
 <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do bulk discounts work?","acceptedAnswer":{"@type":"Answer","text":"Discounts apply automatically per item: 15% off from 5 items, 20% from 10, 25% from 20, 30% from 50 and 35% from 100 items."}},{"@type":"Question","name":"What printing method do you use?","acceptedAnswer":{"@type":"Answer","text":"We use DTF (Direct to Film) printing with commercial-grade inks. It produces vibrant, detailed prints that stay flexible and durable on a wide range of fabrics."}},{"@type":"Question","name":"What artwork files can I upload?","acceptedAnswer":{"@type":"Answer","text":"We accept EPS, SVG, AI, PDF, PNG and JPG files up to 10MB. Vector files give the sharpest result. Returning customers can use artwork already on file."}},{"@type":"Question","name":"Can you design a logo for me?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose the new logo design option when ordering or mention it in your enquiry and our team will work with you on a design."}},{"@type":"Question","name":"Where can I print my logo?","acceptedAnswer":{"@type":"Answer","text":"Popular locations include left chest, right chest, centre front, centre back, lower back and both sleeves. Each location is priced on the product page."}},{"@type":"Question","name":"Do you deliver outside Melbourne?","acceptedAnswer":{"@type":"Answer","text":"Yes. We are based in Melbourne's South East and dispatch orders to customers right across Australia."}}]}</script></main>
 
 <section class="contact section is-dark" id="contact" aria-labelledby="contact-title">
-	<div class="container contact__grid">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow">Get in touch</span>
+			<h2 class="h-1" id="contact-title">Let's get your team <span class="hl">looking sharp.</span></h2>
+			<p class="lead">Tell us what you need and we will come back with pricing, mock-ups and a turnaround that suits you. Prefer to talk? Give us a call.</p>
+		</div>
+	<div class="contact__grid">
 		<div class="contact__info">
-			<div class="reveal">
-				<span class="eyebrow">Get in touch</span>
-				<h2 class="h-1" id="contact-title">Let's get your team <span class="hl">looking sharp.</span></h2>
-				<p class="lead">Tell us what you need and we will come back with pricing, mock-ups and a turnaround that suits you. Prefer to talk? Give us a call.</p>
-			</div>
 
 			<ul class="contact-list reveal" style="--d:.1s">
 				<li>
@@ -806,6 +811,7 @@
 					</div>
 				</form>
 					</div>
+	</div>
 	</div>
 </section>
 
