@@ -12,13 +12,14 @@ $c44_map    = 'https://maps.google.com/maps?q=' . rawurlencode( c44_opt( 'map_qu
 $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '' ) . ( isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '' );
 ?>
 <section class="contact section is-dark" id="contact" aria-labelledby="contact-title">
-	<div class="container contact__grid">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow"><?php esc_html_e( 'Get in touch', 'custom44' ); ?></span>
+			<h2 class="h-1" id="contact-title"><?php echo wp_kses_post( __( "Let's get your team <span class=\"hl\">looking sharp.</span>", 'custom44' ) ); ?></h2>
+			<p class="lead"><?php esc_html_e( 'Tell us what you need and we will come back with pricing, mock-ups and a turnaround that suits you. Prefer to talk? Give us a call.', 'custom44' ); ?></p>
+		</div>
+	<div class="contact__grid">
 		<div class="contact__info">
-			<div class="reveal">
-				<span class="eyebrow"><?php esc_html_e( 'Get in touch', 'custom44' ); ?></span>
-				<h2 class="h-1" id="contact-title"><?php echo wp_kses_post( __( "Let's get your team <span class=\"hl\">looking sharp.</span>", 'custom44' ) ); ?></h2>
-				<p class="lead"><?php esc_html_e( 'Tell us what you need and we will come back with pricing, mock-ups and a turnaround that suits you. Prefer to talk? Give us a call.', 'custom44' ); ?></p>
-			</div>
 
 			<ul class="contact-list reveal" style="--d:.1s">
 				<li>
@@ -133,5 +134,6 @@ $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HO
 				</form>
 			<?php endif; ?>
 		</div>
+	</div>
 	</div>
 </section>

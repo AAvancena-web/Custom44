@@ -18,7 +18,7 @@ $c44_spots = apply_filters(
 );
 ?>
 <section class="section section--dark print-guide" aria-labelledby="print-guide-title" style="border-radius:var(--radius-lg);margin-top:clamp(40px,5vw,80px);padding:clamp(32px,4vw,64px)">
-	<div class="section-head section-head--split" style="margin-bottom:36px">
+	<div class="section-head section-head--center" style="margin-bottom:36px">
 		<div class="section-head__text reveal">
 			<span class="eyebrow"><?php esc_html_e( 'Print locations', 'custom44' ); ?></span>
 			<h2 class="h-2" id="print-guide-title"><?php esc_html_e( 'Put your logo where it counts', 'custom44' ); ?></h2>
