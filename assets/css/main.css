@@ -1640,3 +1640,6 @@ h1, h2, h3 { text-transform: capitalize; }
   .side-card { text-align: left; }
   /* Product card text stays left; product page summary stays left for forms */
 }
+/* Review cards: no divider, no quote mark */
+.review-card::after { display: none; }
+.review-card figcaption { border-top: 0; padding-top: 4px; }
