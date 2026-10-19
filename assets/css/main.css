@@ -1648,3 +1648,8 @@ h1, h2, h3 { text-transform: capitalize; }
   .hero__rating, .page-hero .eyebrow { display: none; }
   .hero { padding-top: 40px; }
 }
+/* Footer wordmark: SVG scales to fit any width */
+.footer-big { font-size: 0; line-height: 0; padding-top: 10px; padding-bottom: 18px; overflow: visible; white-space: normal; }
+.footer-big svg { display: block; width: 100%; height: auto; max-width: 100%; overflow: visible; }
+.footer-big text { font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: 150px; letter-spacing: -.02em; fill: var(--white); }
+.footer-big .footer-big__num { fill: var(--accent); }
