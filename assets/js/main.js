@@ -12,7 +12,7 @@
   var header = document.getElementById('site-header');
   var progress = document.querySelector('.scroll-progress');
   var toTop = document.querySelector('.to-top');
-  var toTopRing = toTop ? toTop.querySelector('circle') : null;
+  var toTopRing = toTop ? toTop.querySelector('.to-top__bar') : null;
   if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
   var ticking = false;
   function onScroll() {
