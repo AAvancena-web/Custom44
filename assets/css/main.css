@@ -1695,3 +1695,11 @@ h1, h2, h3 { text-transform: capitalize; }
 @media (prefers-reduced-motion: reduce) { .print-spot .zone { animation: none; } }
 .pdp-help__icon, .pdp-help__icon svg { color: var(--white) !important; stroke: var(--white); }
 .footer-grid { padding-bottom: 48px; }
+/* Accent buttons on dark backgrounds: visible hover */
+.section--dark .btn--accent, .is-dark .btn--accent, .hero .btn--accent, .page-hero .btn--accent, .print-guide .btn--accent,
+.site-header .btn--accent, .mobile-drawer .btn--accent, .side-help .btn--accent, .rating-card .btn--accent, .site-footer .btn--accent,
+.section--dark .btn--white, .hero .btn--white, .mobile-drawer .btn--white {
+  --btn-bg-hover: var(--white); --btn-fg-hover: var(--ink);
+}
+.section--dark .btn--white, .hero .btn--white, .mobile-drawer .btn--white { --btn-bg-hover: var(--accent); }
+.btn:hover { box-shadow: 0 14px 34px -14px rgba(227,255,59,.55); }
