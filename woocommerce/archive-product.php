@@ -187,29 +187,15 @@ if ( is_wp_error( $c44_chips ) ) {
 			<span class="eyebrow"><?php esc_html_e( 'Ordering made simple', 'custom44' ); ?></span>
 			<h2 class="h-1"><?php esc_html_e( 'Choose, customise, approve, wear', 'custom44' ); ?></h2>
 		</div>
-		<div class="steps" data-observe>
-			<?php
+		<?php
 			$c44_steps = array(
-				array( 'shirt', '/wp-content/uploads/2026/10/6HSP-6HVPH-LIME-BLACK.png', __( 'Pick a style', 'custom44' ), __( 'Select colours and add quantities per size.', 'custom44' ) ),
-				array( 'target', '/wp-content/uploads/2026/08/HOODIE-LONG-SLEEVE-RIGHT-1-scaled.jpg', __( 'Choose print spots', 'custom44' ), __( 'Left chest, back, sleeves and more.', 'custom44' ) ),
-				array( 'upload', '/wp-content/uploads/2026/03/customlogo-1.png', __( 'Upload artwork', 'custom44' ), __( 'Or ask us to design a new logo.', 'custom44' ) ),
-				array( 'check-c', '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'Approve and relax', 'custom44' ), __( 'We print, check and dispatch Australia-wide.', 'custom44' ) ),
+				array( 'shirt', __( 'Pick a style', 'custom44' ), __( 'Select colours and add quantities per size.', 'custom44' ) ),
+				array( 'target', __( 'Choose print spots', 'custom44' ), __( 'Left chest, back, sleeves and more.', 'custom44' ) ),
+				array( 'upload', __( 'Upload artwork', 'custom44' ), __( 'Or ask us to design a new logo.', 'custom44' ) ),
+				array( 'check-c', __( 'Approve and relax', 'custom44' ), __( 'We print, check and dispatch Australia-wide.', 'custom44' ) ),
 			);
-			foreach ( $c44_steps as $c44_k => $c44_step ) :
-				?>
-				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s; --i:<?php echo esc_attr( $c44_k ); ?>">
-					<div class="step__top">
-						<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
-						<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
-					</div>
-					<div class="step__media"><img src="<?php echo esc_url( c44_img( $c44_step[1] ) ); ?>" alt="" loading="lazy"></div>
-					<span class="step__label"><?php echo esc_html( sprintf( __( 'Step %d', 'custom44' ), $c44_k + 1 ) ); ?></span>
-					<h3><?php echo esc_html( $c44_step[2] ); ?></h3>
-					<p><?php echo esc_html( $c44_step[3] ); ?></p>
-					<span class="step__link" aria-hidden="true"></span>
-				</div>
-			<?php endforeach; ?>
-		</div>
+			include get_template_directory() . '/template-parts/process.php';
+		?>
 	</div>
 </section>
 
