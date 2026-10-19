@@ -187,7 +187,7 @@ if ( is_wp_error( $c44_chips ) ) {
 			<span class="eyebrow"><?php esc_html_e( 'Ordering made simple', 'custom44' ); ?></span>
 			<h2 class="h-1"><?php esc_html_e( 'Choose, customise, approve, wear', 'custom44' ); ?></h2>
 		</div>
-		<div class="steps">
+		<div class="steps" data-observe>
 			<?php
 			$c44_steps = array(
 				array( 'shirt', __( 'Pick a style', 'custom44' ), __( 'Select colours and add quantities per size.', 'custom44' ) ),
@@ -197,11 +197,16 @@ if ( is_wp_error( $c44_chips ) ) {
 			);
 			foreach ( $c44_steps as $c44_k => $c44_step ) :
 				?>
-				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s">
-					<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
-					<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
+				<div class="step reveal" style="--d:<?php echo esc_attr( $c44_k * 0.08 ); ?>s; --i:<?php echo esc_attr( $c44_k ); ?>">
+					<div class="step__top">
+						<span class="step__icon"><?php c44_the_icon( $c44_step[0] ); ?></span>
+						<span class="step__num">0<?php echo esc_html( $c44_k + 1 ); ?></span>
+					</div>
+					<span class="step__label"><?php echo esc_html( sprintf( __( 'Step %d', 'custom44' ), $c44_k + 1 ) ); ?></span>
 					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
 					<p><?php echo esc_html( $c44_step[2] ); ?></p>
+					<span class="step__link" aria-hidden="true"></span>
+					<span class="step__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 				</div>
 			<?php endforeach; ?>
 		</div>
