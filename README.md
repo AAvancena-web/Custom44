@@ -1,0 +1,41 @@
+# Custom 44 WordPress Theme
+
+Premium WooCommerce theme for [custom44.com.au](https://custom44.com.au/), built by Digital Movement.
+
+Templates included:
+
+| Page | File |
+| --- | --- |
+| Global header | `header.php` |
+| Global footer (with contact info, Google Map and form above it) | `footer.php`, `template-parts/contact-section.php` |
+| Homepage | `front-page.php` |
+| Category page (product archive) | `woocommerce/archive-product.php` |
+| Product page | `woocommerce/single-product.php`, `woocommerce/content-single-product.php` |
+| Product card (whole card clickable) | `template-parts/product-card.php` |
+
+## Install
+
+1. Download this repository as a ZIP, rename the folder inside to `custom44`, and zip it again (or copy the folder into `wp-content/themes/`).
+2. Appearance > Themes > Activate **Custom 44**.
+3. Settings > Reading: set a static front page (any page). `front-page.php` renders the homepage.
+4. Appearance > Menus: assign menus to **Primary Menu**, **Footer: Shop** and **Footer: Helpful Links**. Until assigned, a built-in menu matching the current site is shown.
+5. Appearance > Customize > Site Identity: upload the logo (falls back to the current site logo).
+6. Appearance > Customize > **Custom 44 Settings**: phone, email, location, map query, banner text and images, social links, optional reviews widget shortcode and optional form plugin shortcode.
+7. Optional: add filter widgets (e.g. WooCommerce product filters) to **Shop Sidebar (Category pages)**. Without widgets, a category tree and help card show instead.
+
+## Notes
+
+* **Layout widths:** `.container` is max 1440px on desktop/laptop and max 1880px on screens 1920px and wider.
+* **Header:** phone icon in a dark circle with a border sits immediately left of the hamburger. Hamburger appears below 1200px.
+* **Mobile:** floating "Call Now" button fixed at the bottom centre on screens under 768px.
+* **Banners** (homepage hero, category hero) display instantly. Only sections below the banner use scroll reveal.
+* **Animations:** scroll reveals, counters, animated bulk tier bars, marquee, parallax images, spotlight hover on service cards, header shrink and scroll progress bar. All respect `prefers-reduced-motion`.
+* **CTAs** all use solid backgrounds. Centered headings and paragraphs have no max-width.
+* **No em dashes:** content filters replace em/en dashes, price ranges render as "From $x", and the title separator is `|`.
+* **Contact form:** built-in form posts to `admin-post.php`, emails the address set in the Customizer (honeypot + nonce protected). Paste a Gravity Forms / WPForms / CF7 shortcode in the Customizer to replace it.
+* **Product page:** standard WooCommerce hooks are preserved, so the existing quote cart and product options plugins keep working. Theme additions (brand/SKU row, bulk tier table, trust points, help card, print guide) are attached via hooks in `inc/woocommerce.php`. Optional `.c44-opt`, `.c44-swatch`, `.c44-size`, `.c44-spot` classes style a step-by-step configurator.
+* Images default to existing uploads on custom44.com.au (`/wp-content/uploads/...`) so the theme looks complete on the live site immediately.
+
+## Static previews
+
+`_preview/index.html`, `_preview/category.html` and `_preview/product.html` are rendered from the real templates with sample products (built with `php _preview/build/build.php`). Open them in a browser to review the design without WordPress. The `_preview` folder can be deleted on the live server.
