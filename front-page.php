@@ -86,7 +86,7 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 <!-- Shop by category -->
 <section class="section" aria-labelledby="cats-title">
 	<div class="container">
-		<div class="section-head section-head--split">
+		<div class="section-head section-head--center">
 			<div class="section-head__text reveal">
 				<span class="eyebrow"><?php esc_html_e( 'Shop by category', 'custom44' ); ?></span>
 				<h2 class="h-1" id="cats-title"><?php echo wp_kses_post( __( 'Gear for every crew, <span class="hl-ink">branded your way.</span>', 'custom44' ) ); ?></h2>
@@ -116,17 +116,13 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 
 <!-- Bulk savings -->
 <section class="section section--dark bulk" id="bulk-pricing" aria-labelledby="bulk-title">
-	<div class="container bulk__inner">
-		<div class="reveal reveal--left">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
 			<span class="eyebrow"><?php esc_html_e( 'Bulk pricing', 'custom44' ); ?></span>
 			<h2 class="h-1" id="bulk-title"><?php echo wp_kses_post( __( 'The more you order, <span class="hl">the more you save.</span>', 'custom44' ) ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'Discounts are applied automatically in your quote cart from just five items. Mix sizes across the same style and still unlock the tier.', 'custom44' ); ?></p>
-			<div class="btn-row" style="margin-top:34px">
-				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
-			</div>
 		</div>
-		<div class="reveal" style="--d:.1s">
+		<div class="bulk__chart reveal" style="--d:.1s">
 			<div class="tiers" data-observe>
 				<?php
 				$c44_tiers = c44_tiers();
@@ -142,6 +138,12 @@ $c44_gallery = array( '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg' );
 				<?php endforeach; ?>
 			</div>
 			<p class="bulk__note"><?php esc_html_e( 'Per item discount on the garment price. Print locations are priced separately on each product.', 'custom44' ); ?></p>
+		</div>
+		<div class="bulk__cta reveal">
+			<div class="btn-row">
+				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
+			</div>
 		</div>
 	</div>
 </section>
@@ -170,7 +172,7 @@ if ( class_exists( 'WooCommerce' ) ) :
 		?>
 		<section class="section section--white" aria-labelledby="best-title">
 			<div class="container">
-				<div class="section-head section-head--split">
+				<div class="section-head section-head--center">
 					<div class="section-head__text reveal">
 						<span class="eyebrow"><?php esc_html_e( 'Best sellers', 'custom44' ); ?></span>
 						<h2 class="h-1" id="best-title"><?php esc_html_e( 'Proven on site. Loved by crews.', 'custom44' ); ?></h2>
@@ -232,7 +234,13 @@ endif;
 
 <!-- Why Custom 44 -->
 <section class="section section--paper2" aria-labelledby="why-title">
-	<div class="container why">
+	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow"><?php esc_html_e( 'Why Custom 44', 'custom44' ); ?></span>
+			<h2 class="h-1" id="why-title"><?php esc_html_e( 'Commercial scale. Family-run care.', 'custom44' ); ?></h2>
+			<p class="lead"><?php esc_html_e( 'We are a family owned business that treats every order like it carries our own name. You get the capacity of a commercial printer with the attention of a local team.', 'custom44' ); ?></p>
+		</div>
+		<div class="why">
 		<div class="why__media reveal reveal--clip" data-parallax-wrap>
 			<img src="<?php echo esc_url( c44_img( '/wp-content/uploads/2025/09/4.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Custom 44 printed apparel', 'custom44' ); ?>" loading="lazy" data-parallax="0.12">
 			<div class="why__badge">
@@ -241,12 +249,7 @@ endif;
 			</div>
 		</div>
 		<div>
-			<div class="reveal">
-				<span class="eyebrow"><?php esc_html_e( 'Why Custom 44', 'custom44' ); ?></span>
-				<h2 class="h-1" id="why-title"><?php esc_html_e( 'Commercial scale. Family-run care.', 'custom44' ); ?></h2>
-				<p class="lead"><?php esc_html_e( 'We are a family owned business that treats every order like it carries our own name. You get the capacity of a commercial printer with the attention of a local team.', 'custom44' ); ?></p>
-			</div>
-			<ul class="why__list">
+			<ul class="why__list" style="margin-top:0">
 				<?php
 				$c44_why = array(
 					array( 'layers', __( 'Prints built for the trade', 'custom44' ), __( 'Commercial-grade DTF inks on rugged base garments that hold up wash after wash.', 'custom44' ) ),
@@ -266,6 +269,7 @@ endif;
 				<a class="link-arrow" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Read our reviews', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 			</div>
 		</div>
+		</div>
 	</div>
 </section>
 
@@ -284,7 +288,7 @@ endif;
 <!-- Services (entire card clickable) -->
 <section class="section section--dark" aria-labelledby="services-title" style="padding-top:0">
 	<div class="container">
-		<div class="section-head section-head--split">
+		<div class="section-head section-head--center">
 			<div class="section-head__text reveal">
 				<span class="eyebrow"><?php esc_html_e( 'What we do', 'custom44' ); ?></span>
 				<h2 class="h-1" id="services-title"><?php esc_html_e( 'Branded apparel for every part of your business', 'custom44' ); ?></h2>
@@ -333,6 +337,10 @@ endif;
 <!-- Reviews -->
 <section class="section section--white" aria-labelledby="reviews-title">
 	<div class="container">
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow"><?php esc_html_e( 'What customers value', 'custom44' ); ?></span>
+			<h2 class="h-1" id="reviews-title"><?php esc_html_e( 'Trusted by tradies, teams and local businesses', 'custom44' ); ?></h2>
+		</div>
 		<div class="reviews">
 			<div class="rating-card reveal reveal--left">
 				<span class="eyebrow" style="color:var(--accent)"><?php esc_html_e( 'Google reviews', 'custom44' ); ?></span>
@@ -342,11 +350,7 @@ endif;
 				<a class="btn btn--accent" href="<?php echo esc_url( c44_opt( 'google_reviews' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'google' ); ?><?php esc_html_e( 'Read reviews on Google', 'custom44' ); ?></a>
 			</div>
 			<div>
-				<div class="reveal">
-					<span class="eyebrow"><?php esc_html_e( 'What customers value', 'custom44' ); ?></span>
-					<h2 class="h-2" id="reviews-title"><?php esc_html_e( 'Trusted by tradies, teams and local businesses', 'custom44' ); ?></h2>
-				</div>
-				<div class="review-points" style="margin-top:30px">
+				<div class="review-points">
 					<?php
 					$c44_points = array(
 						array( 'shield', __( 'Quality that lasts', 'custom44' ), __( 'Crisp, durable prints on garments chosen for real work.', 'custom44' ) ),
@@ -374,7 +378,7 @@ endif;
 <!-- FAQ -->
 <section class="section" aria-labelledby="faq-title">
 	<div class="container faq-wrap">
-		<div class="section-head reveal">
+		<div class="section-head section-head--center reveal">
 			<span class="eyebrow"><?php esc_html_e( 'FAQs', 'custom44' ); ?></span>
 			<h2 class="h-1" id="faq-title"><?php esc_html_e( 'Good questions, quick answers', 'custom44' ); ?></h2>
 			<p class="lead"><?php esc_html_e( 'Still unsure? Our team is a phone call away.', 'custom44' ); ?></p>

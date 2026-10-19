@@ -25,7 +25,7 @@ Templates included:
 
 ## Notes
 
-* **Layout widths:** `.container` is max 1440px on desktop/laptop and max 1880px on screens 1920px and wider.
+* **Layout widths:** `.container` is max 1440px on desktop/laptop and max 1880px on screens 1600px and wider.
 * **Header:** phone icon in a dark circle with a border sits immediately left of the hamburger. Hamburger appears below 1200px.
 * **Mobile:** floating "Call Now" button fixed at the bottom centre on screens under 768px.
 * **Banners** (homepage hero, category hero) display instantly. Only sections below the banner use scroll reveal.
