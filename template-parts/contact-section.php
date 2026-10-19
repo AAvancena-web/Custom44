@@ -85,19 +85,19 @@ $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HO
 					<div class="form-grid">
 						<div class="form-field">
 							<label for="c44_name"><?php esc_html_e( 'Full name', 'custom44' ); ?> <span class="req">*</span></label>
-							<input id="c44_name" name="c44_name" type="text" autocomplete="name" required>
+							<input id="c44_name" name="c44_name" type="text" autocomplete="name" placeholder="<?php esc_attr_e( 'e.g. Jane Smith', 'custom44' ); ?>" required>
 						</div>
 						<div class="form-field">
 							<label for="c44_company"><?php esc_html_e( 'Business / team', 'custom44' ); ?></label>
-							<input id="c44_company" name="c44_company" type="text" autocomplete="organization">
+							<input id="c44_company" name="c44_company" type="text" autocomplete="organization" placeholder="<?php esc_attr_e( 'e.g. Smith Plumbing', 'custom44' ); ?>">
 						</div>
 						<div class="form-field">
 							<label for="c44_email"><?php esc_html_e( 'Email', 'custom44' ); ?> <span class="req">*</span></label>
-							<input id="c44_email" name="c44_email" type="email" autocomplete="email" required>
+							<input id="c44_email" name="c44_email" type="email" autocomplete="email" placeholder="<?php esc_attr_e( 'you@company.com.au', 'custom44' ); ?>" required>
 						</div>
 						<div class="form-field">
 							<label for="c44_phone"><?php esc_html_e( 'Phone', 'custom44' ); ?></label>
-							<input id="c44_phone" name="c44_phone" type="tel" autocomplete="tel">
+							<input id="c44_phone" name="c44_phone" type="tel" autocomplete="tel" placeholder="<?php esc_attr_e( '04XX XXX XXX', 'custom44' ); ?>">
 						</div>
 						<div class="form-field">
 							<label for="c44_interest"><?php esc_html_e( 'I am interested in', 'custom44' ); ?></label>
