@@ -206,7 +206,6 @@ if ( is_wp_error( $c44_chips ) ) {
 					<h3><?php echo esc_html( $c44_step[1] ); ?></h3>
 					<p><?php echo esc_html( $c44_step[2] ); ?></p>
 					<span class="step__link" aria-hidden="true"></span>
-					<span class="step__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 				</div>
 			<?php endforeach; ?>
 		</div>
