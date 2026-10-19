@@ -11,7 +11,6 @@
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body class="archive tax-product_cat woocommerce woocommerce-page">
-<div class="scroll-progress" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <div class="topbar">
@@ -27,6 +26,7 @@
 </div>
 
 <header class="site-header" id="site-header">
+	<div class="scroll-progress" aria-hidden="true"></div>
 	<div class="container site-header__inner">
 		<a class="site-logo " href="index.html" rel="home" aria-label="Custom 44"><img src="https://custom44.com.au/wp-content/uploads/2025/09/logo-footer.png" alt="Custom 44" width="180" height="60"></a>
 		<nav class="primary-nav" aria-label="Primary">
@@ -467,30 +467,50 @@
 			<span class="eyebrow">Ordering made simple</span>
 			<h2 class="h-1">Choose, customise, approve, wear</h2>
 		</div>
-		<div class="steps">
-							<div class="step reveal" style="--d:0s">
-					<span class="step__num">01</span>
-					<span class="step__icon"><svg class="icon icon-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.4 6.6 16 4l-1 1.5a3.6 3.6 0 0 1-6 0L8 4 3.6 6.6a1 1 0 0 0-.4 1.3l1.5 3a1 1 0 0 0 1.2.5L7 11v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-9l1.1.4a1 1 0 0 0 1.2-.5l1.5-3a1 1 0 0 0-.4-1.3z"/></svg></span>
+		<div class="steps" data-observe>
+							<div class="step reveal" style="--d:0s; --i:0">
+					<div class="step__top">
+						<span class="step__icon"><svg class="icon icon-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.4 6.6 16 4l-1 1.5a3.6 3.6 0 0 1-6 0L8 4 3.6 6.6a1 1 0 0 0-.4 1.3l1.5 3a1 1 0 0 0 1.2.5L7 11v9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-9l1.1.4a1 1 0 0 0 1.2-.5l1.5-3a1 1 0 0 0-.4-1.3z"/></svg></span>
+						<span class="step__num">01</span>
+					</div>
+					<span class="step__label">Step 1</span>
 					<h3>Pick a style</h3>
 					<p>Select colours and add quantities per size.</p>
+					<span class="step__link" aria-hidden="true"></span>
+					<span class="step__arrow" aria-hidden="true"><svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 				</div>
-							<div class="step reveal" style="--d:0.08s">
-					<span class="step__num">02</span>
-					<span class="step__icon"><svg class="icon icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+							<div class="step reveal" style="--d:0.08s; --i:1">
+					<div class="step__top">
+						<span class="step__icon"><svg class="icon icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+						<span class="step__num">02</span>
+					</div>
+					<span class="step__label">Step 2</span>
 					<h3>Choose print spots</h3>
 					<p>Left chest, back, sleeves and more.</p>
+					<span class="step__link" aria-hidden="true"></span>
+					<span class="step__arrow" aria-hidden="true"><svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 				</div>
-							<div class="step reveal" style="--d:0.16s">
-					<span class="step__num">03</span>
-					<span class="step__icon"><svg class="icon icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></svg></span>
+							<div class="step reveal" style="--d:0.16s; --i:2">
+					<div class="step__top">
+						<span class="step__icon"><svg class="icon icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></svg></span>
+						<span class="step__num">03</span>
+					</div>
+					<span class="step__label">Step 3</span>
 					<h3>Upload artwork</h3>
 					<p>Or ask us to design a new logo.</p>
+					<span class="step__link" aria-hidden="true"></span>
+					<span class="step__arrow" aria-hidden="true"><svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 				</div>
-							<div class="step reveal" style="--d:0.24s">
-					<span class="step__num">04</span>
-					<span class="step__icon"><svg class="icon icon-check-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg></span>
+							<div class="step reveal" style="--d:0.24s; --i:3">
+					<div class="step__top">
+						<span class="step__icon"><svg class="icon icon-check-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg></span>
+						<span class="step__num">04</span>
+					</div>
+					<span class="step__label">Step 4</span>
 					<h3>Approve and relax</h3>
 					<p>We print, check and dispatch Australia-wide.</p>
+					<span class="step__link" aria-hidden="true"></span>
+					<span class="step__arrow" aria-hidden="true"><svg class="icon icon-arrow icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 				</div>
 					</div>
 	</div>
@@ -650,6 +670,10 @@
 <a class="mobile-call" href="tel:0481316944" aria-label="Call now on 0481 316 944">
 	<span class="mobile-call__icon"><svg class="icon icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
 	Call Now</a>
+
+<button class="to-top" type="button" aria-label="Scroll to top">
+	<svg class="to-top__ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"></circle></svg>
+	<svg class="icon icon-arrow icon-arrow to-top__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 
 <script src="../assets/js/main.js" defer></script>
 </body>
