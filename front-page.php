@@ -372,55 +372,34 @@ endif;
 	</div>
 </section>
 
-<!-- Social feed (replaces the recent work gallery) -->
-<section class="section social" aria-labelledby="social-title">
+<!-- Recent work: live Instagram feed (or set photos) in the gallery layout -->
+<?php $c44_gallery = c44_recent_work(); ?>
+<section class="section" aria-labelledby="gallery-title">
 	<div class="container">
-		<div class="social__grid">
-			<div class="social__intro reveal reveal--left">
-				<span class="eyebrow"><?php esc_html_e( 'Follow our work', 'custom44' ); ?></span>
-				<h2 class="h-1" id="social-title"><?php esc_html_e( 'Printed in Melbourne, worn across Australia', 'custom44' ); ?></h2>
-				<p class="lead"><?php esc_html_e( 'See the latest uniforms, hi-vis and merch fresh off our press. Follow along for new jobs, restocks and special offers.', 'custom44' ); ?></p>
-				<div class="social__links">
-					<?php if ( c44_opt( 'facebook' ) ) : ?>
-						<a class="social-link social-link--fb" href="<?php echo esc_url( c44_opt( 'facebook' ) ); ?>" target="_blank" rel="noopener">
-							<span class="social-link__icon"><?php c44_the_icon( 'facebook' ); ?></span>
-							<span class="social-link__text"><b><?php esc_html_e( 'Follow on Facebook', 'custom44' ); ?></b><small>@Custom44Melbourne</small></span>
-							<?php c44_the_icon( 'arrow' ); ?>
-						</a>
-					<?php endif; ?>
-					<?php if ( c44_opt( 'instagram' ) ) : ?>
-						<a class="social-link social-link--ig" href="<?php echo esc_url( c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener">
-							<span class="social-link__icon"><?php c44_the_icon( 'instagram' ); ?></span>
-							<span class="social-link__text"><b><?php esc_html_e( 'Follow on Instagram', 'custom44' ); ?></b><small>@custom.44</small></span>
-							<?php c44_the_icon( 'arrow' ); ?>
-						</a>
-					<?php endif; ?>
-				</div>
-			</div>
-			<div class="social__feed reveal" style="--d:.1s">
-				<?php if ( c44_opt( 'social_code' ) ) : ?>
-					<?php echo do_shortcode( wp_kses_post( c44_opt( 'social_code' ) ) ); ?>
-				<?php else : ?>
-					<?php
-					$c44_fb_embed = 'https://www.facebook.com/plugins/page.php?' . http_build_query(
-						array(
-							'href'                  => c44_opt( 'facebook' ),
-							'tabs'                  => 'timeline',
-							'width'                 => 500,
-							'height'                => 620,
-							'small_header'          => 'false',
-							'adapt_container_width' => 'true',
-							'hide_cover'            => 'false',
-							'show_facepile'         => 'false',
-						)
-					);
-					?>
-					<div class="social__frame">
-						<iframe src="<?php echo esc_url( $c44_fb_embed ); ?>" title="<?php esc_attr_e( 'Latest posts from Custom 44 on Facebook', 'custom44' ); ?>" width="500" height="620" loading="lazy" scrolling="no" allowfullscreen allow="clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-					</div>
-				<?php endif; ?>
-			</div>
+		<div class="section-head section-head--center reveal">
+			<span class="eyebrow"><?php esc_html_e( 'Recent work', 'custom44' ); ?></span>
+			<h2 class="h-1" id="gallery-title"><?php esc_html_e( 'Printed in Melbourne, worn across Australia', 'custom44' ); ?></h2>
+			<p class="lead"><?php esc_html_e( 'A look at recent uniforms and merch we have produced for local tradies, teams and businesses.', 'custom44' ); ?></p>
 		</div>
+		<?php if ( c44_opt( 'feed_code' ) ) : ?>
+			<div class="feed-embed reveal"><?php echo do_shortcode( wp_kses_post( c44_opt( 'feed_code' ) ) ); ?></div>
+		<?php else : ?>
+		<div class="gallery gallery--instagram">
+			<?php foreach ( $c44_gallery as $c44_k => $c44_g ) : ?>
+				<figure class="gallery__item reveal reveal--scale" style="--d:<?php echo esc_attr( $c44_k * 0.06 ); ?>s">
+					<a href="<?php echo esc_url( ! empty( $c44_g[2] ) ? $c44_g[2] : c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $c44_g[1] . ' ' . __( '(view on Instagram)', 'custom44' ) ); ?>">
+						<img src="<?php echo esc_url( c44_img( $c44_g[0] ) ); ?>" alt="<?php echo esc_attr( $c44_g[1] ); ?>" loading="lazy">
+						<span class="gallery__ig" aria-hidden="true"><?php c44_the_icon( 'instagram' ); ?></span>
+					</a>
+				</figure>
+			<?php endforeach; ?>
+		</div>
+		<?php endif; ?>
+		<?php if ( c44_opt( 'instagram' ) ) : ?>
+			<div class="section-cta reveal">
+				<a class="btn btn--dark btn--lg" href="<?php echo esc_url( c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'instagram' ); ?><?php esc_html_e( 'Follow @custom.44 on Instagram', 'custom44' ); ?></a>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>
 

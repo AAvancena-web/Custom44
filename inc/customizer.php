@@ -20,6 +20,7 @@ function c44_customize_register( $wp_customize ) {
 		'c44_home'    => __( 'Homepage Banner', 'custom44' ),
 		'c44_social'  => __( 'Social & Reviews', 'custom44' ),
 		'c44_forms'   => __( 'Contact Form', 'custom44' ),
+		'c44_work'    => __( 'Recent Work Photos', 'custom44' ),
 	);
 	foreach ( $sections as $id => $title ) {
 		$wp_customize->add_section( $id, array( 'title' => $title, 'panel' => 'c44_panel' ) );
@@ -46,11 +47,19 @@ function c44_customize_register( $wp_customize ) {
 		array( 'facebook', 'c44_social', __( 'Facebook URL', 'custom44' ), 'url' ),
 		array( 'instagram', 'c44_social', __( 'Instagram URL', 'custom44' ), 'url' ),
 		array( 'google_reviews', 'c44_social', __( 'Google reviews URL', 'custom44' ), 'url' ),
-		array( 'social_code', 'c44_social', __( 'Social feed shortcode (optional, replaces the Facebook embed on the homepage)', 'custom44' ), 'textarea' ),
+		array( 'ig_token', 'c44_social', __( 'Instagram access token (long-lived, for the live feed; refreshed automatically)', 'custom44' ), 'text' ),
+		array( 'feed_code', 'c44_social', __( 'Or an Instagram feed plugin shortcode, e.g. Smash Balloon (replaces the gallery photos)', 'custom44' ), 'textarea' ),
 		array( 'reviews_code', 'c44_social', __( 'Reviews widget shortcode (optional)', 'custom44' ), 'textarea' ),
 		array( 'form_code', 'c44_forms', __( 'Form plugin shortcode (optional, replaces built-in form)', 'custom44' ), 'textarea' ),
 		array( 'form_to', 'c44_forms', __( 'Send enquiries to (defaults to contact email)', 'custom44' ), 'email' ),
 	);
+
+	for ( $i = 1; $i <= 6; $i++ ) {
+		/* translators: %d: photo number */
+		$fields[] = array( 'work_' . $i, 'c44_work', sprintf( __( 'Photo %d', 'custom44' ), $i ), 'url' );
+		/* translators: %d: photo number */
+		$fields[] = array( 'work_' . $i . '_alt', 'c44_work', sprintf( __( 'Photo %d description (alt text)', 'custom44' ), $i ), 'text' );
+	}
 
 	$defaults = c44_defaults();
 	foreach ( $fields as $f ) {
@@ -70,6 +79,10 @@ function c44_customize_register( $wp_customize ) {
 				'sanitize_callback' => $sanitize,
 			)
 		);
+		if ( preg_match( '/^work_\d$/', $key ) && class_exists( 'WP_Customize_Image_Control' ) ) {
+			$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'c44_' . $key, array( 'label' => $label, 'section' => $section ) ) );
+			continue;
+		}
 		$wp_customize->add_control(
 			'c44_' . $key,
 			array(

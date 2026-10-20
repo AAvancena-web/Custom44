@@ -24,7 +24,8 @@ function c44_defaults() {
 		'instagram'      => 'https://www.instagram.com/custom.44/',
 		'google_reviews' => 'https://www.google.com/maps/place/Custom+44+Pty+Ltd/@-38.0482687,145.4089145,12491m/data=!3m1!1e3!4m8!3m7!1s0x64cdbec35f67126f:0x8c1f3249aa2259ad!8m2!3d-38.0482688!4d145.4089146!9m1!1b1!16s%2Fg%2F11t6xc782n',
 		'reviews_code'   => '',
-		'social_code'    => '',
+		'ig_token'       => '',
+		'feed_code'      => '',
 		'form_code'      => '',
 		'form_to'        => '',
 		'announcement'   => 'Save up to <strong>35%</strong> on bulk orders, automatically applied from 5+ items.',
@@ -33,7 +34,7 @@ function c44_defaults() {
 		'hero_image'     => '/wp-content/uploads/2026/08/about-custom-44-new-bg-img.jpg',
 		'hero_image_2'   => '/wp-content/uploads/2025/09/2.jpg',
 		'orders'         => '10000',
-		'rating'         => '4.7',
+		'rating'         => '5.0',
 		'review_count'   => '27',
 		'logo_fallback'  => '/wp-content/uploads/2025/09/logo-footer.png',
 	);
@@ -269,4 +270,127 @@ function c44_google_reviews() {
 			array( 'Simon Albore', 'After seeing an advertisement on Facebook I ended up using custom44 to supply and print 50 work shirts for my business. They were easy to deal with, the printing looks great and the T-shirt quality is very good. They even threw in a pack of Allen&rsquo;s Snakes chewie lollies which my family was happy to receive. Would definitely use their services in the future.' ),
 		)
 	);
+}
+
+/**
+ * Recent work photos for the homepage gallery: the live Instagram feed when it is
+ * connected, otherwise the photos set in Customize > Custom 44 Settings > Recent Work Photos
+ * (empty slots fall back to the defaults below).
+ *
+ * @return array[] image, alt text, link.
+ */
+function c44_recent_work() {
+	$feed = c44_instagram_feed( 6 );
+	if ( count( $feed ) >= 3 ) {
+		return apply_filters( 'c44_recent_work', $feed );
+	}
+
+	$defaults = array(
+		array( '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'Custom 44 branded workwear on display', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/04/banner-home-page.jpg', __( 'Custom printed tees and polos', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/08/hero-banner-img.webp', __( 'Branded polos, hoodies and hi-vis', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/10/6HSP-6HVPH-ON-ON.png', __( 'Hi-vis polo and hoodie set', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/08/middle-banner-img.webp', __( 'Uniform range with logo placement', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/10/7BEL-BLACK-ORANGE-.png', __( 'Polo and hoodie team set', 'custom44' ) ),
+	);
+	$items = array();
+	foreach ( $defaults as $i => $d ) {
+		$img = get_theme_mod( 'c44_work_' . ( $i + 1 ), '' );
+		$alt = get_theme_mod( 'c44_work_' . ( $i + 1 ) . '_alt', '' );
+		$items[] = array( $img ? $img : $d[0], $alt ? $alt : $d[1], c44_opt( 'instagram' ) );
+	}
+	return apply_filters( 'c44_recent_work', $items );
+}
+
+/**
+ * Current Instagram access token. Long-lived tokens last 60 days, so the theme refreshes
+ * it about once a week and keeps the newest one in the c44_ig_token option.
+ *
+ * @return string
+ */
+function c44_instagram_token() {
+	$entered = trim( (string) c44_opt( 'ig_token' ) );
+	if ( ! $entered ) {
+		return '';
+	}
+	$stored = get_option( 'c44_ig_token' );
+	// A newly entered token (changed in the Customizer) replaces the stored one.
+	if ( ! is_array( $stored ) || empty( $stored['token'] ) || ! isset( $stored['source'] ) || md5( $entered ) !== $stored['source'] ) {
+		$stored = array( 'token' => $entered, 'source' => md5( $entered ), 'refreshed' => time() );
+		update_option( 'c44_ig_token', $stored, false );
+	}
+	if ( time() - (int) $stored['refreshed'] > WEEK_IN_SECONDS && function_exists( 'wp_remote_get' ) ) {
+		$res  = wp_remote_get(
+			add_query_arg(
+				array( 'grant_type' => 'ig_refresh_token', 'access_token' => $stored['token'] ),
+				'https://graph.instagram.com/refresh_access_token'
+			),
+			array( 'timeout' => 8 )
+		);
+		$body = is_wp_error( $res ) ? array() : json_decode( wp_remote_retrieve_body( $res ), true );
+		if ( ! empty( $body['access_token'] ) ) {
+			$stored['token'] = $body['access_token'];
+		}
+		$stored['refreshed'] = time(); // Try again next week either way.
+		update_option( 'c44_ig_token', $stored, false );
+	}
+	return $stored['token'];
+}
+
+/**
+ * Latest posts from the Custom 44 Instagram account (Instagram API with Instagram Login).
+ * Needs a long-lived access token in Customize > Custom 44 Settings > Social & Reviews.
+ * Results are cached for an hour so the homepage stays fast.
+ *
+ * @param int $limit Number of posts.
+ * @return array[] image, alt text, link. Empty when not connected or on error.
+ */
+function c44_instagram_feed( $limit = 6 ) {
+	$token = c44_instagram_token();
+	if ( ! $token || ! function_exists( 'wp_remote_get' ) ) {
+		return array();
+	}
+	$cache_key = 'c44_ig_feed_' . $limit;
+	$cached    = get_transient( $cache_key );
+	if ( false !== $cached ) {
+		return $cached;
+	}
+
+	$version = apply_filters( 'c44_ig_graph_version', 'v23.0' );
+	$res     = wp_remote_get(
+		add_query_arg(
+			array(
+				'fields'       => 'id,media_type,media_url,thumbnail_url,permalink,caption',
+				'limit'        => 20,
+				'access_token' => $token,
+			),
+			'https://graph.instagram.com/' . $version . '/me/media'
+		),
+		array( 'timeout' => 8 )
+	);
+	$items = array();
+	if ( ! is_wp_error( $res ) && 200 === (int) wp_remote_retrieve_response_code( $res ) ) {
+		$body = json_decode( wp_remote_retrieve_body( $res ), true );
+		foreach ( (array) ( isset( $body['data'] ) ? $body['data'] : array() ) as $post ) {
+			$is_video = isset( $post['media_type'] ) && 'VIDEO' === $post['media_type'];
+			$img      = $is_video ? ( isset( $post['thumbnail_url'] ) ? $post['thumbnail_url'] : '' ) : ( isset( $post['media_url'] ) ? $post['media_url'] : '' );
+			if ( ! $img ) {
+				continue;
+			}
+			$text    = isset( $post['caption'] ) ? wp_strip_all_tags( $post['caption'] ) : '';
+			$items[] = array(
+				esc_url_raw( $img ),
+				$text ? wp_trim_words( $text, 14, '...' ) : __( 'Custom 44 on Instagram', 'custom44' ),
+				isset( $post['permalink'] ) ? esc_url_raw( $post['permalink'] ) : c44_opt( 'instagram' ),
+			);
+			if ( count( $items ) >= $limit ) {
+				break;
+			}
+		}
+		set_transient( $cache_key, $items, HOUR_IN_SECONDS );
+	} else {
+		// Try again in 10 minutes rather than calling Instagram on every page view.
+		set_transient( $cache_key, array(), 10 * MINUTE_IN_SECONDS );
+	}
+	return $items;
 }

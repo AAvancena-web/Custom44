@@ -39,7 +39,7 @@ Templates included:
 ## Feedback round 2 (Oct 2026)
 
 * Brand yellow is now the logo yellow `#FFF301` (`--accent` in `assets/css/main.css`).
-* Homepage: "Buy more, save more" calculator in the banner, Value Packs section (pulls the `value-packs` category when it exists, otherwise the current site's packs), social section (Facebook page embed, or paste a feed shortcode such as Smash Balloon in **Social & Reviews > Social feed shortcode**).
+* Homepage: "Buy more, save more" calculator in the banner, Value Packs section (pulls the `value-packs` category when it exists, otherwise the current site's packs), Recent work gallery shows the live Instagram feed from @custom.44 (paste a long-lived Instagram access token under **Social & Reviews**; refreshed automatically and cached for an hour), or an Instagram feed plugin shortcode such as Smash Balloon, or the photos set in **Recent Work Photos** as a fallback.
 * Menu fallback mirrors the live menu, including Value Packs.
 * Map is pinned to the Custom 44 Pty Ltd Google Business Profile via **Contact Details & Map > Google Business Profile CID**. Rating and review count are set under **Homepage Banner**.
 * Category banner is compact so products show above the fold; long descriptions get a "Read more" toggle.
