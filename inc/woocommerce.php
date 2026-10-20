@@ -101,6 +101,8 @@ function c44_single_eyebrow() {
 	if ( $product->is_in_stock() ) {
 		echo '<span class="c44-stock">' . esc_html__( 'In stock, ready to print', 'custom44' ) . '</span>';
 	}
+	// Google rating (links to the Google reviews tab further down the page).
+	echo '<a class="c44-rating" href="#tab-' . esc_attr( c44_google_tab_key( $product ) ) . '" data-open-tab>' . c44_stars() . '<span><b>' . esc_html( c44_opt( 'rating' ) ) . '</b> ' . esc_html__( 'on Google', 'custom44' ) . '</span></a>'; // phpcs:ignore
 	echo '</div>';
 }
 add_action( 'woocommerce_single_product_summary', 'c44_single_eyebrow', 4 );
@@ -120,6 +122,53 @@ function c44_single_tiers() {
 	get_template_part( 'template-parts/tier-table' );
 }
 add_action( 'woocommerce_single_product_summary', 'c44_single_tiers', 25 );
+
+/**
+ * Running total box (total quantity + estimated total price). Output after the form;
+ * main.js moves it directly above the add to quote button.
+ */
+function c44_single_totals() {
+	global $product;
+	$base = (float) wc_get_price_to_display( $product );
+	?>
+	<div class="pdp-totals" data-totals data-base="<?php echo esc_attr( $base ); ?>">
+		<div class="pdp-totals__row"><span><?php esc_html_e( 'Total quantity', 'custom44' ); ?></span><b data-total-qty>0</b></div>
+		<div class="pdp-totals__row"><span><?php esc_html_e( 'Total price', 'custom44' ); ?></span><b data-total-price>$0.00</b></div>
+		<p class="pdp-totals__note" data-total-note><?php esc_html_e( 'Enter quantities to see your total. Bulk discount applied automatically.', 'custom44' ); ?></p>
+	</div>
+	<?php
+}
+add_action( 'woocommerce_single_product_summary', 'c44_single_totals', 31 );
+
+/**
+ * Tab key used for Google reviews: replaces the empty WooCommerce reviews tab,
+ * or sits beside it when the product already has its own reviews.
+ *
+ * @param WC_Product $product Product.
+ * @return string
+ */
+function c44_google_tab_key( $product ) {
+	return ( $product && method_exists( $product, 'get_review_count' ) && $product->get_review_count() > 0 ) ? 'google_reviews' : 'reviews';
+}
+
+/**
+ * Show Google reviews (from the Custom 44 Pty Ltd Business Profile) in the product tabs.
+ */
+add_filter( 'woocommerce_product_tabs', function ( $tabs ) {
+	global $product;
+	$key   = c44_google_tab_key( $product );
+	$count = c44_opt( 'review_count' );
+	$tab   = array(
+		/* translators: %s: number of Google reviews */
+		'title'    => $count ? sprintf( __( 'Google Reviews (%s)', 'custom44' ), $count ) : __( 'Google Reviews', 'custom44' ),
+		'priority' => 30,
+		'callback' => function () {
+			get_template_part( 'template-parts/google-reviews' );
+		},
+	);
+	$tabs[ $key ] = isset( $tabs[ $key ] ) ? array_merge( $tabs[ $key ], $tab ) : $tab;
+	return $tabs;
+}, 98 );
 
 /**
  * Trust points and help card after add to cart.

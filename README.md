@@ -47,4 +47,4 @@ Templates included:
 
 ## Static previews
 
-`_preview/index.html`, `_preview/category.html` and `_preview/product.html` are rendered from the real templates with sample products (built with `php _preview/build/build.php`). Open them in a browser to review the design without WordPress. The `_preview` folder can be deleted on the live server.
+`_preview/index.html`, `_preview/category.html` and `_preview/product.html` are rendered from the real templates with sample products (built with `php _preview/build/build.php`). Open them in a browser to review the design without WordPress. The root `index.html` just redirects GitHub Pages visitors to `_preview/index.html`; it and the `_preview` folder can be deleted on the live server.

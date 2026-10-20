@@ -37,7 +37,7 @@ if ( is_wp_error( $c44_chips ) ) {
 ?>
 
 <!-- Category banner: content displays immediately (no reveal animation) -->
-<section class="page-hero">
+<section class="page-hero page-hero--compact">
 	<div class="hero__bg" aria-hidden="true"></div>
 	<div class="hero__grid-lines" aria-hidden="true"></div>
 	<div class="container">
@@ -46,7 +46,8 @@ if ( is_wp_error( $c44_chips ) ) {
 			<div>
 				<span class="eyebrow"><?php esc_html_e( 'Custom printed apparel', 'custom44' ); ?></span>
 				<h1><?php echo esc_html( $c44_title ); ?></h1>
-				<div class="page-hero__desc"><?php echo wp_kses_post( $c44_desc ); ?></div>
+				<div class="page-hero__desc" data-clamp><?php echo wp_kses_post( $c44_desc ); ?></div>
+				<button type="button" class="page-hero__more" data-clamp-toggle hidden><?php esc_html_e( 'Read more', 'custom44' ); ?></button>
 			</div>
 			<div class="page-hero__stats">
 				<div class="page-hero__stat"><strong><?php echo esc_html( $c44_total ); ?></strong><span><?php esc_html_e( 'Styles to brand', 'custom44' ); ?></span></div>
@@ -79,7 +80,7 @@ if ( is_wp_error( $c44_chips ) ) {
 	</div>
 </div>
 
-<section class="section section--tight">
+<section class="section section--tight shop-section">
 	<div class="container shop-layout">
 		<div class="drawer-overlay" data-filter-close></div>
 		<aside class="shop-sidebar" id="shop-sidebar" aria-label="<?php esc_attr_e( 'Product filters', 'custom44' ); ?>">

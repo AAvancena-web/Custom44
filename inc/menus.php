@@ -13,39 +13,84 @@ defined( 'ABSPATH' ) || exit;
  * @return array
  */
 function c44_default_nav() {
+	// Mirrors the live custom44.com.au menu (labels and URLs) so nothing changes for shoppers.
 	$cat = function ( $slug ) {
 		return home_url( '/product-category/' . $slug . '/' );
 	};
-	$apparel = array( 'T-Shirts', 'Polos', 'Singlets', 'Hoodies', 'Jumpers', 'Jackets & Vests' );
-	$sub     = function ( $prefix, $labels ) use ( $cat ) {
+	$items = function ( $rows ) use ( $cat ) {
 		$out = array();
-		foreach ( $labels as $label ) {
-			$slug  = $prefix . '-' . sanitize_title( str_replace( '&', '', $label ) );
-			$out[] = array( 'title' => $label, 'url' => $cat( $slug ) );
+		foreach ( $rows as $title => $slug ) {
+			$out[] = array( 'title' => $title, 'url' => $cat( $slug ) );
 		}
 		return $out;
 	};
 
 	return array(
+		array(
+			'title'    => 'Value Packs',
+			'url'      => $cat( 'value-packs' ),
+			'children' => $items( array( 'Hi Vis Packs' => 'value-packs/hi-vis-packs', 'Workwear Packs' => 'value-packs/workwear-packs' ) ),
+		),
 		array( 'title' => 'Best Sellers', 'url' => $cat( 'best-sellers' ) ),
 		array(
 			'title'    => 'Workwear',
 			'url'      => $cat( 'workwear' ),
-			'children' => array(
-				array( 'title' => 'Hi-Vis T-Shirts', 'url' => $cat( 'hi-vis-t-shirts' ) ),
-				array( 'title' => 'Hi-Vis Polos', 'url' => $cat( 'hi-vis-polos' ) ),
-				array( 'title' => 'Hi-Vis Shirts', 'url' => $cat( 'workwear/hi-vis-shirts' ) ),
-				array( 'title' => 'Hi-Vis Singlets', 'url' => $cat( 'hi-vis-singlets' ) ),
-				array( 'title' => 'Hi-Vis Hoodies', 'url' => $cat( 'hi-vis-hoodies' ) ),
-				array( 'title' => 'Hi-Vis Jumpers', 'url' => $cat( 'hi-vis-jumpers' ) ),
-				array( 'title' => 'Hi-Vis Jackets & Vests', 'url' => $cat( 'hi-vis-jacketvests' ) ),
+			'children' => $items(
+				array(
+					'Hi-Vis Polos'           => 'hi-vis-polos',
+					'Hi-Vis Shirts'          => 'workwear/hi-vis-shirts',
+					'Hi-Vis Singlets'        => 'hi-vis-singlets',
+					'Hi-Vis Hoodies'         => 'hi-vis-hoodies',
+					'Hi-Vis Jumpers'         => 'hi-vis-jumpers',
+					'Hi-Vis Jackets & Vests' => 'hi-vis-jacketvests',
+				)
 			),
 		),
-		array( 'title' => 'Mens', 'url' => $cat( 'mens' ), 'children' => array_merge( $sub( 'mens', $apparel ), array( array( 'title' => 'Trackpants', 'url' => $cat( 'mens-trackpants' ) ) ) ) ),
-		array( 'title' => 'Womens', 'url' => $cat( 'womens' ), 'children' => $sub( 'womens', $apparel ) ),
-		array( 'title' => 'Kids', 'url' => $cat( 'kids' ), 'children' => $sub( 'kids', $apparel ) ),
+		array(
+			'title'    => 'Mens',
+			'url'      => $cat( 'mens' ),
+			'children' => $items(
+				array(
+					'T-Shirts'        => 'mens/t-shirts',
+					'Polos'           => 'mens/polos',
+					'Singlets'        => 'mens-singlets',
+					'Hoodies'         => 'mens/mens-hoodies',
+					'Jumpers'         => 'jumpers',
+					'Jackets & Vests' => 'jackets-vest',
+					'Trackpants'      => 'mens/trackpants',
+				)
+			),
+		),
+		array(
+			'title'    => 'Womens',
+			'url'      => $cat( 'womens' ),
+			'children' => $items(
+				array(
+					'T-Shirts'        => 'womens/womens-t-shirts',
+					'Polos'           => 'womens/womens-polos',
+					'Singlets'        => 'womens-singlets',
+					'Hoodies'         => 'womens/womens-hoodies',
+					'Jumpers'         => 'womens-jumpers',
+					'Jackets & Vests' => 'womens/womens-jackets-vests',
+				)
+			),
+		),
+		array(
+			'title'    => 'Kids',
+			'url'      => $cat( 'kids' ),
+			'children' => $items(
+				array(
+					'T-Shirts'       => 'kids-t-shirts',
+					'Polos'          => 'kids-polos',
+					'Singlets'       => 'kids-singlets',
+					'Hoodies'        => 'kids-hoodies',
+					'Jumpers'        => 'kids-jumpers',
+					'Jacket & Vests' => 'kids-jackets-vests',
+				)
+			),
+		),
 		array( 'title' => 'Headwear', 'url' => $cat( 'headwear' ) ),
-		array( 'title' => 'Contact', 'url' => home_url( '/contact/' ) ),
+		array( 'title' => 'Contact Us', 'url' => home_url( '/contact/' ) ),
 	);
 }
 

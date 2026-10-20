@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 $c44_status = isset( $_GET['enquiry'] ) ? sanitize_key( wp_unslash( $_GET['enquiry'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$c44_map    = 'https://maps.google.com/maps?q=' . rawurlencode( c44_opt( 'map_query' ) ) . '&z=11&output=embed';
+$c44_map    = c44_opt( 'map_cid' )
+	? 'https://maps.google.com/maps?cid=' . rawurlencode( c44_opt( 'map_cid' ) ) . '&z=11&output=embed'
+	: 'https://maps.google.com/maps?q=' . rawurlencode( c44_opt( 'map_query' ) ) . '&z=11&output=embed';
 $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '' ) . ( isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '' );
 ?>
 <section class="contact section is-dark" id="contact" aria-labelledby="contact-title">

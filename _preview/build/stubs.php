@@ -159,6 +159,8 @@ class WC_Product {
 	public function get_attribute() { return $this->brand; }
 	public function is_in_stock() { return true; }
 	public function is_visible() { return true; }
+	public function get_review_count() { return 0; }
+	public function get_image_id() { return 0; }
 }
 function c44__products() {
 	$u = 'https://custom44.com.au/wp-content/uploads/';
@@ -251,7 +253,7 @@ function woocommerce_template_single_rating() {}
 function woocommerce_template_single_price() { echo '<p class="price">' . $GLOBALS['c44_single']->get_price_html() . '</p>'; }
 function woocommerce_template_single_excerpt() { echo '<div class="woocommerce-product-details__short-description"><p>A breathable, quick-dry hi-vis polo with spider-mesh panels built for long days on site. Day/night compliant colourways with a durable finish that takes your logo beautifully.</p></div>'; }
 function woocommerce_template_single_add_to_cart() {
-	$colours = array( 'Orange/Navy', 'Yellow/Navy', 'Orange/Black', 'Yellow/Black', 'Lime/Navy' );
+	$colours = array( 'Orange/Navy', 'Yellow/Navy', 'Orange/Black', 'Yellow/Black', 'Lime/Navy', 'Orange/Bottle', 'Yellow/Bottle', 'Orange/Royal', 'Yellow/Royal', 'Lime/Black' );
 	$sizes = array( 'S' => 42, 'M' => 42, 'L' => 42, 'XL' => 42, '2XL' => 44, '3XL' => 46, '4XL' => 48, '5XL' => 50 );
 	$spots = array( array( 'Left Chest', 5, true ), array( 'Centre Back', 5, true ), array( 'Right Chest', 5, false ), array( 'Left Sleeve', 7, false ), array( 'Right Sleeve', 7, false ), array( 'Centre Front', 5, false ), array( 'Lower Back', 8, false ) );
 	echo '<form class="cart c44-demo-options" method="post">';
@@ -259,10 +261,10 @@ function woocommerce_template_single_add_to_cart() {
 	foreach ( $colours as $i => $c ) echo '<label class="c44-swatch"><input type="radio" name="c" ' . ( 0 === $i ? 'checked' : '' ) . '><span>' . esc_html( $c ) . '</span></label>';
 	echo '</div></div>';
 	echo '<div class="c44-opt"><label class="c44-opt__label">2. Sizes & quantities</label><div class="c44-sizes">';
-	foreach ( $sizes as $s => $pr ) echo '<label class="c44-size"><span>' . $s . '<small>$' . number_format( $pr, 2 ) . '</small></span><input type="number" min="0" value="0" inputmode="numeric" aria-label="Quantity ' . $s . '"></label>';
+	foreach ( $sizes as $s => $pr ) echo '<label class="c44-size"><span>' . $s . '<small>$' . number_format( $pr, 2 ) . '</small></span><input type="number" min="0" value="0" inputmode="numeric" data-price="' . $pr . '" aria-label="Quantity ' . $s . '"></label>';
 	echo '</div></div>';
 	echo '<div class="c44-opt"><label class="c44-opt__label">3. Print locations</label><div class="c44-spots">';
-	foreach ( $spots as $sp ) echo '<label class="c44-spot"><input type="checkbox"><span>' . esc_html( $sp[0] ) . ( $sp[2] ? ' <em>Popular</em>' : '' ) . '<small>+$' . number_format( $sp[1], 2 ) . '</small></span></label>';
+	foreach ( $spots as $sp ) echo '<label class="c44-spot"><input type="checkbox" data-price="' . $sp[1] . '"' . ( 'Left Chest' === $sp[0] ? ' checked' : '' ) . '><span>' . esc_html( $sp[0] ) . ( $sp[2] ? ' <em>Popular</em>' : '' ) . '<small>+$' . number_format( $sp[1], 2 ) . '</small></span></label>';
 	echo '</div></div>';
 	echo '<div class="c44-opt"><label class="c44-opt__label" for="art">4. Artwork</label><select id="art"><option>I will supply my own artwork</option><option>Use my file on record</option><option>Design a new logo for me</option></select></div>';
 	echo '<button type="submit" class="single_add_to_cart_button button alt">Add to Quote</button></form>';
@@ -270,10 +272,28 @@ function woocommerce_template_single_add_to_cart() {
 function woocommerce_template_single_meta() { echo '<div class="product_meta"><span class="sku_wrapper">SKU: <span class="sku">6HSP</span></span><span class="posted_in">Categories: <a href="#">Hi-Vis Polos</a>, <a href="#">Workwear</a></span><span class="tagged_as">Brand: <a href="#">JB\'s Wear</a></span></div>'; }
 function woocommerce_template_single_sharing() {}
 function woocommerce_output_product_data_tabs() {
-	echo '<div class="woocommerce-tabs wc-tabs-wrapper"><ul class="tabs wc-tabs" role="tablist"><li class="description_tab active"><a href="#tab-description">Description</a></li><li class="additional_information_tab"><a href="#tab-additional_information">Additional information</a></li><li class="reviews_tab"><a href="#tab-reviews">Reviews (0)</a></li></ul>';
-	echo '<div class="woocommerce-Tabs-panel panel" id="tab-description"><h2>' . apply_filters( 'woocommerce_product_description_heading', 'Description' ) . '</h2><p>Stay cool and visible with the JB\'s Hi Vis S/S Spider Polo. Spider-mesh side and underarm panels move air where you need it most, while the quick-dry fabric keeps you comfortable through the hottest Aussie days.</p><ul><li>Breathable spider-mesh panels</li><li>Quick-dry, moisture wicking polyester</li><li>Day use hi-vis colourways</li><li>Three button placket with contrast collar</li><li>UPF rated fabric</li></ul><h3>Logo print location information</h3><ul><li>Front left or right chest: max 10cm x 10cm</li><li>Back print: max 28cm x 30cm</li></ul></div>';
-	echo '<div class="woocommerce-Tabs-panel panel" id="tab-additional_information" style="display:none"><h2>Additional information</h2><table class="shop_attributes"><tr><th>Colour</th><td>Orange/Navy, Yellow/Navy, Orange/Black, Yellow/Black, Lime/Navy</td></tr><tr><th>Size</th><td>S, M, L, XL, 2XL, 3XL, 4XL, 5XL</td></tr></table></div>';
-	echo '<div class="woocommerce-Tabs-panel panel" id="tab-reviews" style="display:none"><h2>Reviews</h2><p>There are no reviews yet.</p></div></div>';
+	$tabs = array(
+		'description' => array( 'title' => 'Description', 'priority' => 10, 'callback' => function () {
+			echo '<h2>' . apply_filters( 'woocommerce_product_description_heading', 'Description' ) . '</h2><p>Stay cool and visible with the JB\'s Hi Vis S/S Spider Polo. Spider-mesh side and underarm panels move air where you need it most, while the quick-dry fabric keeps you comfortable through the hottest Aussie days.</p><ul><li>Breathable spider-mesh panels</li><li>Quick-dry, moisture wicking polyester</li><li>Day use hi-vis colourways</li><li>Three button placket with contrast collar</li><li>UPF rated fabric</li></ul><h3>Logo print location information</h3><ul><li>Front left or right chest: max 10cm x 10cm</li><li>Back print: max 28cm x 30cm</li></ul>';
+		} ),
+		'additional_information' => array( 'title' => 'Additional information', 'priority' => 20, 'callback' => function () {
+			echo '<h2>Additional information</h2><table class="shop_attributes"><tr><th>Colour</th><td>Orange/Navy, Yellow/Navy, Orange/Black, Yellow/Black, Lime/Navy</td></tr><tr><th>Size</th><td>S, M, L, XL, 2XL, 3XL, 4XL, 5XL</td></tr></table>';
+		} ),
+		'reviews' => array( 'title' => 'Reviews (0)', 'priority' => 30, 'callback' => function () { echo '<h2>Reviews</h2><p>There are no reviews yet.</p>'; } ),
+	);
+	$tabs = apply_filters( 'woocommerce_product_tabs', $tabs );
+	uasort( $tabs, function ( $x, $y ) { return $x['priority'] <=> $y['priority']; } );
+	echo '<div class="woocommerce-tabs wc-tabs-wrapper"><ul class="tabs wc-tabs" role="tablist">';
+	$i = 0;
+	foreach ( $tabs as $k => $t ) echo '<li class="' . $k . '_tab' . ( 0 === $i++ ? ' active' : '' ) . '"><a href="#tab-' . $k . '">' . esc_html( $t['title'] ) . '</a></li>';
+	echo '</ul>';
+	$i = 0;
+	foreach ( $tabs as $k => $t ) {
+		echo '<div class="woocommerce-Tabs-panel panel" id="tab-' . $k . '"' . ( 0 === $i++ ? '' : ' style="display:none"' ) . '>';
+		call_user_func( $t['callback'], $k, $t );
+		echo '</div>';
+	}
+	echo '</div>';
 }
 function woocommerce_upsell_display() {}
 function woocommerce_output_related_products() {
