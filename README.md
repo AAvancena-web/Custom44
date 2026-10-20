@@ -36,6 +36,15 @@ Templates included:
 * **Product page:** standard WooCommerce hooks are preserved, so the existing quote cart and product options plugins keep working. Theme additions (brand/SKU row, bulk tier table, trust points, help card, print guide) are attached via hooks in `inc/woocommerce.php`. Optional `.c44-opt`, `.c44-swatch`, `.c44-size`, `.c44-spot` classes style a step-by-step configurator.
 * Images default to existing uploads on custom44.com.au (`/wp-content/uploads/...`) so the theme looks complete on the live site immediately.
 
+## Feedback round 2 (Oct 2026)
+
+* Brand yellow is now the logo yellow `#FFF301` (`--accent` in `assets/css/main.css`).
+* Homepage: "Buy more, save more" calculator in the banner, Value Packs section (pulls the `value-packs` category when it exists, otherwise the current site's packs), social section (Facebook page embed, or paste a feed shortcode such as Smash Balloon in **Social & Reviews > Social feed shortcode**).
+* Menu fallback mirrors the live menu, including Value Packs.
+* Map is pinned to the Custom 44 Pty Ltd Google Business Profile via **Contact Details & Map > Google Business Profile CID**. Rating and review count are set under **Homepage Banner**.
+* Category banner is compact so products show above the fold; long descriptions get a "Read more" toggle.
+* Product page: Google rating link, light tier box with "Add N more to unlock X% off" progress, colour swatches (theme swatches and WooCommerce colour dropdowns), Total quantity / Total price box above the add to quote button, and Google reviews in the reviews tab.
+
 ## Static previews
 
 `_preview/index.html`, `_preview/category.html` and `_preview/product.html` are rendered from the real templates with sample products (built with `php _preview/build/build.php`). Open them in a browser to review the design without WordPress. The `_preview` folder can be deleted on the live server.

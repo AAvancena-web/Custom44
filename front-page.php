@@ -20,14 +20,6 @@ $c44_cat_url    = function ( $slug ) {
 	}
 	return home_url( '/product-category/' . $slug . '/' );
 };
-$c44_gallery = array(
-	array( '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'Custom 44 branded workwear on display', 'custom44' ) ),
-	array( '/wp-content/uploads/2026/04/banner-home-page.jpg', __( 'Custom printed tees and polos', 'custom44' ) ),
-	array( '/wp-content/uploads/2026/08/hero-banner-img.webp', __( 'Branded polos, hoodies and hi-vis', 'custom44' ) ),
-	array( '/wp-content/uploads/2026/10/6HSP-6HVPH-ON-ON.png', __( 'Hi-vis polo and hoodie set', 'custom44' ) ),
-	array( '/wp-content/uploads/2026/08/middle-banner-img.webp', __( 'Uniform range with logo placement', 'custom44' ) ),
-	array( '/wp-content/uploads/2026/10/7BEL-BLACK-ORANGE-.png', __( 'Polo and hoodie team set', 'custom44' ) ),
-);
 ?>
 
 <!-- Banner: content displays immediately (no reveal animation) -->
@@ -58,16 +50,46 @@ $c44_gallery = array(
 			<div class="hero__img-main" data-parallax-wrap>
 				<img src="<?php echo esc_url( c44_img( c44_opt( 'hero_image' ) ) ); ?>" alt="<?php esc_attr_e( 'Custom printed workwear by Custom 44', 'custom44' ); ?>" width="900" height="1100" fetchpriority="high" data-parallax="0.08">
 			</div>
-			<div class="hero__img-small">
-				<img src="<?php echo esc_url( c44_img( c44_opt( 'hero_image_2' ) ) ); ?>" alt="<?php esc_attr_e( 'DTF printed logo detail', 'custom44' ); ?>" width="400" height="500">
-			</div>
 			<div class="hero__chip hero__chip--a">
 				<span class="hero__chip-icon"><?php c44_the_icon( 'truck' ); ?></span>
 				<div><strong><?php echo esc_html( number_format_i18n( $c44_orders ) ); ?>+</strong><span><?php esc_html_e( 'Orders shipped Australia-wide', 'custom44' ); ?></span></div>
 			</div>
-			<div class="hero__chip hero__chip--b">
-				<span class="hero__chip-icon"><?php c44_the_icon( 'layers' ); ?></span>
-				<div><strong>DTF</strong><span><?php esc_html_e( 'Commercial-grade prints', 'custom44' ); ?></span></div>
+
+			<?php
+			// Bulk savings calculator. Example: AS Colour Staple Tee ($27) + left chest print ($5).
+			// The tier discount applies to the garment; print locations are priced separately.
+			$c44_calc_base  = (float) apply_filters( 'c44_calc_base_price', 27 );
+			$c44_calc_print = (float) apply_filters( 'c44_calc_print_price', 5 );
+			$c44_calc_qty   = 20;
+			?>
+			<div class="calc" data-calc data-base="<?php echo esc_attr( $c44_calc_base ); ?>" data-print="<?php echo esc_attr( $c44_calc_print ); ?>">
+				<div class="calc__head">
+					<strong><?php esc_html_e( 'Buy more, save more', 'custom44' ); ?></strong>
+					<span><?php esc_html_e( 'Mix sizes & colours', 'custom44' ); ?></span>
+				</div>
+				<div class="calc__tiers" role="group" aria-label="<?php esc_attr_e( 'Bulk discount tiers', 'custom44' ); ?>">
+					<?php foreach ( c44_tiers() as $c44_tier ) : ?>
+						<button type="button" class="calc__tier<?php echo $c44_calc_qty === $c44_tier['qty'] ? ' is-active' : ''; ?>" data-qty="<?php echo esc_attr( $c44_tier['qty'] ); ?>" data-off="<?php echo esc_attr( $c44_tier['off'] ); ?>">
+							<small><?php echo esc_html( $c44_tier['qty'] ); ?>+</small><b><?php echo esc_html( $c44_tier['off'] ); ?>%</b>
+						</button>
+					<?php endforeach; ?>
+				</div>
+				<div class="calc__row">
+					<label for="calc-qty"><?php esc_html_e( 'How many do you need?', 'custom44' ); ?></label>
+					<output for="calc-qty" data-calc-qty><?php echo esc_html( $c44_calc_qty ); ?> <?php esc_html_e( 'items', 'custom44' ); ?></output>
+				</div>
+				<input class="calc__range" id="calc-qty" type="range" min="1" max="150" step="1" value="<?php echo esc_attr( $c44_calc_qty ); ?>">
+				<div class="calc__result">
+					<div>
+						<span><?php esc_html_e( 'AS Colour Staple Tee', 'custom44' ); ?></span>
+						<small><?php esc_html_e( 'with a left chest print', 'custom44' ); ?></small>
+					</div>
+					<div class="calc__price">
+						<b data-calc-each><?php echo esc_html( '$' . number_format( $c44_calc_base * 0.75 + $c44_calc_print, 2 ) ); ?></b>
+						<small data-calc-note><?php esc_html_e( 'each, 25% off applied', 'custom44' ); ?></small>
+					</div>
+				</div>
+				<a class="calc__cta" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 			</div>
 		</div>
 	</div>
@@ -88,6 +110,54 @@ $c44_gallery = array(
 		?>
 	</div>
 </div>
+
+<!-- Value packs (as on the current homepage) -->
+<?php
+$c44_packs = c44_value_packs();
+$c44_sizes = array_values( array_unique( array_filter( array_column( $c44_packs, 'size' ) ) ) );
+if ( $c44_packs ) :
+	?>
+	<section class="section section--white packs" id="value-packs" aria-labelledby="packs-title">
+		<div class="container">
+			<div class="section-head section-head--center reveal">
+				<span class="label-chip"><?php esc_html_e( 'Save big with our value packs', 'custom44' ); ?></span>
+				<h2 class="h-1" id="packs-title"><?php esc_html_e( 'Value Packs', 'custom44' ); ?></h2>
+				<p class="lead"><?php esc_html_e( "Kit out the whole crew in one order. Bundles of 7, 15, 30 or 60 polos, tees and hoodies from AS Colour and JB's Wear, with your logo printed on the left chest and back.", 'custom44' ); ?></p>
+			</div>
+
+			<?php if ( count( $c44_sizes ) > 1 ) : ?>
+				<div class="packs__filter reveal" role="tablist" aria-label="<?php esc_attr_e( 'Pack size', 'custom44' ); ?>">
+					<?php foreach ( $c44_sizes as $c44_k => $c44_size ) : ?>
+						<button type="button" role="tab" class="packs__tab<?php echo 0 === $c44_k ? ' is-active' : ''; ?>" aria-selected="<?php echo 0 === $c44_k ? 'true' : 'false'; ?>" data-pack-size="<?php echo esc_attr( $c44_size ); ?>">
+							<?php
+							/* translators: %d: items in the pack */
+							echo esc_html( sprintf( __( '%d Packs', 'custom44' ), $c44_size ) );
+							?>
+						</button>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+
+			<ul class="packs__grid" data-packs>
+				<?php foreach ( $c44_packs as $c44_p ) : ?>
+					<li class="pack-card" data-size="<?php echo esc_attr( $c44_p['size'] ); ?>"<?php echo ( count( $c44_sizes ) > 1 && (int) $c44_p['size'] !== (int) $c44_sizes[0] ) ? ' hidden' : ''; ?>>
+						<a href="<?php echo esc_url( $c44_p['url'] ); ?>">
+							<span class="pack-card__img"><img src="<?php echo esc_url( $c44_p['img'] ); ?>" alt="<?php echo esc_attr( $c44_p['name'] ); ?>" loading="lazy" width="600" height="600"></span>
+							<span class="pack-card__body">
+								<span class="pack-card__name"><?php echo esc_html( $c44_p['name'] ); ?></span>
+								<span class="pack-card__price"><b><?php echo esc_html( '$' . number_format( $c44_p['price'] ) ); ?></b> <small><?php esc_html_e( 'incl. GST', 'custom44' ); ?></small></span>
+								<span class="pack-card__go"><?php esc_html_e( 'View pack', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></span>
+							</span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<div class="section-cta reveal">
+				<a class="btn btn--dark btn--lg" href="<?php echo esc_url( $c44_cat_url( 'value-packs' ) ); ?>"><?php esc_html_e( 'Shop all value packs', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
 
 <!-- Shop by category -->
 <section class="section" aria-labelledby="cats-title">
@@ -302,20 +372,54 @@ endif;
 	</div>
 </section>
 
-<!-- Recent work gallery -->
-<section class="section" aria-labelledby="gallery-title">
+<!-- Social feed (replaces the recent work gallery) -->
+<section class="section social" aria-labelledby="social-title">
 	<div class="container">
-		<div class="section-head section-head--center reveal">
-			<span class="eyebrow"><?php esc_html_e( 'Recent work', 'custom44' ); ?></span>
-			<h2 class="h-1" id="gallery-title"><?php esc_html_e( 'Printed in Melbourne, worn across Australia', 'custom44' ); ?></h2>
-			<p class="lead"><?php esc_html_e( 'A look at recent uniforms and merch we have produced for local tradies, teams and businesses.', 'custom44' ); ?></p>
-		</div>
-		<div class="gallery">
-			<?php foreach ( $c44_gallery as $c44_k => $c44_g ) : ?>
-				<figure class="gallery__item reveal reveal--scale" style="--d:<?php echo esc_attr( $c44_k * 0.06 ); ?>s">
-					<img src="<?php echo esc_url( c44_img( $c44_g[0] ) ); ?>" alt="<?php echo esc_attr( $c44_g[1] ); ?>" loading="lazy">
-				</figure>
-			<?php endforeach; ?>
+		<div class="social__grid">
+			<div class="social__intro reveal reveal--left">
+				<span class="eyebrow"><?php esc_html_e( 'Follow our work', 'custom44' ); ?></span>
+				<h2 class="h-1" id="social-title"><?php esc_html_e( 'Printed in Melbourne, worn across Australia', 'custom44' ); ?></h2>
+				<p class="lead"><?php esc_html_e( 'See the latest uniforms, hi-vis and merch fresh off our press. Follow along for new jobs, restocks and special offers.', 'custom44' ); ?></p>
+				<div class="social__links">
+					<?php if ( c44_opt( 'facebook' ) ) : ?>
+						<a class="social-link social-link--fb" href="<?php echo esc_url( c44_opt( 'facebook' ) ); ?>" target="_blank" rel="noopener">
+							<span class="social-link__icon"><?php c44_the_icon( 'facebook' ); ?></span>
+							<span class="social-link__text"><b><?php esc_html_e( 'Follow on Facebook', 'custom44' ); ?></b><small>@Custom44Melbourne</small></span>
+							<?php c44_the_icon( 'arrow' ); ?>
+						</a>
+					<?php endif; ?>
+					<?php if ( c44_opt( 'instagram' ) ) : ?>
+						<a class="social-link social-link--ig" href="<?php echo esc_url( c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener">
+							<span class="social-link__icon"><?php c44_the_icon( 'instagram' ); ?></span>
+							<span class="social-link__text"><b><?php esc_html_e( 'Follow on Instagram', 'custom44' ); ?></b><small>@custom.44</small></span>
+							<?php c44_the_icon( 'arrow' ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="social__feed reveal" style="--d:.1s">
+				<?php if ( c44_opt( 'social_code' ) ) : ?>
+					<?php echo do_shortcode( wp_kses_post( c44_opt( 'social_code' ) ) ); ?>
+				<?php else : ?>
+					<?php
+					$c44_fb_embed = 'https://www.facebook.com/plugins/page.php?' . http_build_query(
+						array(
+							'href'                  => c44_opt( 'facebook' ),
+							'tabs'                  => 'timeline',
+							'width'                 => 500,
+							'height'                => 620,
+							'small_header'          => 'false',
+							'adapt_container_width' => 'true',
+							'hide_cover'            => 'false',
+							'show_facepile'         => 'false',
+						)
+					);
+					?>
+					<div class="social__frame">
+						<iframe src="<?php echo esc_url( $c44_fb_embed ); ?>" title="<?php esc_attr_e( 'Latest posts from Custom 44 on Facebook', 'custom44' ); ?>" width="500" height="620" loading="lazy" scrolling="no" allowfullscreen allow="clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -328,17 +432,7 @@ endif;
 			<h2 class="h-1" id="reviews-title"><?php esc_html_e( 'Trusted by tradies, teams and local businesses', 'custom44' ); ?></h2>
 		</div>
 		<?php
-		$c44_reviews = apply_filters(
-			'c44_reviews',
-			array(
-				array( 'Joey taylor', 'I&rsquo;ve had an outstanding experience with this company. The shirt quality is absolutely top-notch really impressive. Service is always friendly and professional, and they consistently give me great prices. They really take care of their customers, and I wouldn&rsquo;t hesitate to recommend them.' ),
-				array( 'Cameron Dixon', 'Marko and Maria are so easy to deal with, with quick communication. The product arrived quickly to my door and is fantastic quality. Highly recommend to anyone looking for custom work wear.' ),
-				array( 'Nick Keating', 'Custom 44 is so easy to deal with. Marko and Maria were very helpful when I placed my order. Answered any question I had very quickly. Once the mock up was approved I received my order the same week even though I&rsquo;m in a different state. I would highly recommend this company.' ),
-				array( 'Cinzia Cailotto', 'Amazing to work with and hoodies and polos are PERFECT. Great quality product and printing. Thank you so much Marko and Maria, you guys are the best every time I order. Balloons and More look so professional in their tops x' ),
-				array( 'Brijeshkumar Patel', 'I&rsquo;m very happy with Custom 44. Very fast turnaround, the quality is excellent and very easy to deal with Marko &amp; Maria. Highly recommend.' ),
-				array( 'Simon Albore', 'After seeing an advertisement on Facebook I ended up using custom44 to supply and print 50 work shirts for my business. They were easy to deal with, the printing looks great and the T-shirt quality is very good. They even threw in a pack of Allen&rsquo;s Snakes chewie lollies which my family was happy to receive. Would definitely use their services in the future.' ),
-			)
-		);
+		$c44_reviews = c44_google_reviews();
 		?>
 		<div class="review-grid">
 			<?php foreach ( $c44_reviews as $c44_k => $c44_r ) : ?>
