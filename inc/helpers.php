@@ -63,7 +63,7 @@ function c44_img( $path ) {
 		$src = wp_get_attachment_image_url( (int) $path, 'large' );
 		return $src ? $src : '';
 	}
-	if ( preg_match( '#^https?://#', $path ) ) {
+	if ( preg_match( '#^https?://#', $path ) || 0 === strpos( $path, get_template_directory_uri() ) ) {
 		return $path;
 	}
 	return home_url( $path );
@@ -275,7 +275,7 @@ function c44_google_reviews() {
 /**
  * Recent work photos for the homepage gallery: the live Instagram feed when it is
  * connected, otherwise the photos set in Customize > Custom 44 Settings > Recent Work Photos
- * (empty slots fall back to the defaults below).
+ * (empty slots fall back to the saved Instagram posts below).
  *
  * @return array[] image, alt text, link.
  */
@@ -285,21 +285,27 @@ function c44_recent_work() {
 		return apply_filters( 'c44_recent_work', $feed );
 	}
 
+	// Latest @custom.44 posts saved in the theme (assets/images/instagram), each linking to its post.
+	$ig       = 'https://www.instagram.com/custom.44/';
 	$defaults = array(
-		array( '/wp-content/uploads/2026/08/hero-banner-image.webp', __( 'Custom 44 branded workwear on display', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/04/banner-home-page.jpg', __( 'Custom printed tees and polos', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/08/hero-banner-img.webp', __( 'Branded polos, hoodies and hi-vis', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/10/6HSP-6HVPH-ON-ON.png', __( 'Hi-vis polo and hoodie set', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/08/middle-banner-img.webp', __( 'Uniform range with logo placement', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/10/7BEL-BLACK-ORANGE-.png', __( 'Polo and hoodie team set', 'custom44' ) ),
-		array( '/wp-content/uploads/2026/08/about-custom-44-new-bg-img.jpg', __( 'Custom printed workwear by Custom 44', 'custom44' ) ),
-		array( '/wp-content/uploads/2025/09/2.jpg', __( 'DTF printed logo detail', 'custom44' ) ),
+		array( 'ig-1.jpg', __( 'Staple Tee flash sale: buy 20, get 5 free', 'custom44' ), $ig . 'reel/DeVNweAj_n6/' ),
+		array( 'ig-2.jpg', __( 'New printed gear for a local crew', 'custom44' ), $ig . 'p/DdacC5qCIjj/' ),
+		array( 'ig-3.jpg', __( 'Fresh custom merch for spring', 'custom44' ), $ig . 'p/DdXoO-JIzxF/' ),
+		array( 'ig-4.jpg', __( 'Bright gradient prints, hot off the press', 'custom44' ), $ig . 'reel/DdTgB-UCUfA/' ),
+		array( 'ig-5.jpg', __( 'Gradient logo print on custom merch', 'custom44' ), $ig . 'p/DdSshrBiZ6X/' ),
+		array( 'ig-6.jpg', __( 'Uniform upgrade with a printed logo', 'custom44' ), $ig . 'p/DdGdzUJjxl-/' ),
+		array( 'ig-7.jpg', __( 'Free cooler bag with your logo printed', 'custom44' ), $ig . 'reel/DdDJAwZDRCt/' ),
+		array( 'ig-8.jpg', __( 'Free logo printed cooler bag for every $500 spent', 'custom44' ), $ig . 'p/Db9QrRKksc3/' ),
 	);
 	$items = array();
 	foreach ( $defaults as $i => $d ) {
-		$img = get_theme_mod( 'c44_work_' . ( $i + 1 ), '' );
-		$alt = get_theme_mod( 'c44_work_' . ( $i + 1 ) . '_alt', '' );
-		$items[] = array( $img ? $img : $d[0], $alt ? $alt : $d[1], c44_opt( 'instagram' ) );
+		$img     = get_theme_mod( 'c44_work_' . ( $i + 1 ), '' );
+		$alt     = get_theme_mod( 'c44_work_' . ( $i + 1 ) . '_alt', '' );
+		$items[] = array(
+			$img ? $img : get_template_directory_uri() . '/assets/images/instagram/' . $d[0],
+			$alt ? $alt : $d[1],
+			$img ? c44_opt( 'instagram' ) : $d[2],
+		);
 	}
 	return apply_filters( 'c44_recent_work', $items );
 }
