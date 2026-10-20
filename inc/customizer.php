@@ -54,7 +54,7 @@ function c44_customize_register( $wp_customize ) {
 		array( 'form_to', 'c44_forms', __( 'Send enquiries to (defaults to contact email)', 'custom44' ), 'email' ),
 	);
 
-	for ( $i = 1; $i <= 6; $i++ ) {
+	for ( $i = 1; $i <= 8; $i++ ) {
 		/* translators: %d: photo number */
 		$fields[] = array( 'work_' . $i, 'c44_work', sprintf( __( 'Photo %d', 'custom44' ), $i ), 'url' );
 		/* translators: %d: photo number */
@@ -79,7 +79,7 @@ function c44_customize_register( $wp_customize ) {
 				'sanitize_callback' => $sanitize,
 			)
 		);
-		if ( preg_match( '/^work_\d$/', $key ) && class_exists( 'WP_Customize_Image_Control' ) ) {
+		if ( preg_match( '/^work_\d+$/', $key ) && class_exists( 'WP_Customize_Image_Control' ) ) {
 			$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'c44_' . $key, array( 'label' => $label, 'section' => $section ) ) );
 			continue;
 		}

@@ -280,8 +280,8 @@ function c44_google_reviews() {
  * @return array[] image, alt text, link.
  */
 function c44_recent_work() {
-	$feed = c44_instagram_feed( 6 );
-	if ( count( $feed ) >= 3 ) {
+	$feed = c44_instagram_feed( 8 );
+	if ( count( $feed ) >= 4 ) {
 		return apply_filters( 'c44_recent_work', $feed );
 	}
 
@@ -292,6 +292,8 @@ function c44_recent_work() {
 		array( '/wp-content/uploads/2026/10/6HSP-6HVPH-ON-ON.png', __( 'Hi-vis polo and hoodie set', 'custom44' ) ),
 		array( '/wp-content/uploads/2026/08/middle-banner-img.webp', __( 'Uniform range with logo placement', 'custom44' ) ),
 		array( '/wp-content/uploads/2026/10/7BEL-BLACK-ORANGE-.png', __( 'Polo and hoodie team set', 'custom44' ) ),
+		array( '/wp-content/uploads/2026/08/about-custom-44-new-bg-img.jpg', __( 'Custom printed workwear by Custom 44', 'custom44' ) ),
+		array( '/wp-content/uploads/2025/09/2.jpg', __( 'DTF printed logo detail', 'custom44' ) ),
 	);
 	$items = array();
 	foreach ( $defaults as $i => $d ) {

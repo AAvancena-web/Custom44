@@ -1787,7 +1787,10 @@ h1, h2, h3 { text-transform: capitalize; }
 @media (max-width: 760px) { .packs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .pack-card__name { font-size: 14px; } .pack-card__price b { font-size: 20px; } }
 
 /* Recent work: Instagram posts (square, like the feed) */
+.gallery--instagram { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .gallery--instagram .gallery__item, .gallery--instagram .gallery__item:nth-child(n) { aspect-ratio: 1 / 1; }
+@media (max-width: 900px) { .gallery--instagram { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+@media (max-width: 520px) { .gallery--instagram { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .gallery--instagram .gallery__item { border-radius: var(--radius); } }
 .gallery__item > a { position: absolute; inset: 0; display: block; }
 .gallery__ig { position: absolute; right: 14px; bottom: 14px; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: var(--white); background: linear-gradient(45deg, #f9a825, #e1306c 50%, #833ab4); opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .3s var(--ease); }
 .gallery__ig svg { width: 20px; height: 20px; }
