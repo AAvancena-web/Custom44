@@ -31,7 +31,7 @@ Templates included:
 * **Banners** (homepage hero, category hero) display instantly. Only sections below the banner use scroll reveal.
 * **Animations:** scroll reveals, counters, animated bulk tier bars, marquee, parallax images, spotlight hover on service cards, header shrink and scroll progress bar. All respect `prefers-reduced-motion`.
 * **CTAs** all use solid backgrounds. Centered headings and paragraphs have no max-width.
-* **No em dashes:** content filters replace em/en dashes, product cards show price ranges as "$min - $max each" (plain hyphen, matching the current site), the product page price still shows "From $x", and the title separator is `|`.
+* **No em dashes:** content filters replace em/en dashes, product cards show price ranges as "$min - $max each" (plain hyphen, matching the current site) and the product page shows "$min - $max each" with "+ Print Locations" below, and the title separator is `|`.
 * **Contact form:** built-in form posts to `admin-post.php`, emails the address set in the Customizer (honeypot + nonce protected). Paste a Gravity Forms / WPForms / CF7 shortcode in the Customizer to replace it.
 * **Product page:** standard WooCommerce hooks are preserved, so the existing quote cart and product options plugins keep working. Theme additions (brand/SKU row, bulk tier table, trust points, help card, print guide) are attached via hooks in `inc/woocommerce.php`. Optional `.c44-opt`, `.c44-swatch`, `.c44-size`, `.c44-spot` classes style a step-by-step configurator.
 * Images default to existing uploads on custom44.com.au (`/wp-content/uploads/...`) so the theme looks complete on the live site immediately.
