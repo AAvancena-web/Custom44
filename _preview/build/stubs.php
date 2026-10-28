@@ -296,6 +296,13 @@ function woocommerce_output_product_data_tabs() {
 	echo '</div>';
 }
 function woocommerce_upsell_display() {}
+// Sample size chart for the preview (on the live site this comes from the product's "size_chart" field or the Customizer).
+add_filter( 'c44_size_chart', function () {
+	$rows = array( 'S' => array( 52, 70 ), 'M' => array( 55, 72 ), 'L' => array( 58, 74 ), 'XL' => array( 61, 76 ), '2XL' => array( 64, 78 ), '3XL' => array( 67, 80 ), '4XL' => array( 70, 82 ), '5XL' => array( 73, 84 ) );
+	$h = '<div class="c44-size-chart__content"><table><thead><tr><th>Size</th><th>Half chest (cm)</th><th>Body length (cm)</th></tr></thead><tbody>';
+	foreach ( $rows as $s => $r ) $h .= '<tr><th>' . $s . '</th><td>' . $r[0] . '</td><td>' . $r[1] . '</td></tr>';
+	return $h . '</tbody></table><p>Sample measurements for preview only. Half chest is measured flat, 2.5cm below the armpit.</p></div>';
+} );
 function woocommerce_output_related_products() {
 	$args = apply_filters( 'woocommerce_output_related_products_args', array() );
 	global $product;

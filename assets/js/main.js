@@ -253,6 +253,36 @@
     });
   });
 
+  /* Product page: size chart popup ------------------------------------ */
+  var sizeChart = document.querySelector('[data-size-chart]');
+  if (sizeChart) {
+    if (sizeChart.parentNode !== document.body) document.body.appendChild(sizeChart);
+    var openChart = function (e) {
+      if (e) e.preventDefault();
+      if (typeof sizeChart.showModal === 'function') sizeChart.showModal();
+      else sizeChart.setAttribute('open', '');
+    };
+    var closeChart = function () {
+      if (typeof sizeChart.close === 'function') sizeChart.close();
+      else sizeChart.removeAttribute('open');
+    };
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-size-chart-open]')) openChart(e);
+      else if (e.target.closest('[data-size-chart-close]') || e.target === sizeChart) closeChart();
+    });
+    // "Size chart" link next to the sizes step of the configurator.
+    var sizesLabel = document.querySelector('.c44-sizes');
+    sizesLabel = sizesLabel && sizesLabel.parentNode.querySelector('.c44-opt__label');
+    if (sizesLabel) {
+      var link = document.createElement('button');
+      link.type = 'button';
+      link.className = 'c44-size-link';
+      link.setAttribute('data-size-chart-open', '');
+      link.textContent = 'Size chart';
+      sizesLabel.appendChild(link);
+    }
+  }
+
   /* Product page: tiers, unlock progress and running totals ------------ */
   var form = document.querySelector('.pdp__summary form.cart') || document.querySelector('form.cart');
   var tiers = document.querySelector('[data-tiers]');
