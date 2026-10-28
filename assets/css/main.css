@@ -744,6 +744,11 @@ ul.products::before, ul.products::after { display: none !important; }
 .product-card__price .price del { font-size: 14px; color: var(--text-soft); font-weight: 500; }
 .product-card__price .price ins { text-decoration: none; }
 .product-card__price .c44-from { font-size: 12px; font-weight: 600; color: var(--text-soft); font-family: var(--font-body); margin-right: 4px; }
+.product-card__price .price { display: inline; color: var(--blue); white-space: nowrap; font-size: clamp(15px, 1.15vw, 18px); letter-spacing: -0.01em; }
+.product-card__price { min-width: 0; }
+.product-card__price .c44-range__sep { color: var(--blue); }
+.product-card__each { display: inline; margin-left: 0; font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+
 .product-card__go { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); color: var(--ink); display: grid; place-items: center; flex: none; transition: background-color .3s, color .3s, transform .4s var(--ease); }
 .product-card__go svg { width: 17px; height: 17px; }
 .product-card:hover .product-card__go { background: var(--ink); color: var(--accent); transform: rotate(-45deg); }
@@ -1896,3 +1901,7 @@ h1, h2, h3 { text-transform: capitalize; }
 @media (max-width: 760px) { .g-reviews__list { grid-template-columns: minmax(0, 1fr); } }
 .woocommerce-tabs { scroll-margin-top: calc(var(--header-h) + 24px); }
 @media (max-width: 560px) { .packs__filter { gap: 6px; } .packs__tab { padding: 9px 13px; font-size: 13.5px; } }
+
+/* Product card price ranges ("$min - $max each"): keep the range on one line. */
+@media (max-width: 860px) { .product-card .product-card__price .price { font-size: 15px; } }
+@media (max-width: 600px) { .product-card .product-card__price .price { font-size: 13.5px; } .product-card .product-card__each { display: block; margin-left: 0; font-size: 13px; } .product-card .product-card__go { display: none; } }
