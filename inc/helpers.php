@@ -186,6 +186,30 @@ function c44_from_price( $product ) {
 }
 
 /**
+ * Price range for product cards, matching the current site: "$23.10 - $42.00".
+ * Uses a plain hyphen (never an en dash). Single prices show on their own.
+ *
+ * @param WC_Product $product Product.
+ * @return string Price HTML or empty.
+ */
+function c44_price_range( $product ) {
+	if ( $product->is_type( 'variable' ) ) {
+		$min = $product->get_variation_price( 'min', true );
+		$max = $product->get_variation_price( 'max', true );
+	} else {
+		$min = wc_get_price_to_display( $product );
+		$max = $min;
+	}
+	if ( ! $min ) {
+		return '';
+	}
+	if ( ! $max || (float) $max <= (float) $min ) {
+		return wc_price( $min );
+	}
+	return wc_price( $min ) . '<span class="c44-range__sep"> - </span>' . wc_price( $max );
+}
+
+/**
  * Value packs shown on the homepage. Pulls products from the "value-packs" category when
  * it exists; otherwise falls back to the packs currently listed on custom44.com.au.
  *
