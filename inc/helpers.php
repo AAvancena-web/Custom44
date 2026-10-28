@@ -186,6 +186,57 @@ function c44_from_price( $product ) {
 }
 
 /**
+ * Price range for product cards, matching the current site: "$23.10 - $42.00".
+ * Uses a plain hyphen (never an en dash). Single prices show on their own.
+ *
+ * @param WC_Product $product Product.
+ * @return string Price HTML or empty.
+ */
+function c44_price_range( $product ) {
+	if ( $product->is_type( 'variable' ) ) {
+		$min = $product->get_variation_price( 'min', true );
+		$max = $product->get_variation_price( 'max', true );
+	} else {
+		$min = wc_get_price_to_display( $product );
+		$max = $min;
+	}
+	if ( ! $min ) {
+		return '';
+	}
+	if ( ! $max || (float) $max <= (float) $min ) {
+		return wc_price( $min );
+	}
+	return wc_price( $min ) . '<span class="c44-range__sep"> - </span>' . wc_price( $max );
+}
+
+/**
+ * Small garment icon for a print location (tee outline with the print zone highlighted).
+ * Front-view zones are drawn from the viewer's side, so Left Chest sits on the right.
+ *
+ * @param string $label Location name, e.g. "Left Chest", "Centre Back".
+ * @return string SVG markup.
+ */
+function c44_print_location_icon( $label ) {
+	$key   = strtolower( trim( preg_replace( '/[^a-z ]/i', '', (string) $label ) ) );
+	$zones = array(
+		'left chest'   => array( false, '<rect class="zone" x="102" y="56" width="22" height="22" rx="3"/>' ),
+		'right chest'  => array( false, '<rect class="zone" x="56" y="56" width="22" height="22" rx="3"/>' ),
+		'centre front' => array( false, '<rect class="zone" x="64" y="56" width="52" height="46" rx="4"/>' ),
+		'center front' => array( false, '<rect class="zone" x="64" y="56" width="52" height="46" rx="4"/>' ),
+		'left sleeve'  => array( false, '<polygon class="zone" points="148,45 144.8,58.3 152.3,63.9 157.3,52.7"/>' ),
+		'right sleeve' => array( false, '<polygon class="zone" points="32,45 35.2,58.3 27.7,63.9 22.7,52.7"/>' ),
+		'centre back'  => array( true, '<rect class="zone" x="62" y="48" width="56" height="58" rx="4"/>' ),
+		'center back'  => array( true, '<rect class="zone" x="62" y="48" width="56" height="58" rx="4"/>' ),
+		'lower back'   => array( true, '<rect class="zone" x="66" y="118" width="48" height="20" rx="3"/>' ),
+		'upper back'   => array( true, '<rect class="zone" x="66" y="36" width="48" height="18" rx="3"/>' ),
+	);
+	$zone = isset( $zones[ $key ] ) ? $zones[ $key ] : array( false, '' );
+	$tee  = '<path class="tee" d="M62 18 L40 26 L10 52 L26 76 L44 64 L44 150 L136 150 L136 64 L154 76 L170 52 L140 26 L118 18 C112 30 100 34 90 34 C80 34 68 30 62 18 Z"/>';
+	$neck = $zone[0] ? '<path class="seam" d="M66 20 C76 26 104 26 114 20"/>' : '<path class="seam" d="M62 18 C68 30 80 36 90 36 C100 36 112 30 118 18"/>';
+	return '<svg class="c44-spot__icon" viewBox="0 0 180 160" aria-hidden="true" focusable="false">' . $tee . $neck . $zone[1] . '</svg>';
+}
+
+/**
  * Value packs shown on the homepage. Pulls products from the "value-packs" category when
  * it exists; otherwise falls back to the packs currently listed on custom44.com.au.
  *

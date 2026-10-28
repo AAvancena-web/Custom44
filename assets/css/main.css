@@ -744,6 +744,11 @@ ul.products::before, ul.products::after { display: none !important; }
 .product-card__price .price del { font-size: 14px; color: var(--text-soft); font-weight: 500; }
 .product-card__price .price ins { text-decoration: none; }
 .product-card__price .c44-from { font-size: 12px; font-weight: 600; color: var(--text-soft); font-family: var(--font-body); margin-right: 4px; }
+.product-card__price .price { display: inline; color: var(--blue); white-space: nowrap; font-size: clamp(15px, 1.15vw, 18px); letter-spacing: -0.01em; }
+.product-card__price { min-width: 0; }
+.product-card__price .c44-range__sep { color: var(--blue); }
+.product-card__each { display: inline; margin-left: 0; font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+
 .product-card__go { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); color: var(--ink); display: grid; place-items: center; flex: none; transition: background-color .3s, color .3s, transform .4s var(--ease); }
 .product-card__go svg { width: 17px; height: 17px; }
 .product-card:hover .product-card__go { background: var(--ink); color: var(--accent); transform: rotate(-45deg); }
@@ -1896,3 +1901,27 @@ h1, h2, h3 { text-transform: capitalize; }
 @media (max-width: 760px) { .g-reviews__list { grid-template-columns: minmax(0, 1fr); } }
 .woocommerce-tabs { scroll-margin-top: calc(var(--header-h) + 24px); }
 @media (max-width: 560px) { .packs__filter { gap: 6px; } .packs__tab { padding: 9px 13px; font-size: 13.5px; } }
+
+/* Product card price ranges ("$min - $max each"): keep the range on one line. */
+@media (max-width: 860px) { .product-card .product-card__price .price { font-size: 15px; } }
+@media (max-width: 600px) { .product-card .product-card__price .price { font-size: 13.5px; } .product-card .product-card__each { display: block; margin-left: 0; font-size: 13px; } .product-card .product-card__go { display: none; } }
+
+/* Product page price (matches current site): "$min - $max each" + "+ Print Locations". */
+.pdp__summary p.c44-single-price { color: var(--blue) !important; margin-bottom: 4px; }
+.pdp__summary p.c44-single-price .c44-range__sep { color: var(--blue); }
+.pdp__summary p.c44-single-price .c44-each { font-family: var(--font-body); font-size: clamp(16px, 1.3vw, 20px); font-weight: 600; color: var(--ink); margin-left: 4px; }
+.pdp__summary .c44-price-note { font-size: 14px; font-weight: 600; letter-spacing: .04em; color: var(--ink); margin-bottom: 22px; }
+
+/* Print location options with garment icons. */
+.c44-spot span { gap: 12px; padding: 10px 14px; }
+.c44-spot__icon { width: 56px; height: 50px; flex: none; overflow: visible; }
+.c44-spot__icon .tee { fill: var(--white); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.c44-spot__icon .seam { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.c44-spot__icon .zone { fill: var(--accent); stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.c44-spot__name { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-weight: 600; }
+.c44-spot input:checked + span .c44-spot__icon .tee { fill: var(--paper); }
+
+/* Order accuracy note under the quote buttons. */
+.c44-order-note { margin: 18px 0 22px; padding: 16px 18px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); font-size: 14.5px; line-height: 1.6; color: var(--text); }
+.c44-order-note p { margin: 0; }
+.c44-order-note p + p { margin-top: 10px; }

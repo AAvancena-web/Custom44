@@ -51,8 +51,9 @@ if ( in_array( 'most-popular', $c44_tags, true ) ) {
 			<h3 class="product-card__title"><?php echo esc_html( $product->get_name() ); ?></h3>
 			<div class="product-card__foot">
 				<div class="product-card__price">
-					<span class="price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-					<?php esc_html_e( 'per item', 'custom44' ); ?>
+					<?php $c44_range = c44_price_range( $product ); ?>
+					<span class="price"><?php echo wp_kses_post( $c44_range ? $c44_range : $product->get_price_html() ); ?></span>
+					<span class="product-card__each"><?php esc_html_e( 'each', 'custom44' ); ?></span>
 				</div>
 				<span class="product-card__go" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
 			</div>
