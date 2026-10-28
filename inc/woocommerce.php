@@ -46,11 +46,15 @@ add_filter( 'woocommerce_breadcrumb_defaults', function ( $args ) {
 } );
 
 /**
- * Price ranges show as "From $x" (cleaner, and avoids en dash ranges).
+ * Price ranges show as "$min - $max" (matches the current site), with a plain hyphen, never an en dash.
  */
 add_filter( 'woocommerce_format_price_range', function ( $price, $from, $to ) {
-	/* translators: %s: lowest price */
-	return '<span class="c44-from">' . esc_html__( 'From', 'custom44' ) . '</span> ' . ( is_numeric( $from ) ? wc_price( $from ) : $from );
+	$from_html = is_numeric( $from ) ? wc_price( $from ) : $from;
+	$to_html   = is_numeric( $to ) ? wc_price( $to ) : $to;
+	if ( '' === (string) $to || $from_html === $to_html ) {
+		return $from_html;
+	}
+	return $from_html . '<span class="c44-range__sep"> - </span>' . $to_html;
 }, 10, 3 );
 
 /**
@@ -108,12 +112,31 @@ function c44_single_eyebrow() {
 add_action( 'woocommerce_single_product_summary', 'c44_single_eyebrow', 4 );
 
 /**
- * Price note under the price.
+ * Product page price, matching the current site: "$14.85 - $27.00 each" with "+ Print Locations" below.
  */
-function c44_single_price_note() {
-	echo '<p class="c44-price-note">' . esc_html__( 'Per item, before print locations. Bulk discounts apply automatically.', 'custom44' ) . '</p>';
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+function c44_single_price() {
+	global $product;
+	if ( ! $product ) {
+		return;
+	}
+	$range = c44_price_range( $product );
+	echo '<p class="price c44-single-price">' . wp_kses_post( $range ? $range : $product->get_price_html() ) . ' <span class="c44-each">' . esc_html__( 'each', 'custom44' ) . '</span></p>';
+	echo '<p class="c44-price-note">' . esc_html__( '+ Print Locations', 'custom44' ) . '</p>';
 }
-add_action( 'woocommerce_single_product_summary', 'c44_single_price_note', 11 );
+add_action( 'woocommerce_single_product_summary', 'c44_single_price', 10 );
+
+/**
+ * Order accuracy note under the Add to Quote / View Quote buttons.
+ */
+function c44_single_order_note() {
+	echo '<div class="c44-order-note">';
+	echo '<p><span aria-hidden="true">&#9888;&#65039;</span> ' . esc_html__( 'Please ensure you select the correct garment sizes and colours carefully before adding to cart.', 'custom44' ) . '</p>';
+	echo '<p>' . esc_html__( 'Your cart selections are sent directly to our supplier, so if you enter different sizes or colours in the notes section, we may not see them in time.', 'custom44' ) . '</p>';
+	echo '<p>' . esc_html__( 'Incorrect orders will result in restocking, return, and redelivery fees. Changes after checkout will also incur additional charges.', 'custom44' ) . '</p>';
+	echo '</div>';
+}
+add_action( 'woocommerce_single_product_summary', 'c44_single_order_note', 32 );
 
 /**
  * Bulk tier table.
