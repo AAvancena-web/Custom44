@@ -1905,3 +1905,23 @@ h1, h2, h3 { text-transform: capitalize; }
 /* Product card price ranges ("$min - $max each"): keep the range on one line. */
 @media (max-width: 860px) { .product-card .product-card__price .price { font-size: 15px; } }
 @media (max-width: 600px) { .product-card .product-card__price .price { font-size: 13.5px; } .product-card .product-card__each { display: block; margin-left: 0; font-size: 13px; } .product-card .product-card__go { display: none; } }
+
+/* Product page price (matches current site): "$min - $max each" + "+ Print Locations". */
+.pdp__summary p.c44-single-price { color: var(--blue) !important; margin-bottom: 4px; }
+.pdp__summary p.c44-single-price .c44-range__sep { color: var(--blue); }
+.pdp__summary p.c44-single-price .c44-each { font-family: var(--font-body); font-size: clamp(16px, 1.3vw, 20px); font-weight: 600; color: var(--ink); margin-left: 4px; }
+.pdp__summary .c44-price-note { font-size: 14px; font-weight: 600; letter-spacing: .04em; color: var(--ink); margin-bottom: 22px; }
+
+/* Print location options with garment icons. */
+.c44-spot span { gap: 12px; padding: 10px 14px; }
+.c44-spot__icon { width: 56px; height: 50px; flex: none; overflow: visible; }
+.c44-spot__icon .tee { fill: var(--white); stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.c44-spot__icon .seam { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.c44-spot__icon .zone { fill: var(--accent); stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.c44-spot__name { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-weight: 600; }
+.c44-spot input:checked + span .c44-spot__icon .tee { fill: var(--paper); }
+
+/* Order accuracy note under the quote buttons. */
+.c44-order-note { margin: 18px 0 22px; padding: 16px 18px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); font-size: 14.5px; line-height: 1.6; color: var(--text); }
+.c44-order-note p { margin: 0; }
+.c44-order-note p + p { margin-top: 10px; }
