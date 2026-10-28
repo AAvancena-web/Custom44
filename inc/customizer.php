@@ -21,6 +21,7 @@ function c44_customize_register( $wp_customize ) {
 		'c44_social'  => __( 'Social & Reviews', 'custom44' ),
 		'c44_forms'   => __( 'Contact Form', 'custom44' ),
 		'c44_work'    => __( 'Recent Work Photos', 'custom44' ),
+		'c44_product' => __( 'Product Page', 'custom44' ),
 	);
 	foreach ( $sections as $id => $title ) {
 		$wp_customize->add_section( $id, array( 'title' => $title, 'panel' => 'c44_panel' ) );
@@ -51,6 +52,7 @@ function c44_customize_register( $wp_customize ) {
 		array( 'feed_code', 'c44_social', __( 'Or an Instagram feed plugin shortcode, e.g. Smash Balloon (replaces the gallery photos)', 'custom44' ), 'textarea' ),
 		array( 'reviews_code', 'c44_social', __( 'Reviews widget shortcode (optional)', 'custom44' ), 'textarea' ),
 		array( 'form_code', 'c44_forms', __( 'Form plugin shortcode (optional, replaces built-in form)', 'custom44' ), 'textarea' ),
+		array( 'size_chart', 'c44_product', __( 'Default size chart: image URL, size chart plugin shortcode or HTML table (a product\'s "size_chart" custom field overrides it; leave empty to hide)', 'custom44' ), 'textarea' ),
 		array( 'form_to', 'c44_forms', __( 'Send enquiries to (defaults to contact email)', 'custom44' ), 'email' ),
 	);
 

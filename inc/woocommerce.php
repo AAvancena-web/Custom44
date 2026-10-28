@@ -139,6 +139,45 @@ function c44_single_order_note() {
 add_action( 'woocommerce_single_product_summary', 'c44_single_order_note', 32 );
 
 /**
+ * Size chart content for the current product.
+ *
+ * Source, in order: the product's "size_chart" custom field, then the Customizer default
+ * (Custom 44 Settings > Product Page). Either can be an image URL, an attachment ID,
+ * a size chart plugin shortcode or HTML (e.g. a table). Filter: c44_size_chart.
+ *
+ * @return string Safe HTML, or '' when there is no chart.
+ */
+function c44_size_chart_content() {
+	global $product;
+	$raw = '';
+	if ( $product && function_exists( 'get_post_meta' ) ) {
+		$raw = (string) get_post_meta( $product->get_id(), 'size_chart', true );
+	}
+	if ( '' === trim( $raw ) ) {
+		$raw = (string) c44_opt( 'size_chart' );
+	}
+	$raw  = trim( $raw );
+	$html = '';
+	if ( '' !== $raw ) {
+		if ( is_numeric( $raw ) || preg_match( '#^(https?://|/)\S+\.(jpe?g|png|gif|webp|svg)(\?\S*)?$#i', $raw ) ) {
+			$src  = c44_img( $raw );
+			$html = $src ? '<img class="c44-size-chart__img" src="' . esc_url( $src ) . '" alt="' . esc_attr__( 'Size chart', 'custom44' ) . '" loading="lazy">' : '';
+		} else {
+			$html = '<div class="c44-size-chart__content">' . do_shortcode( wp_kses_post( $raw ) ) . '</div>';
+		}
+	}
+	return (string) apply_filters( 'c44_size_chart', $html, $product );
+}
+
+/**
+ * Size Chart accordion under the order note (popup chart).
+ */
+function c44_single_size_chart() {
+	get_template_part( 'template-parts/size-chart' );
+}
+add_action( 'woocommerce_single_product_summary', 'c44_single_size_chart', 33 );
+
+/**
  * Bulk tier table.
  */
 function c44_single_tiers() {

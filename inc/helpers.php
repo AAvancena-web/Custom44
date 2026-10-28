@@ -28,6 +28,7 @@ function c44_defaults() {
 		'feed_code'      => '',
 		'form_code'      => '',
 		'form_to'        => '',
+		'size_chart'     => '',
 		'announcement'   => 'Save up to <strong>35%</strong> on bulk orders, automatically applied from 5+ items.',
 		'hero_title'     => 'Custom workwear, <span class="hl">printed to perform.</span>',
 		'hero_text'      => "Melbourne's custom workwear printing specialists. Hi-vis, polos, hoodies and uniforms branded with commercial-grade DTF prints that survive the toughest job sites. Perfect results, every single time.",
