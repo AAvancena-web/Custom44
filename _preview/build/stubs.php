@@ -264,7 +264,7 @@ function woocommerce_template_single_add_to_cart() {
 	foreach ( $sizes as $s => $pr ) echo '<label class="c44-size"><span>' . $s . '<small>$' . number_format( $pr, 2 ) . '</small></span><input type="number" min="0" value="0" inputmode="numeric" data-price="' . $pr . '" aria-label="Quantity ' . $s . '"></label>';
 	echo '</div></div>';
 	echo '<div class="c44-opt"><label class="c44-opt__label">3. Print locations</label><div class="c44-spots">';
-	foreach ( $spots as $sp ) echo '<label class="c44-spot"><input type="checkbox" data-price="' . $sp[1] . '"' . ( 'Left Chest' === $sp[0] ? ' checked' : '' ) . '><span>' . esc_html( $sp[0] ) . ( $sp[2] ? ' <em>Popular</em>' : '' ) . '<small>+$' . number_format( $sp[1], 2 ) . '</small></span></label>';
+	foreach ( $spots as $sp ) echo '<label class="c44-spot"><input type="checkbox" data-price="' . $sp[1] . '"' . ( 'Left Chest' === $sp[0] ? ' checked' : '' ) . '><span>' . c44_print_location_icon( $sp[0] ) . '<b class="c44-spot__name">' . esc_html( $sp[0] ) . ( $sp[2] ? ' <em>Popular</em>' : '' ) . '</b><small>+$' . number_format( $sp[1], 2 ) . '</small></span></label>';
 	echo '</div></div>';
 	echo '<div class="c44-opt"><label class="c44-opt__label" for="art">4. Artwork</label><select id="art"><option>I will supply my own artwork</option><option>Use my file on record</option><option>Design a new logo for me</option></select></div>';
 	echo '<button type="submit" class="single_add_to_cart_button button alt">Add to Quote</button></form>';
