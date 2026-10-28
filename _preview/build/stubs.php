@@ -155,7 +155,7 @@ class WC_Product {
 	public function get_price_html() { return apply_filters( 'woocommerce_format_price_range', '', $this->min, $this->max ) . ''; }
 	public function is_on_sale() { return false; }
 	public function is_type( $t ) { return 'variable' === $t; }
-	public function get_variation_price() { return $this->min; }
+	public function get_variation_price( $k = 'min' ) { return 'max' === $k ? $this->max : $this->min; }
 	public function get_attribute() { return $this->brand; }
 	public function is_in_stock() { return true; }
 	public function is_visible() { return true; }
