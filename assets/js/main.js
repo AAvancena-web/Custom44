@@ -321,8 +321,10 @@
       qty += n;
       var price = parseFloat(i.getAttribute('data-price'));
       if (isNaN(price)) {
-        var lbl = i.closest('label');
-        price = lbl && lbl.querySelector('small') ? parseMoney(lbl.querySelector('small').textContent) : base;
+        var lbl = i.closest('label, .c44-size');
+        var sm = lbl ? lbl.querySelector('small') : null;
+        // data-orig holds the garment-only price once the label has been rewritten below.
+        price = sm ? (parseFloat(sm.getAttribute('data-orig')) || parseMoney(sm.textContent)) : base;
       }
       garment += n * price;
     });
@@ -334,7 +336,7 @@
     });
     var tier = tierFor(qty);
 
-    // Per-size prices follow the active bulk tier (as on the current site).
+    // Per-size prices follow the active bulk tier (as on the current site) and include the chosen print locations.
     qtyInputs().forEach(function (i) {
       var lbl = i.closest('label, .c44-size');
       var el = lbl ? lbl.querySelector('small') : null;
@@ -346,8 +348,11 @@
         if (!orig) return;
         el.setAttribute('data-orig', orig);
       }
-      var now = orig * (1 - tier.off / 100);
-      el.innerHTML = tier.off ? '<s>' + money(orig) + '</s> <b>' + money(now) + '</b>' : '<b>' + money(orig) + '</b>';
+      // Selected print locations are added on top of the (discounted) garment price.
+      var full = orig + prints;
+      var now = orig * (1 - tier.off / 100) + prints;
+      el.innerHTML = tier.off ? '<s>' + money(full) + '</s> <b>' + money(now) + '</b>' : '<b>' + money(full) + '</b>';
+      el.title = prints ? 'Includes ' + money(prints) + ' for print locations' : '';
       el.classList.toggle('is-discounted', !!tier.off);
     });
 
