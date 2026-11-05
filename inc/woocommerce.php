@@ -90,7 +90,7 @@ function c44_single_print_guide() {
 add_action( 'woocommerce_after_single_product_summary', 'c44_single_print_guide', 12 );
 
 /**
- * Eyebrow row: brand, SKU, stock.
+ * Eyebrow row: brand and SKU.
  */
 function c44_single_eyebrow() {
 	global $product;
@@ -102,11 +102,6 @@ function c44_single_eyebrow() {
 	if ( $product->get_sku() ) {
 		echo '<span class="c44-sku">' . esc_html__( 'SKU', 'custom44' ) . ' ' . esc_html( $product->get_sku() ) . '</span>';
 	}
-	if ( $product->is_in_stock() ) {
-		echo '<span class="c44-stock">' . esc_html__( 'In stock, ready to print', 'custom44' ) . '</span>';
-	}
-	// Google rating (links to the Google reviews tab further down the page).
-	echo '<a class="c44-rating" href="#tab-' . esc_attr( c44_google_tab_key( $product ) ) . '" data-open-tab>' . c44_stars() . '<span><b>' . esc_html( c44_opt( 'rating' ) ) . '</b> ' . esc_html__( 'on Google', 'custom44' ) . '</span></a>'; // phpcs:ignore
 	echo '</div>';
 }
 add_action( 'woocommerce_single_product_summary', 'c44_single_eyebrow', 4 );

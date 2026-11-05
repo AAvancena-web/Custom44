@@ -29,7 +29,7 @@ function c44_defaults() {
 		'form_code'      => '',
 		'form_to'        => '',
 		'size_chart'     => '',
-		'announcement'   => 'Save up to <strong>35%</strong> on bulk orders, automatically applied from 5+ items.',
+		'announcement'   => 'Save up to <strong>45%</strong> on bulk orders, automatically applied from 5+ items.',
 		'hero_title'     => 'Custom workwear, <span class="hl">printed to perform.</span>',
 		'hero_text'      => "Melbourne's custom workwear printing specialists. Hi-vis, polos, hoodies and uniforms branded with commercial-grade DTF prints that survive the toughest job sites. Perfect results, every single time.",
 		'hero_image'     => '/wp-content/uploads/2026/08/about-custom-44-new-bg-img.jpg',
@@ -78,6 +78,38 @@ function c44_tel() {
 }
 
 /**
+ * Whether the contact section (info, map and enquiry form) shows above the footer.
+ * Hidden on category / shop archives and product pages. Filter: c44_show_contact.
+ *
+ * @return bool
+ */
+function c44_show_contact() {
+	$shop = ( function_exists( 'is_product' ) && is_product() )
+		|| ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() )
+		|| ( function_exists( 'is_shop' ) && is_shop() );
+	return (bool) apply_filters( 'c44_show_contact', ! $shop );
+}
+
+/**
+ * Where "Get a quote" links point: the on-page form when it is shown, otherwise the homepage form.
+ *
+ * @return string
+ */
+function c44_quote_url() {
+	return c44_show_contact() ? '#contact' : home_url( '/#contact' );
+}
+
+/**
+ * Highest bulk discount percent (from c44_tiers()).
+ *
+ * @return int
+ */
+function c44_max_off() {
+	$offs = array_column( c44_tiers(), 'off' );
+	return $offs ? (int) max( $offs ) : 0;
+}
+
+/**
  * Bulk discount tiers.
  *
  * @return array[] min quantity => discount percent.
@@ -91,6 +123,8 @@ function c44_tiers() {
 			array( 'qty' => 20, 'off' => 25 ),
 			array( 'qty' => 50, 'off' => 30 ),
 			array( 'qty' => 100, 'off' => 35 ),
+			array( 'qty' => 250, 'off' => 40 ),
+			array( 'qty' => 500, 'off' => 45 ),
 		)
 	);
 }
