@@ -20,26 +20,11 @@ if ( ! $c44_desc ) {
 	$c44_desc = '<p>' . sprintf( esc_html__( 'Custom branded %s printed in Melbourne with commercial-grade DTF technology. Choose a style to see pricing, pick your print locations and request a free quote.', 'custom44' ), esc_html( strtolower( $c44_title ) ) ) . '</p>';
 }
 
-// Child categories, or siblings when this category has no children.
-$c44_chips   = array();
 $c44_current = $c44_term ? $c44_term->term_id : 0;
-if ( $c44_term && 'product_cat' === $c44_term->taxonomy ) {
-	$c44_chips = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => $c44_term->term_id, 'hide_empty' => true ) );
-	if ( empty( $c44_chips ) && $c44_term->parent ) {
-		$c44_chips = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => $c44_term->parent, 'hide_empty' => true ) );
-	}
-} else {
-	$c44_chips = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => 0, 'hide_empty' => true, 'exclude' => array( (int) get_option( 'default_product_cat' ) ) ) );
-}
-if ( is_wp_error( $c44_chips ) ) {
-	$c44_chips = array();
-}
 ?>
 
 <!-- Category banner: content displays immediately (no reveal animation) -->
-<section class="page-hero page-hero--compact">
-	<div class="hero__bg" aria-hidden="true"></div>
-	<div class="hero__grid-lines" aria-hidden="true"></div>
+<section class="page-hero page-hero--compact page-hero--light">
 	<div class="container">
 		<?php woocommerce_breadcrumb(); ?>
 		<div class="page-hero__inner">
@@ -51,19 +36,12 @@ if ( is_wp_error( $c44_chips ) ) {
 			</div>
 			<div class="page-hero__stats">
 				<div class="page-hero__stat"><strong><?php echo esc_html( $c44_total ); ?></strong><span><?php esc_html_e( 'Styles to brand', 'custom44' ); ?></span></div>
-				<div class="page-hero__stat"><strong>35%</strong><span><?php esc_html_e( 'Max bulk saving', 'custom44' ); ?></span></div>
+				<div class="page-hero__stat"><strong><?php echo esc_html( c44_max_off() ); ?>%</strong><span><?php esc_html_e( 'Max bulk saving', 'custom44' ); ?></span></div>
 				<div class="page-hero__stat"><strong>7</strong><span><?php esc_html_e( 'Print locations', 'custom44' ); ?></span></div>
 				<div class="page-hero__stat"><strong>DTF</strong><span><?php esc_html_e( 'Commercial-grade print', 'custom44' ); ?></span></div>
 			</div>
 		</div>
 
-		<?php if ( $c44_chips ) : ?>
-			<nav class="subcats" aria-label="<?php esc_attr_e( 'Sub categories', 'custom44' ); ?>">
-				<?php foreach ( $c44_chips as $c44_chip ) : ?>
-					<a class="<?php echo (int) $c44_chip->term_id === (int) $c44_current ? 'is-current' : ''; ?>" href="<?php echo esc_url( get_term_link( $c44_chip ) ); ?>"><?php echo esc_html( $c44_chip->name ); ?> <small><?php echo esc_html( $c44_chip->count ); ?></small></a>
-				<?php endforeach; ?>
-			</nav>
-		<?php endif; ?>
 	</div>
 </section>
 
@@ -76,7 +54,6 @@ if ( is_wp_error( $c44_chips ) ) {
 				<li><b><?php echo esc_html( $c44_tier['qty'] ); ?>+</b> <?php echo esc_html( $c44_tier['off'] ); ?>% <?php esc_html_e( 'off', 'custom44' ); ?></li>
 			<?php endforeach; ?>
 		</ul>
-		<a class="btn btn--dark btn--sm" href="#contact"><?php esc_html_e( 'Get a bulk quote', 'custom44' ); ?></a>
 	</div>
 </div>
 
@@ -171,7 +148,7 @@ if ( is_wp_error( $c44_chips ) ) {
 				<div class="no-products">
 					<h2 class="h-3"><?php esc_html_e( 'No products found here yet', 'custom44' ); ?></h2>
 					<p><?php esc_html_e( 'Get in touch and we will source the right garment for you.', 'custom44' ); ?></p>
-					<a class="btn btn--accent" href="#contact"><?php esc_html_e( 'Request a quote', 'custom44' ); ?></a>
+					<a class="btn btn--accent" href="<?php echo esc_url( c44_quote_url() ); ?>"><?php esc_html_e( 'Request a quote', 'custom44' ); ?></a>
 				</div>
 				<?php do_action( 'woocommerce_no_products_found' ); ?>
 			<?php endif; ?>
