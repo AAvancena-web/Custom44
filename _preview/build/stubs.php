@@ -130,6 +130,8 @@ function get_the_terms( $id, $tax ) {
 	return $GLOBALS['c44_page'] === 'home' ? array( (object) array( 'slug' => 'best-sellers' ) ) : array();
 }
 function is_product_taxonomy() { return 'category' === $GLOBALS['c44_page']; }
+function is_product() { return 'product' === $GLOBALS['c44_page']; }
+function is_shop() { return false; }
 function get_queried_object() { return get_term_by( 'slug', 'workwear' ); }
 function term_description() { return '<p>Custom branded workwear, from hi-vis to polos and jackets. Every logo is printed in Melbourne using DTF technology for a sharp, durable finish. Choose a style to see pricing and request a free quote.</p>'; }
 function wp_count_posts() { return (object) array( 'publish' => 300 ); }
