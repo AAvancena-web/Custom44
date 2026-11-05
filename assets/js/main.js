@@ -334,6 +334,23 @@
     });
     var tier = tierFor(qty);
 
+    // Per-size prices follow the active bulk tier (as on the current site).
+    qtyInputs().forEach(function (i) {
+      var lbl = i.closest('label, .c44-size');
+      var el = lbl ? lbl.querySelector('small') : null;
+      if (!el) return;
+      var orig = parseFloat(el.getAttribute('data-orig'));
+      if (isNaN(orig)) {
+        orig = parseFloat(i.getAttribute('data-price'));
+        if (isNaN(orig)) orig = parseMoney(el.textContent);
+        if (!orig) return;
+        el.setAttribute('data-orig', orig);
+      }
+      var now = orig * (1 - tier.off / 100);
+      el.innerHTML = tier.off ? '<s>' + money(orig) + '</s> <b>' + money(now) + '</b>' : '<b>' + money(orig) + '</b>';
+      el.classList.toggle('is-discounted', !!tier.off);
+    });
+
     if (tiers) {
       var cells = tiers.querySelectorAll('[data-min]');
       cells.forEach(function (c) { c.classList.toggle('is-active', c === tier.el); });
