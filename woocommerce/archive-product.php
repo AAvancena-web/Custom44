@@ -34,12 +34,6 @@ $c44_current = $c44_term ? $c44_term->term_id : 0;
 				<div class="page-hero__desc" data-clamp><?php echo wp_kses_post( $c44_desc ); ?></div>
 				<button type="button" class="page-hero__more" data-clamp-toggle hidden><?php esc_html_e( 'Read more', 'custom44' ); ?></button>
 			</div>
-			<div class="page-hero__stats">
-				<div class="page-hero__stat"><strong><?php echo esc_html( $c44_total ); ?></strong><span><?php esc_html_e( 'Styles to brand', 'custom44' ); ?></span></div>
-				<div class="page-hero__stat"><strong><?php echo esc_html( c44_max_off() ); ?>%</strong><span><?php esc_html_e( 'Max bulk saving', 'custom44' ); ?></span></div>
-				<div class="page-hero__stat"><strong>7</strong><span><?php esc_html_e( 'Print locations', 'custom44' ); ?></span></div>
-				<div class="page-hero__stat"><strong>DTF</strong><span><?php esc_html_e( 'Commercial-grade print', 'custom44' ); ?></span></div>
-			</div>
 		</div>
 
 	</div>
