@@ -64,7 +64,7 @@ $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HO
 		</div>
 
 		<div class="contact-form reveal reveal--right" style="--d:.1s">
-			<h3><?php esc_html_e( 'Request a free quote', 'custom44' ); ?></h3>
+			<h3><?php esc_html_e( 'Bulk Orders & Enquiries?', 'custom44' ); ?></h3>
 			<p><?php esc_html_e( 'Most quotes are answered within one business day.', 'custom44' ); ?></p>
 
 			<?php if ( c44_opt( 'form_code' ) ) : ?>
@@ -121,7 +121,9 @@ $c44_url    = ( is_ssl() ? 'https://' : 'http://' ) . ( isset( $_SERVER['HTTP_HO
 								<option>10 to 19 (20% off)</option>
 								<option>20 to 49 (25% off)</option>
 								<option>50 to 99 (30% off)</option>
-								<option>100+ (35% off)</option>
+								<option>100 to 249 (35% off)</option>
+								<option>250 to 499 (40% off)</option>
+								<option>500+ (45% off)</option>
 							</select>
 						</div>
 						<div class="form-field form-field--full">

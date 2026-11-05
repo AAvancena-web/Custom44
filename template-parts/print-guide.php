@@ -60,6 +60,6 @@ $c44_tee = function ( $spot ) {
 		<?php endforeach; ?>
 	</div>
 	<div class="section-cta reveal">
-		<a class="btn btn--accent btn--lg" href="#contact"><?php esc_html_e( 'Ask about artwork', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+		<a class="btn btn--accent btn--lg" href="<?php echo esc_url( c44_quote_url() ); ?>"><?php esc_html_e( 'Ask about artwork', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 	</div>
 </section>

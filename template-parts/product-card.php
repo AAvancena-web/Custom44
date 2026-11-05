@@ -42,7 +42,7 @@ if ( in_array( 'most-popular', $c44_tags, true ) ) {
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
-			<span class="product-card__quick"><?php esc_html_e( 'Choose colours & print', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></span>
+			<span class="product-card__quick"><?php esc_html_e( 'Choose colours & sizes', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></span>
 		</div>
 		<div class="product-card__body">
 			<?php if ( $c44_meta ) : ?>
