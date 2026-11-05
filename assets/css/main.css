@@ -2064,3 +2064,7 @@ h1, h2, h3 { text-transform: capitalize; }
   .hero__img-main { height: 340px; }
 }
 @media (max-width: 1360px) and (min-width: 1000px), (max-width: 420px) { .c44-size small s { display: none; } }
+/* Card hover button: keep "Choose colours & sizes" on one line in narrow cards */
+.product-card__quick { left: 10px; right: 10px; bottom: 10px; padding: 0 12px; gap: 6px; white-space: nowrap; font-size: 12.5px; letter-spacing: .03em; }
+.product-card__quick svg { width: 14px; height: 14px; flex: none; }
+@media (max-width: 1360px) { .product-card__quick { font-size: 11px; letter-spacing: .02em; min-height: 40px; } }
