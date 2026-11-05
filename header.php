@@ -26,8 +26,11 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 <div class="topbar">
 	<div class="container topbar__inner">
 		<p class="topbar__msg"><span class="topbar__pulse" aria-hidden="true"></span><span><?php echo wp_kses_post( c44_opt( 'announcement' ) ); ?></span></p>
-		<div class="topbar__links">
+		<div class="topbar__contact">
+			<a href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php echo esc_html( c44_opt( 'phone' ) ); ?></a>
 			<a href="mailto:<?php echo esc_attr( c44_opt( 'email' ) ); ?>"><?php c44_the_icon( 'mail' ); ?><?php echo esc_html( c44_opt( 'email' ) ); ?></a>
+		</div>
+		<div class="topbar__links">
 			<a href="<?php echo esc_url( $c44_account ); ?>"><?php c44_the_icon( 'user' ); ?><?php esc_html_e( 'Login', 'custom44' ); ?></a>
 			<?php if ( c44_opt( 'facebook' ) ) : ?>
 				<a href="<?php echo esc_url( c44_opt( 'facebook' ) ); ?>" target="_blank" rel="noopener" aria-label="Facebook"><?php c44_the_icon( 'facebook' ); ?></a>
@@ -40,7 +43,6 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 </div>
 
 <header class="site-header" id="site-header">
-	<div class="scroll-progress" aria-hidden="true"></div>
 	<div class="container site-header__inner">
 		<?php c44_logo(); ?>
 
@@ -58,17 +60,19 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 		</nav>
 
 		<div class="header-actions">
-			<button class="icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="search-panel" aria-label="<?php esc_attr_e( 'Search products', 'custom44' ); ?>"><?php c44_the_icon( 'search' ); ?></button>
-			<a class="icon-btn icon-btn--account" href="<?php echo esc_url( $c44_account ); ?>" aria-label="<?php esc_attr_e( 'My account', 'custom44' ); ?>"><?php c44_the_icon( 'user' ); ?></a>
+			<form role="search" method="get" class="header-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label class="screen-reader-text" for="c44-header-search"><?php esc_html_e( 'Search for:', 'custom44' ); ?></label>
+				<input type="search" id="c44-header-search" name="s" placeholder="<?php esc_attr_e( 'Search products...', 'custom44' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>">
+				<?php if ( class_exists( 'WooCommerce' ) ) : ?>
+					<input type="hidden" name="post_type" value="product">
+				<?php endif; ?>
+				<button type="submit" aria-label="<?php esc_attr_e( 'Search', 'custom44' ); ?>"><?php c44_the_icon( 'search' ); ?></button>
+			</form>
+			<button class="icon-btn icon-btn--search" type="button" data-search-toggle aria-expanded="false" aria-controls="search-panel" aria-label="<?php esc_attr_e( 'Search products', 'custom44' ); ?>"><?php c44_the_icon( 'search' ); ?></button>
 			<a class="icon-btn" href="<?php echo esc_url( $c44_cart_url ); ?>" aria-label="<?php esc_attr_e( 'Quote cart', 'custom44' ); ?>">
 				<?php c44_the_icon( 'bag' ); ?>
 				<span class="icon-btn__count c44-cart-count"><?php echo esc_html( $c44_cart_count ); ?></span>
 			</a>
-			<a class="btn btn--accent btn--sm header-cta" href="#contact"><?php esc_html_e( 'Get a Free Quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-			<div class="header-phone-wrap">
-				<a class="header-phone" href="<?php echo esc_attr( c44_tel() ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Call %s', 'custom44' ), c44_opt( 'phone' ) ) ); ?>"><?php c44_the_icon( 'phone' ); ?></a>
-				<a class="header-phone-text" href="<?php echo esc_attr( c44_tel() ); ?>"><small><?php esc_html_e( 'Call us', 'custom44' ); ?></small><strong><?php echo esc_html( c44_opt( 'phone' ) ); ?></strong></a>
-			</div>
 			<button class="hamburger" type="button" data-drawer-toggle aria-expanded="false" aria-controls="mobile-drawer" aria-label="<?php esc_attr_e( 'Open menu', 'custom44' ); ?>">
 				<span></span><span></span><span></span>
 			</button>
@@ -108,7 +112,7 @@ $c44_account    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_perma
 		?>
 	</nav>
 	<div class="mobile-drawer__foot">
-		<a class="btn btn--accent btn--block" href="#contact" data-drawer-close><?php esc_html_e( 'Get a Free Quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+		<a class="btn btn--accent btn--block" href="<?php echo esc_url( c44_quote_url() ); ?>" data-drawer-close><?php esc_html_e( 'Get a Free Quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 		<a class="btn btn--white btn--block" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php echo esc_html( c44_opt( 'phone' ) ); ?></a>
 		<p><?php echo esc_html( c44_opt( 'email' ) ); ?></p>
 	</div>

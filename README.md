@@ -26,10 +26,10 @@ Templates included:
 ## Notes
 
 * **Layout widths:** `.container` is max 1440px on desktop/laptop and max 1880px on screens 1600px and wider.
-* **Header:** phone icon in a dark circle with a border sits immediately left of the hamburger. Hamburger appears below 1200px.
+* **Header:** top bar shows the announcement, phone and email (centre), and login and social links. The menu bar has the logo, menu, a search bar (search icon below 1200px) and the quote cart. Hamburger appears below 1200px.
 * **Mobile:** floating "Call Now" button fixed at the bottom centre on screens under 768px.
 * **Banners** (homepage hero, category hero) display instantly. Only sections below the banner use scroll reveal.
-* **Animations:** scroll reveals, counters, animated bulk tier bars, marquee, parallax images, spotlight hover on service cards, header shrink and scroll progress bar. All respect `prefers-reduced-motion`.
+* **Animations:** scroll reveals, counters, animated bulk tier bars, marquee, parallax images, spotlight hover on service cards and header shrink. All respect `prefers-reduced-motion`.
 * **CTAs** all use solid backgrounds. Centered headings and paragraphs have no max-width.
 * **No em dashes:** content filters replace em/en dashes, product cards show price ranges as "$min - $max each" (plain hyphen, matching the current site) and the product page shows "$min - $max each" with "+ Print Locations" below, and the title separator is `|`.
 * **Contact form:** built-in form posts to `admin-post.php`, emails the address set in the Customizer (honeypot + nonce protected). Paste a Gravity Forms / WPForms / CF7 shortcode in the Customizer to replace it.
@@ -44,6 +44,17 @@ Templates included:
 * Map is pinned to the Custom 44 Pty Ltd Google Business Profile via **Contact Details & Map > Google Business Profile CID**. Rating and review count are set under **Homepage Banner**.
 * Category banner is compact so products show above the fold; long descriptions get a "Read more" toggle.
 * Product page: Google rating link, light tier box with "Add N more to unlock X% off" progress, colour swatches (theme swatches and WooCommerce colour dropdowns), Total quantity / Total price box above the add to quote button, and Google reviews in the reviews tab.
+
+## Feedback round 3 (Nov 2026)
+
+* Colours: every orange accent is now the bright blue `#00ABF0` (`--orange` token) and every grey background is `#EDF2F7` (`--paper` / `--paper-2`). Garment images sit on white.
+* Bulk tiers now include 250+ (40%) and 500+ (45%) everywhere (`c44_tiers()` in `inc/helpers.php`). "Up to X%" copy uses the top tier via `c44_max_off()`.
+* Header: phone and email moved to the centre of the top bar; menu bar loses the phone, account icon and "Get a free quote" button; search is a bar; cart count is yellow; scroll progress bar removed.
+* Homepage: shorter banner so the scrolling bar shows on load, no calculator or bulk quote button, "Get a Quote" CTA, 10,000+ moved into the banner ticks. Category tiles removed and Best Sellers moved into their place (grey section, white garments, "Choose colours & sizes" hover). Bulk pricing bars are white with black text, CTA reads "Get a Free Quote". Dark buttons hover to white with black text. Process line runs yellow to blue. Facebook button beside Instagram. FAQ phone button and the "Ready to kit out your crew?" band removed. Form title is "Bulk Orders & Enquiries?".
+* Contact section (info, map and form) shows on the homepage and other pages but not on category or product pages (`c44_show_contact()`, filter `c44_show_contact`). Quote links on those pages go to the homepage form.
+* Category page: white banner with black text, no sub-category buttons, all 7 tiers in the bulk bar, no quote button, grey product area with white cards.
+* Product page: smaller gallery so the whole garment fits on screen, brand in blue, no stock or rating line, bigger "Add N more" message, smaller colour swatches, size prices in bold that update to the discounted tier price as quantities are entered.
+* Every product category uses `woocommerce/archive-product.php` and every product uses the single product templates, so no per-category pages need building.
 
 ## Static previews
 

@@ -36,60 +36,18 @@ $c44_cat_url    = function ( $slug ) {
 			<h1 class="h-display" id="hero-title"><?php echo wp_kses_post( c44_opt( 'hero_title' ) ); ?></h1>
 			<p class="lead"><?php echo esc_html( c44_opt( 'hero_text' ) ); ?></p>
 			<div class="btn-row">
-				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'workwear' ) ); ?>"><?php esc_html_e( 'Shop Workwear', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-				<a class="btn btn--white btn--lg" href="#contact"><?php esc_html_e( 'Get a Bulk Quote', 'custom44' ); ?></a>
+				<a class="btn btn--accent btn--lg" href="#contact"><?php esc_html_e( 'Get a Quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 			</div>
 			<ul class="hero__ticks">
-				<li><?php c44_the_icon( 'check-c' ); ?><?php esc_html_e( 'Up to 35% off bulk orders', 'custom44' ); ?></li>
+				<li><?php c44_the_icon( 'check-c' ); ?><?php echo esc_html( sprintf( __( 'Up to %d%% off bulk orders', 'custom44' ), c44_max_off() ) ); ?></li>
+				<li><?php c44_the_icon( 'check-c' ); ?><?php echo esc_html( sprintf( __( '%s+ orders shipped Australia-wide', 'custom44' ), number_format_i18n( $c44_orders ) ) ); ?></li>
 				<li><?php c44_the_icon( 'check-c' ); ?><?php esc_html_e( 'Family owned in Melbourne', 'custom44' ); ?></li>
-				<li><?php c44_the_icon( 'check-c' ); ?><?php esc_html_e( 'Australia-wide dispatch', 'custom44' ); ?></li>
 			</ul>
 		</div>
 
 		<div class="hero__visual">
 			<div class="hero__img-main" data-parallax-wrap>
 				<img src="<?php echo esc_url( c44_img( c44_opt( 'hero_image' ) ) ); ?>" alt="<?php esc_attr_e( 'Custom printed workwear by Custom 44', 'custom44' ); ?>" width="900" height="1100" fetchpriority="high" data-parallax="0.08">
-			</div>
-			<div class="hero__chip hero__chip--a">
-				<span class="hero__chip-icon"><?php c44_the_icon( 'truck' ); ?></span>
-				<div><strong><?php echo esc_html( number_format_i18n( $c44_orders ) ); ?>+</strong><span><?php esc_html_e( 'Orders shipped Australia-wide', 'custom44' ); ?></span></div>
-			</div>
-
-			<?php
-			// Bulk savings calculator. Example: AS Colour Staple Tee ($27) + left chest print ($5).
-			// The tier discount applies to the garment; print locations are priced separately.
-			$c44_calc_base  = (float) apply_filters( 'c44_calc_base_price', 27 );
-			$c44_calc_print = (float) apply_filters( 'c44_calc_print_price', 5 );
-			$c44_calc_qty   = 20;
-			?>
-			<div class="calc" data-calc data-base="<?php echo esc_attr( $c44_calc_base ); ?>" data-print="<?php echo esc_attr( $c44_calc_print ); ?>">
-				<div class="calc__head">
-					<strong><?php esc_html_e( 'Buy more, save more', 'custom44' ); ?></strong>
-					<span><?php esc_html_e( 'Mix sizes & colours', 'custom44' ); ?></span>
-				</div>
-				<div class="calc__tiers" role="group" aria-label="<?php esc_attr_e( 'Bulk discount tiers', 'custom44' ); ?>">
-					<?php foreach ( c44_tiers() as $c44_tier ) : ?>
-						<button type="button" class="calc__tier<?php echo $c44_calc_qty === $c44_tier['qty'] ? ' is-active' : ''; ?>" data-qty="<?php echo esc_attr( $c44_tier['qty'] ); ?>" data-off="<?php echo esc_attr( $c44_tier['off'] ); ?>">
-							<small><?php echo esc_html( $c44_tier['qty'] ); ?>+</small><b><?php echo esc_html( $c44_tier['off'] ); ?>%</b>
-						</button>
-					<?php endforeach; ?>
-				</div>
-				<div class="calc__row">
-					<label for="calc-qty"><?php esc_html_e( 'How many do you need?', 'custom44' ); ?></label>
-					<output for="calc-qty" data-calc-qty><?php echo esc_html( $c44_calc_qty ); ?> <?php esc_html_e( 'items', 'custom44' ); ?></output>
-				</div>
-				<input class="calc__range" id="calc-qty" type="range" min="1" max="150" step="1" value="<?php echo esc_attr( $c44_calc_qty ); ?>">
-				<div class="calc__result">
-					<div>
-						<span><?php esc_html_e( 'AS Colour Staple Tee', 'custom44' ); ?></span>
-						<small><?php esc_html_e( 'with a left chest print', 'custom44' ); ?></small>
-					</div>
-					<div class="calc__price">
-						<b data-calc-each><?php echo esc_html( '$' . number_format( $c44_calc_base * 0.75 + $c44_calc_print, 2 ) ); ?></b>
-						<small data-calc-note><?php esc_html_e( 'each, 25% off applied', 'custom44' ); ?></small>
-					</div>
-				</div>
-				<a class="calc__cta" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
 			</div>
 		</div>
 	</div>
@@ -99,7 +57,7 @@ $c44_cat_url    = function ( $slug ) {
 <div class="marquee" aria-hidden="true">
 	<div class="marquee__track">
 		<?php
-		$c44_marquee = array( 'DTF Printing', 'Hi-Vis Workwear', 'Bulk Savings to 35%', 'Corporate Uniforms', 'Nationwide Dispatch', 'Family Owned', 'AS Colour', "JB's Wear" );
+		$c44_marquee = array( 'DTF Printing', 'Hi-Vis Workwear', sprintf( 'Bulk Savings to %d%%', c44_max_off() ), 'Corporate Uniforms', 'Nationwide Dispatch', 'Family Owned', 'AS Colour', "JB's Wear" );
 		for ( $c44_i = 0; $c44_i < 2; $c44_i++ ) :
 			foreach ( $c44_marquee as $c44_word ) :
 				?>
@@ -159,71 +117,6 @@ if ( $c44_packs ) :
 	</section>
 <?php endif; ?>
 
-<!-- Shop by category -->
-<section class="section" aria-labelledby="cats-title">
-	<div class="container">
-		<div class="section-head section-head--center">
-			<div class="section-head__text reveal">
-				<span class="eyebrow"><?php esc_html_e( 'Shop by category', 'custom44' ); ?></span>
-				<h2 class="h-1" id="cats-title"><?php echo wp_kses_post( __( 'Gear for every crew, <span class="hl-ink">branded your way.</span>', 'custom44' ) ); ?></h2>
-			</div>
-		</div>
-
-		<div class="cat-grid">
-			<?php foreach ( c44_home_categories() as $c44_idx => $c44_cat ) : ?>
-				<a class="cat-card reveal reveal--scale" style="--d:<?php echo esc_attr( $c44_idx * 0.07 ); ?>s" href="<?php echo esc_url( $c44_cat['url'] ); ?>">
-					<img src="<?php echo esc_url( $c44_cat['img'] ); ?>" alt="" loading="lazy">
-					<?php if ( $c44_cat['tag'] ) : ?>
-						<span class="cat-card__tag"><?php echo esc_html( $c44_cat['tag'] ); ?></span>
-					<?php endif; ?>
-					<div class="cat-card__body">
-						<div>
-							<span class="cat-card__count"><?php echo esc_html( $c44_cat['count'] ? $c44_cat['count'] : $c44_cat['label'] ); ?></span>
-							<h3><?php echo esc_html( $c44_cat['title'] ); ?></h3>
-						</div>
-						<span class="cat-card__arrow" aria-hidden="true"><?php c44_the_icon( 'arrow' ); ?></span>
-					</div>
-				</a>
-			<?php endforeach; ?>
-		</div>
-		<div class="section-cta reveal">
-			<a class="btn btn--dark btn--lg" href="<?php echo esc_url( $c44_shop_url ); ?>"><?php esc_html_e( 'View all products', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-		</div>
-	</div>
-</section>
-
-<!-- Bulk savings -->
-<section class="section section--dark bulk" id="bulk-pricing" aria-labelledby="bulk-title">
-	<div class="container bulk__inner">
-		<div class="reveal reveal--left">
-			<span class="eyebrow"><?php esc_html_e( 'Bulk pricing', 'custom44' ); ?></span>
-			<h2 class="h-1" id="bulk-title"><?php echo wp_kses_post( __( 'The more you order, <span class="hl">the more you save.</span>', 'custom44' ) ); ?></h2>
-			<p class="lead"><?php esc_html_e( 'Discounts are applied automatically in your quote cart from just five items. Mix sizes across the same style and still unlock the tier.', 'custom44' ); ?></p>
-			<div class="btn-row" style="margin-top:34px">
-				<a class="btn btn--accent btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Start your order', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
-			</div>
-		</div>
-		<div class="reveal" style="--d:.1s">
-			<div class="tiers" data-observe>
-				<?php
-				$c44_tiers = c44_tiers();
-				foreach ( $c44_tiers as $c44_n => $c44_tier ) :
-					$c44_h = 28 + ( $c44_n * 18 );
-					?>
-					<div class="tier">
-						<div class="tier__bar" style="--h:<?php echo esc_attr( $c44_h ); ?>%">
-							<span class="tier__pct"><?php echo esc_html( $c44_tier['off'] ); ?>%<small><?php esc_html_e( 'OFF', 'custom44' ); ?></small></span>
-						</div>
-						<span class="tier__qty"><b><?php echo esc_html( $c44_tier['qty'] ); ?>+</b> <?php esc_html_e( 'items', 'custom44' ); ?></span>
-					</div>
-				<?php endforeach; ?>
-			</div>
-			<p class="bulk__note"><?php esc_html_e( 'Per item discount on the garment price. Print locations are priced separately on each product.', 'custom44' ); ?></p>
-		</div>
-	</div>
-</section>
-
 <!-- Best sellers carousel -->
 <?php
 if ( class_exists( 'WooCommerce' ) ) :
@@ -246,7 +139,7 @@ if ( class_exists( 'WooCommerce' ) ) :
 	}
 	if ( $c44_q->have_posts() ) :
 		?>
-		<section class="section section--white" aria-labelledby="best-title">
+		<section class="section section--paper2 best-sellers" aria-labelledby="best-title">
 			<div class="container">
 				<div class="section-head section-head--center">
 					<div class="section-head__text reveal">
@@ -280,6 +173,38 @@ if ( class_exists( 'WooCommerce' ) ) :
 endif;
 ?>
 
+<!-- Bulk savings -->
+<section class="section section--dark bulk" id="bulk-pricing" aria-labelledby="bulk-title">
+	<div class="container bulk__inner">
+		<div class="reveal reveal--left">
+			<span class="eyebrow"><?php esc_html_e( 'Bulk pricing', 'custom44' ); ?></span>
+			<h2 class="h-1" id="bulk-title"><?php echo wp_kses_post( __( 'The more you order, <span class="hl">the more you save.</span>', 'custom44' ) ); ?></h2>
+			<p class="lead"><?php esc_html_e( 'Discounts are applied automatically in your quote cart from just five items. Mix sizes across the same style and still unlock the tier.', 'custom44' ); ?></p>
+			<div class="btn-row" style="margin-top:34px">
+				<a class="btn btn--accent btn--lg" href="#contact"><?php esc_html_e( 'Get a Free Quote', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
+				<a class="btn btn--white btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php esc_html_e( 'Talk to us', 'custom44' ); ?></a>
+			</div>
+		</div>
+		<div class="reveal" style="--d:.1s">
+			<div class="tiers" data-observe>
+				<?php
+				$c44_tiers = c44_tiers();
+				foreach ( $c44_tiers as $c44_n => $c44_tier ) :
+					$c44_h = 22 + (int) round( $c44_n * 78 / max( count( $c44_tiers ) - 1, 1 ) );
+					?>
+					<div class="tier">
+						<div class="tier__bar" style="--h:<?php echo esc_attr( $c44_h ); ?>%">
+							<span class="tier__pct"><?php echo esc_html( $c44_tier['off'] ); ?>%<small><?php esc_html_e( 'OFF', 'custom44' ); ?></small></span>
+						</div>
+						<span class="tier__qty"><b><?php echo esc_html( $c44_tier['qty'] ); ?>+</b> <?php esc_html_e( 'items', 'custom44' ); ?></span>
+					</div>
+				<?php endforeach; ?>
+			</div>
+			<p class="bulk__note"><?php esc_html_e( 'Per item discount on the garment price. Print locations are priced separately on each product.', 'custom44' ); ?></p>
+		</div>
+	</div>
+</section>
+
 <!-- How it works -->
 <section class="section section--dark steps-section" aria-labelledby="steps-title">
 	<div class="container">
@@ -311,7 +236,7 @@ endif;
 		<div class="why-stats">
 			<div class="why-stat reveal"><strong><span data-count="<?php echo esc_attr( $c44_orders ); ?>">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Orders shipped across Australia', 'custom44' ); ?></span></div>
 			<div class="why-stat reveal" style="--d:.08s"><strong><span data-count="7">0</span></strong><span><?php esc_html_e( 'Print locations to choose from', 'custom44' ); ?></span></div>
-			<div class="why-stat reveal" style="--d:.16s"><strong><span data-count="35">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
+			<div class="why-stat reveal" style="--d:.16s"><strong><span data-count="<?php echo esc_attr( c44_max_off() ); ?>">0</span><span class="hl">%</span></strong><span><?php esc_html_e( 'Maximum bulk saving', 'custom44' ); ?></span></div>
 			<div class="why-stat reveal" style="--d:.24s"><strong><span data-count="5">0</span><span class="hl">+</span></strong><span><?php esc_html_e( 'Items to unlock discounts', 'custom44' ); ?></span></div>
 		</div>
 		<div class="why-band reveal">
@@ -395,9 +320,16 @@ endif;
 			<?php endforeach; ?>
 		</div>
 		<?php endif; ?>
-		<?php if ( c44_opt( 'instagram' ) ) : ?>
+		<?php if ( c44_opt( 'instagram' ) || c44_opt( 'facebook' ) ) : ?>
 			<div class="section-cta reveal">
-				<a class="btn btn--dark btn--lg" href="<?php echo esc_url( c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'instagram' ); ?><?php esc_html_e( 'Follow @custom.44 on Instagram', 'custom44' ); ?></a>
+				<div class="btn-row">
+					<?php if ( c44_opt( 'instagram' ) ) : ?>
+						<a class="btn btn--dark btn--lg" href="<?php echo esc_url( c44_opt( 'instagram' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'instagram' ); ?><?php esc_html_e( 'Follow @custom.44 on Instagram', 'custom44' ); ?></a>
+					<?php endif; ?>
+					<?php if ( c44_opt( 'facebook' ) ) : ?>
+						<a class="btn btn--dark btn--lg" href="<?php echo esc_url( c44_opt( 'facebook' ) ); ?>" target="_blank" rel="noopener"><?php c44_the_icon( 'facebook' ); ?><?php esc_html_e( 'Follow us on Facebook', 'custom44' ); ?></a>
+					<?php endif; ?>
+				</div>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -448,7 +380,7 @@ endif;
 		<div class="faq reveal" style="--d:.1s">
 			<?php
 			$c44_faqs = array(
-				array( __( 'How do bulk discounts work?', 'custom44' ), __( 'Discounts apply automatically per item: 15% off from 5 items, 20% from 10, 25% from 20, 30% from 50 and 35% from 100 items.', 'custom44' ) ),
+				array( __( 'How do bulk discounts work?', 'custom44' ), __( 'Discounts apply automatically per item: 15% off from 5 items, 20% from 10, 25% from 20, 30% from 50, 35% from 100, 40% from 250 and 45% from 500 items.', 'custom44' ) ),
 				array( __( 'What printing method do you use?', 'custom44' ), __( 'We use DTF (Direct to Film) printing with commercial-grade inks. It produces vibrant, detailed prints that stay flexible and durable on a wide range of fabrics.', 'custom44' ) ),
 				array( __( 'What artwork files can I upload?', 'custom44' ), __( 'We accept EPS, SVG, AI, PDF, PNG and JPG files up to 10MB. Vector files give the sharpest result. Returning customers can use artwork already on file.', 'custom44' ) ),
 				array( __( 'Can you design a logo for me?', 'custom44' ), __( 'Yes. Choose the new logo design option when ordering or mention it in your enquiry and our team will work with you on a design.', 'custom44' ) ),
@@ -462,25 +394,6 @@ endif;
 					<div class="faq__body"><p><?php echo esc_html( $c44_f[1] ); ?></p></div>
 				</details>
 			<?php endforeach; ?>
-		</div>
-		<div class="section-cta reveal">
-			<a class="btn btn--dark btn--lg" href="<?php echo esc_attr( c44_tel() ); ?>"><?php c44_the_icon( 'phone' ); ?><?php echo esc_html( sprintf( __( 'Call %s', 'custom44' ), c44_opt( 'phone' ) ) ); ?></a>
-		</div>
-	</div>
-</section>
-
-<!-- CTA band -->
-<section class="section" style="padding-top:0" aria-labelledby="cta-title">
-	<div class="container">
-		<div class="cta-band reveal reveal--scale">
-			<div>
-				<h2 class="h-1" id="cta-title"><?php esc_html_e( 'Ready to kit out your crew?', 'custom44' ); ?></h2>
-				<p><?php esc_html_e( 'Browse our best sellers or send us your brief. We will take care of the rest.', 'custom44' ); ?></p>
-			</div>
-			<div class="btn-row">
-				<a class="btn btn--dark btn--lg" href="<?php echo esc_url( $c44_cat_url( 'best-sellers' ) ); ?>"><?php esc_html_e( 'Shop Best Sellers', 'custom44' ); ?><?php c44_the_icon( 'arrow' ); ?></a>
-				<a class="btn btn--white btn--lg" href="#contact"><?php esc_html_e( 'Request a Quote', 'custom44' ); ?></a>
-			</div>
 		</div>
 	</div>
 </section>

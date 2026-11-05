@@ -13,7 +13,11 @@ $c44_cat = function ( $slug ) {
 ?>
 </main>
 
-<?php get_template_part( 'template-parts/contact-section' ); ?>
+<?php
+if ( c44_show_contact() ) {
+	get_template_part( 'template-parts/contact-section' );
+}
+?>
 
 <footer class="site-footer">
 	<div class="container">
